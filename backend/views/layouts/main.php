@@ -1,77 +1,72 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: matjazz
+ * Date: 06/01/16
+ * Time: 07:52
+ */
+
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
-use backend\assets\AppAsset;
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+backend\assets\AppAsset::register($this);
+backend\assets\InspiniaAsset::register($this);
 
-AppAsset::register($this);
+$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/yii2-smartysoft-inspinia/assets');
+
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
+    <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+
+<body class="<?= (Yii::$app->controller->action->id==='login' || Yii::$app->controller->action->id==='signup') ? 'gray-bg':'' ?>">
+
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<div id="wrapper">
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+
+    <?php if (!Yii::$app->user->isGuest) : ?>
+        <?= $this->render('sidebar.php', ['directoryAsset' => $directoryAsset]) ?>
+    <?php endif; ?>
+
+
+    <?php if (!Yii::$app->user->isGuest) : ?>
+    <div id="page-wrapper" class="gray-bg dashbard-1" style="min-height: 576px;">
+        <?= $this->render('header.php', ['directoryAsset' => $directoryAsset]) ?>
+
+        <div class="row white-bg">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                    <div class="row col-lg-12">
+                        <?= $this->render('content.php', ['directoryAsset' => $directoryAsset, 'content'=>$content]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <?= $this->render('footer.php', ['directoryAsset' => $directoryAsset]) ?>
+        -->
+
     </div>
+    <?php else : ?>
+
+        <?= $this->render('content.php', ['directoryAsset' => $directoryAsset, 'content'=>$content]) ?>
+
+    <?php endif; ?>
+
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

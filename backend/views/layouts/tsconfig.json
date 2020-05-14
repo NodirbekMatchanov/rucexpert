@@ -1,0 +1,37 @@
+  {
+    "user_id": 0,
+    "city_id": 0,
+    "details": {
+      "count_tourist": 0,
+      "budget": 0,
+      "places": [
+        {
+          "id": 0,
+          "options_visit": 1,
+          "guide_id": 0
+        }
+      ],
+      "events": [
+        {
+          "date": "date",
+          "detail": [
+            {
+              "type": "place",
+              "place_id": "2",
+              "start_time": "11:30",
+              "end_time": "12:30",
+              "sort" : 1
+            },
+            {
+              "type": "some_type",
+              "date": "date",
+              "name": "text",
+              "start_time": "11:30",
+              "end_time": "12:30",
+              "sort" : 2
+            }
+          ]
+        }
+      ]
+    }
+  }

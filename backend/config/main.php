@@ -11,7 +11,21 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'common\models\User',
+                ],
+            ],
+            'mainLayout' => '@app/views/layouts/main.php',
+        ]
+    ],
+    'aliases' => [
+        '@mdm/admin' => '@common/modules/rbac-gui',
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

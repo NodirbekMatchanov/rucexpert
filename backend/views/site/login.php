@@ -1,23 +1,33 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: matjazz
+ * Date: 04/01/16
+ * Time: 21:34
+ */
+
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+$this->title = 'Sign In';
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
-
+<div class="loginColumns animated fadeInDown">
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+
+        <div class="col-md-3">
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="ibox-content">
+                <h2 class="text-center text-info"><b>Admin Panel</b></h2>
+
+                <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form','class' => 'm-t']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
@@ -25,11 +35,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
+                <div style="color:#999;margin:1em 0">
+                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    <br>
+                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
+                </div>
+
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+                <?php \yii\widgets\ActiveForm::end(); ?>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+
         </div>
     </div>
+    <hr>
+
 </div>
