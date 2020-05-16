@@ -27,7 +27,7 @@ class RouteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => [ 'index','delete', 'view'],
+                        'actions' => [ 'index','assign','refresh','remove','delete', 'view'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],

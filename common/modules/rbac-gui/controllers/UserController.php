@@ -40,7 +40,7 @@ class UserController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => [ 'index','delete', 'view'],
+                        'actions' => [ 'index','activate','delete', 'view'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],

@@ -51,7 +51,7 @@ class AssignmentController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => [ 'index','delete', 'view'],
+                        'actions' => [ 'index','assign','revoke','delete', 'view'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -60,7 +60,6 @@ class AssignmentController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'assign' => ['post'],
                     'assign' => ['post'],
                     'revoke' => ['post'],
                 ],

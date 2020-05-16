@@ -35,7 +35,7 @@ class RuleController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => [ 'index','delete', 'view'],
+                        'actions' => [ 'index','update','delete', 'view'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
