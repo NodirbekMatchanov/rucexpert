@@ -4,6 +4,7 @@ namespace mdm\admin\controllers;
 
 use Yii;
 use mdm\admin\models\BizRule;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use mdm\admin\models\searchs\BizRule as BizRuleSearch;
 use yii\filters\VerbFilter;
@@ -26,6 +27,20 @@ class RuleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [ 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [ 'index','delete', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [

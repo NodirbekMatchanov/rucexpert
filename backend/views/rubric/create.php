@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Rubric */
 
-$this->title = 'Create Rubric';
+$this->title = 'Создать рубрик';
 $this->params['breadcrumbs'][] = ['label' => 'Rubrics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

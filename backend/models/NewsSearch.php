@@ -47,7 +47,7 @@ class NewsSearch extends News
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $query->select(['id,creator,DATE_FORMAT(date, "%Y-%m-%d") as date,title']);
         $this->load($params);
 
         if (!$this->validate()) {

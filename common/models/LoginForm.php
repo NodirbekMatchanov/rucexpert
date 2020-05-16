@@ -47,6 +47,10 @@ class LoginForm extends Model
             }
         }
     }
+    /**
+     * {@inheritdoc}
+     */
+
 
     /**
      * Logs in a user using the provided username and password.

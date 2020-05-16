@@ -24,7 +24,7 @@ class User extends \yii\web\User
         return \Yii::$app->user->identity->updated_at;
     }
 
-    public function getRole($id = null)
+    public static function getRole($id = null)
     {
         if ($id == null) {
             $id = Yii::$app->getUser()->identity->getId();
@@ -36,7 +36,7 @@ class User extends \yii\web\User
         return $roleModel['item_name'];
     }
 
-    public function getRoleName($id = null)
+    public static function getRoleName($id = null)
     {
         if ($id == null) {
             $id = Yii::$app->getUser()->identity->getId();
@@ -47,40 +47,16 @@ class User extends \yii\web\User
 
         return $roleModel['description'];
     }
-
-    //  Получать только список куриеров
-    public function getUsers()
+    public static function getRoleNames()
     {
-        $courier = Yii::$app->db
-            ->createCommand("Select * from user INNER JOIN auth_assignment
-    ON user.id = auth_assignment.user_id  where auth_assignment.item_name = 'user' ORDER BY id DESC")
+        $roleModel = Yii::$app->db
+            ->createCommand("Select * from auth_assignment  INNER JOIN auth_item ON auth_item.name = auth_assignment.item_name ")
             ->queryAll();
-        return $courier;
+
+        return $roleModel;
     }
 
-    public function getGuides()
-    {
-        $courier = Yii::$app->db
-            ->createCommand("Select * from user INNER JOIN auth_assignment
-    ON user.id = auth_assignment.user_id  where auth_assignment.item_name = 'guide'")
-            ->queryAll();
-        return $courier;
-    }
 
-    public function getGuidesByCity($city)
-    {
-        $city_id = $city ? $city : null;
-        if ($city_id) {
-            $courier = Yii::$app->db
-                ->createCommand("Select * from user INNER JOIN auth_assignment
-    ON user.id = auth_assignment.user_id  where auth_assignment.item_name = 'guide' and  user.city_id = ".$city_id)
-                ->queryAll();
-            return $courier;
-        } else {
-            return [];
-        }
-
-    }
 
     public static function getAdminsIds()
     {

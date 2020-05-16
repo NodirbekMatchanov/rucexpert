@@ -3,6 +3,8 @@
 namespace mdm\admin\controllers;
 
 use mdm\admin\components\ItemController;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\rbac\Item;
 
 /**
@@ -23,7 +25,31 @@ class RoleController extends ItemController
             'Items' => 'Roles',
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [ 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [ 'index','delete', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */

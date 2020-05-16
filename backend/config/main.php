@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
@@ -64,7 +65,21 @@ return [
                 '<controller:\w+>/<action:(\w|-)+>' => '<controller>/<action>'
             ],
         ],*/
-        
+
+    ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@','?'],
+            'roots' => [
+                'global'=>[
+                    'baseUrl'=>'/frontend',
+                    'basePath'=>'@frontend',
+                    'path'=>'web/uploads/news/',
+                    'name' => 'Global'
+                ]
+            ],
+        ],
     ],
     'params' => $params,
 ];

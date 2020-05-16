@@ -11,6 +11,7 @@ use mdm\admin\models\form\ChangePassword;
 use mdm\admin\models\User;
 use mdm\admin\models\searchs\User as UserSearch;
 use yii\base\InvalidParamException;
+use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -31,6 +32,20 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [ 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [ 'index','delete', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
@@ -86,29 +101,7 @@ class UserController extends Controller
 
         ]);
     } 
-    public function actionCourier()
-    {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->searchCourier(Yii::$app->request->queryParams);
-        $title = 'Курьеры';
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'title' => $title,
-        ]);
-    }
-    public function actionList()
-    {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->searchUsers(Yii::$app->request->queryParams);
-        $title = 'Пользователи';
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'title' => $title,
-        ]);
-    }
 
     /**
      * Displays a single User model.
@@ -135,55 +128,6 @@ class UserController extends Controller
         return $this->redirect(['index']);
     }
   
-
-    /**
-     * Login
-     * @return string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->getUser()->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new Login();
-        if ($model->load(Yii::$app->getRequest()->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Logout
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->getUser()->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Signup new user
-     * @return string
-     */
-    public function actionSignup()
-    {
-        $model = new Signup();
-        if ($model->load(Yii::$app->getRequest()->post())) {
-            if ($user = $model->signup()) {
-                return $this->goHome();
-            }
-        }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Request reset password

@@ -1,7 +1,10 @@
 <?php
 namespace backend\controllers;
 
+use backend\components\User;
+use backend\models\SignupForm;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -26,9 +29,9 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','create-user'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],
@@ -94,5 +97,16 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionCreateUser(){
+        $user = new SignupForm();
+        if($user->load(Yii::$app->request->post()) && $user->signup()){
+           return $this->redirect(['admin/user']);
+        }
+        return $this->render('signup',[ 'model' => $user]);
     }
 }

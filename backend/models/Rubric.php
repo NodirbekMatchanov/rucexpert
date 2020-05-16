@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "rubric".
@@ -38,8 +39,19 @@ class Rubric extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
+            'id' => 'Ид',
+            'title' => 'Название',
         ];
     }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getAll()
+    {
+        $rubrics = Rubric::find()->all();
+        $rubrics = ArrayHelper::map($rubrics, 'id', 'title');
+        return $rubrics;
+    }
+
 }

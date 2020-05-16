@@ -57,7 +57,9 @@
 
 
             ];
-//            $menuItems = \mdm\admin\components\Helper::filter($menuItems)
+            if(\backend\components\User::getRoleName() != 'admin'){
+                $menuItems = \mdm\admin\components\Helper::filter($menuItems);
+            }
             ?>
 
 

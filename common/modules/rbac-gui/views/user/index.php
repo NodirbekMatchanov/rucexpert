@@ -10,14 +10,14 @@ use kartik\select2\Select2;
 /* @var $searchModel mdm\admin\models\searchs\User */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $title;
+$this->title = "Admin";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::a('Создать', ['/site/create-guide'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Создать', ['/site/create-user'], ['class' => 'btn btn-success']) ?>
 
     <?=
     GridView::widget([
@@ -48,8 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         return 'admin';
                         
                     }
-                    $status = \common\models\AuthItem::find()->where('type = 1 and name = "guide" or name = "user"')->all();
-                    $status = ArrayHelper::map($status, 'name', 'description');
+                    $status = \backend\components\User::getRoleNames();
+                    $status = ArrayHelper::map($status, 'name', 'name');
                     if(empty($role)){
                         return Html::dropDownList('statusRole',$role,$status,['data-id' => $model->id]);
                     }

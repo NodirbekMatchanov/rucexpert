@@ -2,52 +2,57 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Url;
+
+$this->title = 'Главная страница';
+
 ?>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <p class="text-center">
+        <img src="/images/desc.png" width="50%">
+    </p>
+    <div class="text-justify">
+        <p>
+            Въехать в отель, снять апартаменты, одолжить машину в каршеринге сейчас проще простого: достаточно скачать
+            приложение и иметь под рукой кредитку. Недобросовестные граждане пользуются этой доступностью, портя
+            имущество и нанося вред репутации компании. Решение проблемы – прямо перед вами: RUC EXPERT – реестр
+            безответственных постояльцев и арендаторов.
+            Подобные «черные списки» ведут гостиничные сети в США и Европе. Наш онлайн-сервис не ограничен одним
+            регионом/государством. RUC EXPERT – международная база. Постоялец, грубо нарушивший правила в отеле в
+            Белоруссии, получит отказ в заселении в России. В Австрии. В Греции. Где угодно. Безнаказанность – в
+            прошлом.
+            Столкнулись с неадекватным поведением клиента? Регистрируйтесь на нашем сайте и вносите его в реестр.
+            Обязательно нужно указать фамилию, имя, место рождения и кратко описать инцидент, будь то вождение в пьяном
+            виде, кража ковриков из салона, агрессивное общение с персоналом, шум по ночам. «Пробить» нового клиента
+            тоже легко: потребуется лишь ввести фамилию и уточняющие сведения (e-mail, телефон). Важный момент: мы
+            соблюдаем законы о защите личных (в частности, паспортных) данных, принятые в разных странах. Стоп-лист не
+            выводится целиком – только подходящие запросы.
+            RUC EXPERT – доступный в освоении инструмент для владельца отельного бизнеса, службы каршеринга,
+            арендодателя. Реестр решает сразу две задачи – наказать недобросовестных арендаторов и оградиться от них в
+            дальнейшем. Работа нашей базы в перспективе усилит ответственность гостей, исключит нежелательных клиентов и
+            упростит жизнь законопослушным гражданам и бизнесу. Подключайтесь!
+        </p>
     </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+    <div class="row">
+        <?= \yii\helpers\Html::a('Все новости', Url::to(['news/index']), ['class' => 'btn btn-warning']) ?>
+    </div>
+    <div class="row">
+        <br>
+        <?php if (!empty($news)):
+            foreach ($news as $item):
+                ?>
+                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <div class="" style="height: 200px">
+                        <img src="/uploads/news/<?= $item->img ?>" style="object-fit: cover" width="100%" height="100%"
+                             class="">
+                    </div>
+                    <h5>
+                        <?= \yii\helpers\Html::a($item->title, Url::to(['news/view','id' => $item->id]), ['class' => '']) ?>
+                    </h5>
+                </div>
+            <?php
+            endforeach;
+        endif;
+        ?>
     </div>
 </div>
