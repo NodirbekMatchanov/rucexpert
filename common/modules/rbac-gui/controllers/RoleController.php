@@ -38,7 +38,7 @@ class RoleController extends ItemController
                     [
                         'actions' => [ 'index','delete', 'view'],
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
