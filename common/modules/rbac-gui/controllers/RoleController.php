@@ -28,20 +28,6 @@ class RoleController extends ItemController
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => [ 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => [ 'index','delete', 'view'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
