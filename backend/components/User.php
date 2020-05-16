@@ -45,7 +45,7 @@ class User extends \yii\web\User
             ->createCommand("Select * from auth_assignment  INNER JOIN auth_item ON auth_item.name = auth_assignment.item_name where user_id = " . $id)
             ->queryOne();
 
-        return $roleModel['description'];
+        return $roleModel['name'];
     }
     public static function getRoleNames()
     {
