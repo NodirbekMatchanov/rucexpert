@@ -117,7 +117,8 @@ class NewsController extends Controller
     public function actionDeleteImage($id)
     {
         $model = $this->findModel($id);
-        if (file_exists(Yii::getAlias('@frontend') . '/uploads/news/' . $model->img)) {
+        if (file_exists(  '/uploads/news/' . $model->img)) {
+            unlink( '/uploads/news/' . $model->img);
             $model->img = '';
             $model->save();
         }
