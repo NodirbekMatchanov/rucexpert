@@ -73,7 +73,7 @@ return [
             'access' => ['@','?'],
             'roots' => [
                 'global'=>[
-                    'baseUrl'=>'',
+                    'baseUrl'=>'/',
                     'basePath'=>'@frontend',
                     'path'=>'/uploads/news/',
                     'name' => 'Global'
