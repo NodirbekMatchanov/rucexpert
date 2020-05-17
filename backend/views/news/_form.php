@@ -47,7 +47,7 @@ use kartik\select2\Select2;
     <?php if (Yii::$app->controller->action->id === 'update' && $model->img != ''): ?>
         <div class="row">
             <div class="col-md-4">
-                <?= Html::img('/frontend/web/uploads/news/' . $model->img, ['class' => 'img img-thumbnail']) ?>
+                <?= Html::img('/uploads/news/' . $model->img, ['class' => 'img img-thumbnail']) ?>
                 <p><a href="<?= \yii\helpers\Url::to(['/news/delete-image', 'id' => $model->id]) ?>"
                       class="btn btn-danger">Удалить <span class="fa fa-trash"></span></a></p>
             </div>
