@@ -43,12 +43,7 @@ use kartik\select2\Select2;
             'showPreview' => false
         ]
     ]) ?>
-<!--    <div class="row">-->
-<!--        --><?//= $form->field($model, 'image')->widget(\kartik\file\FileInput::classname(), [
-//            'options' => ['accept' => 'image/*'],
-//            'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],'showUpload' => false,],
-//        ]);   ?>
-<!--    </div>-->
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
