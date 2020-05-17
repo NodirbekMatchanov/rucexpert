@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -50,14 +51,15 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+    $menuItems[] = '<li><a href="#" id="specialButton"><i class="fa fa-eye"></i></a>'."</li>";
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
+
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -68,13 +70,14 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">RUC EXPERT - Реестр недобросовестных пользователей услугами отелей/хостелами, проката автомашин/каршеринга, арендой помещений. </p>
+        <p class="pull-left">RUC EXPERT - Реестр недобросовестных пользователей услугами отелей/хостелами, <br> проката
+            автомашин/каршеринга, арендой помещений. </p>
 
-        <p class="pull-right"><?=Html::a('Пользовательское соглашение','')?></p>
+        <p class="pull-right"><?= Html::a('Пользовательское соглашение', '') ?></p>
     </div>
 </footer>
-
 <?php $this->endBody() ?>
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
