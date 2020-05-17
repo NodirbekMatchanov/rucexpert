@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <div class="col-md-8 col-sm-6 col-xs-12 col wow fadeInUp line-br">
                             <div class="blog-content ">
-                                <h4><b><a href="/news/<?= $newsItem->id ?>"><?= $newsItem->title ?></a></b></h4>
+                                <h4><b><a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>"><?= $newsItem->title ?></a></b></h4>
                                 <p>
                                     <?= \yii\helpers\StringHelper::truncate(Html::encode($newsItem->short_content), '150', '...') ?>
                                 </p>
