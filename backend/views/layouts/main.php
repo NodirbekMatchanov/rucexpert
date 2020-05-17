@@ -69,6 +69,8 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/y
 </div>
 
 <?php $this->endBody() ?>
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+
 </body>
 </html>
 <?php $this->endPage() ?>

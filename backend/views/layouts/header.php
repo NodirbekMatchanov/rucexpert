@@ -122,7 +122,9 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="enterOnSite_option enterOnSite_option--logout">
+                <a href="#" id="specialButton"><i class="fa fa-eye"></i></a>
+            </li>
             <li class="enterOnSite_option enterOnSite_option--logout">
 
                 <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post')
@@ -132,6 +134,7 @@
                 )
                 . \yii\helpers\Html::endForm() ?>
             </li>
+
 
             <!--                <li>-->
             <!--                    <a class="right-sidebar-toggle">-->
