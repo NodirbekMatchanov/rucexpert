@@ -85,10 +85,10 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->date = date("d.m.Y",strtotime($model->date));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+
         }
+        $model->date = date("d.m.Y", strtotime($model->date));
 
         return $this->render('update', [
             'model' => $model,
@@ -107,6 +107,21 @@ class NewsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /** удаления фото новости
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteImage($id)
+    {
+        $model = $this->findModel($id);
+        if (file_exists(Yii::getAlias('@frontend') . '/web/uploads/news/' . $model->img)) {
+            $model->img = '';
+            $model->save();
+        }
+        return $this->redirect(['update', 'id' => $id]);
     }
 
     /**

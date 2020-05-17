@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use \yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'li',
                                 $this->render('left_menu', ['item' => $item])
                             );
-                        },'class' => 'left-menu']) ?>
-                    <a href="<?=Url::to(['news/index'])?>" class="btn btn-default">Очистить Фильтр</a>
+                        }, 'class' => 'left-menu']) ?>
+                    <a href="<?= Url::to(['news/index']) ?>" class="btn btn-default">Очистить Фильтр</a>
                 </div>
             </div>
         </div>
@@ -43,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="blog-wrap">
                                 <div class="blog-img" style="width: 100%; height: 150px">
                                     <?php if ($newsItem->img != ''): ?>
-                                        <img src="/uploads/news/<?= $newsItem->img ?>" alt=""/>
+                                        <?= Html::img('/uploads/news/' . $newsItem->img) ?>
                                     <?php else: ?>
-                                        <img src="/images/notfound.png" alt=""/>
+                                        <?= Html::img("/images/notfound.png") ?>
                                     <?php endif; ?>
                                 </div>
 
@@ -67,7 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </ul>
                                 </div>
 
-                                <a href="<?=Url::to(['news/view','id' => $newsItem->id])?>" class=" pull-right ">Подробнее >></a>
+                                <a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>" class=" pull-right ">Подробнее
+                                    >></a>
 
                             </div>
                         </div>
@@ -93,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p>
                     <?php
                     $totalCount = $pages->totalCount;
-                    $begin = $pages->getPage() +1;
+                    $begin = $pages->getPage() + 1;
                     $count = $pages->pageCount;
                     $end = $totalCount - 4;
                     if ($begin > $end) {

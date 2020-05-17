@@ -35,16 +35,27 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'short_content')->textarea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'creator')->textInput(['maxlength' => true,'class' => 'hidden','value' => \Yii::$app->user->identity->username])->label(false) ?>
+    <?= $form->field($model, 'creator')->textInput(['maxlength' => true, 'class' => 'hidden', 'value' => \Yii::$app->user->identity->username])->label(false) ?>
 
 
-    <?= $form->field($model, 'image')->widget(\kartik\file\FileInput::className(),[
+    <?= $form->field($model, 'image')->widget(\kartik\file\FileInput::className(), [
         'pluginOptions' => [
             'showPreview' => false
         ]
     ]) ?>
 
-    <div class="form-group">
+    <?php if (Yii::$app->controller->action->id === 'update' && $model->img != ''): ?>
+        <div class="row">
+            <div class="col-md-4">
+                <?= Html::img('/frontend/web/uploads/news/' . $model->img, ['class' => 'img img-thumbnail']) ?>
+                <p><a href="<?= \yii\helpers\Url::to(['/news/delete-image', 'id' => $model->id]) ?>"
+                      class="btn btn-danger">Удалить <span class="fa fa-trash"></span></a></p>
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+    <div class="form-group pull-right">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 

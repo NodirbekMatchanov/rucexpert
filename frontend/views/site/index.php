@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Url;
+use \yii\helpers\Html;
 
 $this->title = 'Главная страница';
 
@@ -43,11 +44,15 @@ $this->title = 'Главная страница';
                 ?>
                 <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                     <div class="" style="height: 200px">
-                        <img src="/uploads/news/<?= $item->img ?>" style="object-fit: cover" width="100%" height="100%"
-                             class="">
+                        <?php if ($item->img != ''): ?>
+                        <?= Html::img('/uploads/news/' . $item->img, ['class' => 'home-img']) ?>
+                        <?php else: ?>
+                            <?= Html::img("/images/notfound.png",['class' => 'home-img']) ?>
+                        <?php endif; ?>
+
                     </div>
                     <h5>
-                        <?= \yii\helpers\Html::a($item->title, Url::to(['news/view','id' => $item->id]), ['class' => '']) ?>
+                        <?= Html::a($item->title, Url::to(['news/view', 'id' => $item->id]), ['class' => '']) ?>
                     </h5>
                 </div>
             <?php
