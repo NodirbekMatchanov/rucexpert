@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $this->render('left_menu', ['item' => $item])
                             );
                         }, 'class' => 'left-menu']) ?>
-                    <a href="<?= Url::to(['news/index']) ?>" class="btn btn-default">Очистить Фильтр</a>
+                    <a href="<?= Url::to(['news/index']) ?>" class="btn btn-default">ВСЕ НОВОСТИ</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </p>
                                 <div class="blog-meta pull-right">
                                     <ul>
-                                        <li><i class="fa fa-user"></i> <?= $newsItem->creator ?></li>
                                         <li>
                                             <i class="fa fa-calendar"></i>
                                             <?= date("d.m.Y", strtotime($newsItem->date)) ?>
@@ -68,8 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </ul>
                                 </div>
 
-                                <a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>" class=" pull-right ">Подробнее
-                                    >></a>
+                                <a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>" class=" pull-right ">Подробнее</a>
 
                             </div>
                         </div>

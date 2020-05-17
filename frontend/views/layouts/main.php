@@ -68,9 +68,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">RUC EXPERT - Реестр недобросовестных пользователей услугами отелей/хостелами, проката автомашин/каршеринга, арендой помещений. </p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><?=Html::a('Пользовательское соглашение','')?></p>
     </div>
 </footer>
 

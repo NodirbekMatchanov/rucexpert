@@ -59,8 +59,11 @@ class NewsController extends Controller
      */
     public function actionView($id)
     {
+        $rubric = new Rubric();
+        $rubric = $rubric::find()->all();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'rubric' => $rubric,
         ]);
     }
 
