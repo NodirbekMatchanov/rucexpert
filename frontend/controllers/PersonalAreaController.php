@@ -4,7 +4,9 @@ namespace frontend\controllers;
 
 use backend\components\Sender;
 use backend\models\News;
+use common\models\Hotels;
 use common\models\Sms;
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -20,8 +22,9 @@ use frontend\models\ContactForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class PersonalAreaController extends Controller
 {
+    public $layout = 'main_area';
     /**
      * @inheritdoc
      */
@@ -76,10 +79,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news = new News();
-        $newsList = $news::find()->orderBy('id desc')->limit(3)->all();
+        $user = new User();
+        $user = $user::findOne(Yii::$app->user->identity->getId());
+        $hotel = new Hotels();
+        $hotel = $hotel::findOne($user->hotel_id);
         return $this->render('index', [
-            "news" => $newsList
+            'hotel' => $hotel
         ]);
     }
 
@@ -91,12 +96,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['personal-area/index']);
+            return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['personal-area/index']);
+            return $this->goBack();
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -160,7 +165,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(['personal-area/index']);
+                    return $this->goHome();
                 }
             }
         }
@@ -219,40 +224,4 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSendCode()
-    {
-
-        if (Yii::$app->request->isAjax) {
-            $phone = Yii::$app->request->get('phone');
-            $code = rand(1000, 9999);
-            $sms = new Sms();
-            $sms->code = $code;
-            $sms->phone = $phone;
-            $sms->create_at = date("Y-m-d h:i:s");
-            if ($sms->save()) {
-                $messages = new Sender(Yii::$app->params['sms_login'], Yii::$app->params['sms_passwd']);
-                $messages = $messages->messageObj;
-                $messages->setUrl(Yii::$app->params['sms_host']);
-                $mes = $messages->createNewMessage(Yii::$app->params['sms_sender'], $code, 'sms');
-
-                $abonent = $mes->createAbonent($phone);
-                $abonent->setNumberSms(1);
-                $mes->addAbonent($abonent);
-                //$abonent->setTimeSend("2015-12-15 15:12");
-                //$abonent->setValidityPeriod("2015-12-16 16:00");
-                $mes->addAbonent($abonent);
-
-                $messages->addMessage($mes);
-                if (!$messages->send()) {
-                    Yii::info($messages->getError());
-                    return false;
-                } else {
-                    Yii::info(($messages->getResponse()));
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
 }
