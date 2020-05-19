@@ -55,8 +55,8 @@ return [
                 ],
                 'google' => [
                     'class' => 'yii\authclient\clients\Google',
-                    'clientId' => 'xxx',
-                    'clientSecret' => 'xxx',
+                    'clientId' => '643692777731-gnrdb5o56lpc98dn1ivmjkuttpua7sav.apps.googleusercontent.com',
+                    'clientSecret' => '5XBTdB1grO3Bnlf9CqUZ28fZ',
                 ],
             ],
         ],
