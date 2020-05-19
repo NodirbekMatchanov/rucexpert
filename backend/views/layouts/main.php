@@ -37,6 +37,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/y
 
 
     <?php if (!Yii::$app->user->isGuest) : ?>
+
         <?= $this->render('sidebar.php', ['directoryAsset' => $directoryAsset]) ?>
     <?php endif; ?>
 
@@ -69,7 +70,9 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/y
 </div>
 
 <?php $this->endBody() ?>
-<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+<?php endif; ?>
 
 </body>
 </html>

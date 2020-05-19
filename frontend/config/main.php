@@ -12,9 +12,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'ru',
+    "homeUrl" => "/",
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            "baseUrl" => ''
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -37,14 +39,35 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authClientCollection' => [
+            'class' => \yii\authclient\Collection::className(),
+            'clients' => [
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => '658646087907300',
+                    'clientSecret' => '0f7155efd0e660cbf267733a433fd249',
+                    'attributeNames' => ['name', 'email', 'first_name', 'last_name'],
+                ],
+                'vkontakte' => [
+                    'class' => 'yii\authclient\clients\VKontakte',
+                    'clientId' => '6994403',
+                    'clientSecret' => '0Ui9gb8WAlKGDmYNSsn3',
+                ],
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => 'xxx',
+                    'clientSecret' => 'xxx',
+                ],
+            ],
+        ],
         
-      /*  'urlManager' => [
+        'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

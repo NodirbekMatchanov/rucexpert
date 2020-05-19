@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use backend\components\Sender;
 use backend\models\News;
 use common\models\Sms;
+use common\models\User;
 use Yii;
+use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -66,6 +68,10 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => AuthAction::class,
+                'successCallback' => [$this, 'successCallback']
+            ]
         ];
     }
 
@@ -254,5 +260,117 @@ class SiteController extends Controller
                 return false;
             }
         }
+    }
+
+    public function successCallback($client)
+    {
+
+        $attributes = $client->getUserAttributes();
+        $access_token = $client->getAccessToken()->getToken();
+        $auth = User::find()->where(['source' => $client->getId(), 'source_id' => $attributes['id']])->one();
+
+        if (Yii::$app->user->isGuest) {
+            if (!empty($auth) && Yii::$app->user->login($auth)) { // login
+
+            } else { // signup
+                if (isset($attributes['email']) && User::find()->where(['email' => $attributes['email']])->exists()) {
+                    Yii::$app->getSession()->setFlash('error', [
+                        Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $client->getTitle()]),
+                    ]);
+                } else {
+                    $password = Yii::$app->security->generateRandomString(6);
+                    if (isset($attributes['name']['givenName']) && isset($attributes['name']['familyName'])) {
+                        if (User::find()->where(['username' => $attributes['first_name'] . $attributes['last_name']])->exists()) {
+                            $user_name = $attributes['first_name'] . $attributes['last_name'] . rand(0, 100);
+                        } else {
+                            $user_name = $attributes['first_name'] . $attributes['last_name'];
+                        }
+                        $full_name = isset($attributes['first_name'])? $attributes['first_name'] : '';
+                        $login = strtolower($this->translit($full_name));
+                        $full_name .= isset($attributes['last_name'])? ' '.$attributes['last_name'] : '';
+                        $login .= strtolower($this->translit(isset($attributes['last_name'])? '_'.$attributes['last_name'] : ''));
+                        if ($login) {
+                            if (User::find()->where(['username' => $login])->exists()) {
+                                $login = $login.rand(0,100);
+                            }
+                        }
+                        $user = new User([
+                            'username' => $login,
+                            'first_name' =>  isset($attributes['first_name'])? $attributes['first_name'] : '',
+                            'last_name' =>  isset($attributes['last_name'])? $attributes['last_name'] : '',
+                            'email' => isset($attributes['emails'][0]['value']) ? $attributes['emails'][0]['value'] : null,
+                            'password_hash' => Yii::$app->security->generatePasswordHash($password),
+                            'social_access_token' => $access_token,
+                            'source' => $client->getId(),
+                            'source_id' => $attributes['id'],
+                            'created_at' => time(),
+                            'updated_at' => time(),
+                            'status' => 10
+                        ]);
+                        $user->generateAuthKey();
+                        $user->generateAccessToken();
+                        $user->generatePasswordResetToken();
+                        $user->save(false);
+                        $userRole = Yii::$app->authManager->getRole('user');
+                        Yii::$app->authManager->assign($userRole, $user->id);
+                        if ($user->save(false) && Yii::$app->user->login($user)) {
+                            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+                            $this->redirect(['site']);
+
+                        } else {
+                            print_r($user->getErrors());
+                        }
+                    } else {
+                        if (User::find()->where(['username' => $attributes['first_name'] . $attributes['last_name']])->exists()) {
+                            $user_name = $attributes['first_name'] . $attributes['last_name'] . rand(0, 100);
+                        } else {
+                            $user_name = $attributes['first_name'] . $attributes['last_name'];
+                        }
+                        $full_name = isset($attributes['first_name'])? $attributes['first_name'] : '';
+                        $login = strtolower($this->translit($full_name));
+                        $full_name .= isset($attributes['last_name'])? ' '.$attributes['last_name'] : '';
+                        $login .= strtolower($this->translit(isset($attributes['last_name'])? '_'.$attributes['last_name'] : ''));
+                        if ($login) {
+                            if (User::find()->where(['username' => $login])->exists()) {
+                                $login = $login.rand(0,100);
+                            }
+                        }
+                        $user = new User([
+                            'username' => $login,
+                            'first_name' =>  isset($attributes['first_name'])? $attributes['first_name'] : '',
+                            'last_name' =>  isset($attributes['last_name'])? $attributes['last_name'] : '',
+                            'email' => isset($attributes['email']) ? $attributes['email'] : null,
+                            'password_hash' => Yii::$app->security->generatePasswordHash($password),
+                            'social_access_token' => $access_token,
+                            'source' => $client->getId(),
+                            'source_id' => $attributes['id'],
+                            'photo' => isset($attributes['photo']) ? $attributes['photo'] : '',
+                            'created_at' => time(),
+                            'updated_at' => time(),
+                            'status' => 10
+                        ]);
+                        $user->generateAuthKey();
+                        $user->generateAccessToken();
+                        $user->generatePasswordResetToken();
+                        $user->save(false);
+                        $userRole = Yii::$app->authManager->getRole('user');
+                        Yii::$app->authManager->assign($userRole, $user->id);
+                        if ($user->save(false) && Yii::$app->user->login($user)) {
+                            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+
+                        } else {
+                            print_r($user->getErrors());
+                        }
+//                        }
+
+                    }
+
+
+                }
+            }
+        } else { // user already logged in
+
+        }
+
     }
 }
