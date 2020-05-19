@@ -22,7 +22,8 @@ $this->title = 'Поиск';
             <div class="form-group" style="display: flex; align-items: center">
                 <h4 class="">Подключить соцсет</h4>
                 <?php echo yii\authclient\widgets\AuthChoice::widget([
-                    'baseAuthUrl' => ['personal-area/auth']
+                    'baseAuthUrl' => ['personal-area/auth'],
+                    'popupMode' => false,
                 ]) ?>
             </div>
         </div>

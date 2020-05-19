@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group" style="display: flex; align-items: center">
                     <h4 class="">Войти через</h4>
                     <?php echo yii\authclient\widgets\AuthChoice::widget([
-                        'baseAuthUrl' => ['site/auth']
+                        'baseAuthUrl' => ['site/auth'],
+                        'popupMode' => false,
                     ]) ?>
                 </div>
             </div>
