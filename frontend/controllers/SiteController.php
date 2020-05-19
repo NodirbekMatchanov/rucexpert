@@ -267,6 +267,8 @@ class SiteController extends Controller
 
         $attributes = $client->getUserAttributes();
         $access_token = $client->getAccessToken()->getToken();
+        var_dump($attributes);
+        die();
         $auth = User::find()->where(['source' => $client->getId(), 'source_id' => $attributes['id']])->one();
 
         if (Yii::$app->user->isGuest) {

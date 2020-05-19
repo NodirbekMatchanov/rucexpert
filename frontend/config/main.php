@@ -44,8 +44,8 @@ return [
             'clients' => [
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '658646087907300',
-                    'clientSecret' => '0f7155efd0e660cbf267733a433fd249',
+                    'clientId' => '599010284302815',
+                    'clientSecret' => 'd90ad9b3efd00dc19df47d61e59f19da',
                     'attributeNames' => ['name', 'email', 'first_name', 'last_name'],
                 ],
                 'vkontakte' => [
