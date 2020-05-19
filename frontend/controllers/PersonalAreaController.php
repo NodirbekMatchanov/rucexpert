@@ -246,13 +246,13 @@ class PersonalAreaController extends Controller
             $user = $user::findOne(Yii::$app->user->identity->getId());
             if(!empty($user)){
                 if ($socialName === 'facebook') {
-                    $user->facebook_id = User::find()->where(['facebook_id' => $id])->one();
+                    $user->facebook_id = $id;
                 }
                 if ($socialName === 'vkontakte') {
-                    $user->vkontakte_id = User::find()->where(['vkontakte_id' => $id])->one();
+                    $user->vkontakte_id = $id;
                 }
                 if ($socialName === 'google') {
-                    $user->google_id = User::find()->where(['google_id' => $id])->one();
+                    $user->google_id = $id;
                 }
                 if($user->save()){
                     Yii::$app->session->setFlash('success', 'СоцСет '.$socialName. ' подключен!');

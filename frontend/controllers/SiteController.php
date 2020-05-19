@@ -285,7 +285,7 @@ class SiteController extends Controller
                 $auth->addError('ошибка при входе');
             }
         } else {
-            $auth->addError('ошибка при входе');
+            $auth->addError("facebook_id",'ошибка при входе');
         }
     }
 }
