@@ -1,10 +1,8 @@
 RewriteEngine on
-RewriteBase /
-RewriteCond %{HTTP_HOST} ^(www\.)?backend\.rucexpert\.ru$ [NC]
-RewriteCond %{REQUEST_URI} !^/backend
-RewriteRule ^(.*)$ backend/$1 [L]
-<IfModule mod_rewrite.c>
-    Options +FollowSymlinks
-    RewriteEngine On
-</IfModule>
-
+ 
+# если это папка или файл, открываем его
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+ 
+# в противном случае перенаправляем на index.php
+RewriteRule . index.php

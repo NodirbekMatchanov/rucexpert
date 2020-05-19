@@ -30,6 +30,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/admin'
             
         ],
         'user' => [
@@ -53,18 +54,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<controller:(about|login)>' => 'site/index',
+              /*  '<controller:(about|login)>' => 'site/index',
                 '<controller:(\w|-)+>/' => '<controller>/index',
                 '<controller:\w+>/<action:(\w|-)+>/<id:\d+>' => '<controller>/<action>',
                 '<module:\w+>/<controller:\w+>/<action:(\w|-)+>' => '<module>/<controller>/<action>',
-                '<controller:\w+>/<action:(\w|-)+>' => '<controller>/<action>'
+                '<controller:\w+>/<action:(\w|-)+>' => '<controller>/<action>'*/
             ],
-        ],*/
+        ],
 
     ],
     'controllerMap' => [

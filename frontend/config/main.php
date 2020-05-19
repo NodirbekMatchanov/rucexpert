@@ -12,11 +12,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'ru',
-    "homeUrl" => "/",
+    'homeUrl' => '/',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            "baseUrl" => ''
+            'baseUrl' => ""
         ],
         'user' => [
             'identityClass' => 'common\models\User',
