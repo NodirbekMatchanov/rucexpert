@@ -18,6 +18,14 @@ $this->title = 'Поиск';
             <h4>НАЗВАНИЕ ОРГАНИЗАЦИИ: <?=$hotel->company?></h4>
             <h4>ТЕЛЕФОН: <?=$hotel->phone?></h4>
         </div>
+        <div class="story-container log">
+            <div class="form-group" style="display: flex; align-items: center">
+                <h4 class="">Подключить соцсет</h4>
+                <?php echo yii\authclient\widgets\AuthChoice::widget([
+                    'baseAuthUrl' => ['personal-area/auth']
+                ]) ?>
+            </div>
+        </div>
     </div>
 
 </div>

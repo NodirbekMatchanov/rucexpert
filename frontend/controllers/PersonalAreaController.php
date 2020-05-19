@@ -8,7 +8,9 @@ use common\models\Hotels;
 use common\models\Sms;
 use common\models\User;
 use Yii;
+use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -25,6 +27,7 @@ use frontend\models\ContactForm;
 class PersonalAreaController extends Controller
 {
     public $layout = 'main_area';
+
     /**
      * @inheritdoc
      */
@@ -36,7 +39,7 @@ class PersonalAreaController extends Controller
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup','send-code'],
+                        'actions' => ['signup', 'send-code'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -69,6 +72,10 @@ class PersonalAreaController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => AuthAction::class,
+                'successCallback' => [$this, 'successCallback']
+            ]
         ];
     }
 
@@ -222,6 +229,38 @@ class PersonalAreaController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $client
+     * @return \yii\web\Response
+     */
+    public function successCallback($client)
+    {
+        $attributes = $client->getUserAttributes();
+        $access_token = $client->getAccessToken()->getToken();
+        $id = ArrayHelper::getValue($attributes, 'id');
+        $socialName = $client->getName();
+        if (!Yii::$app->user->isGuest && $id) {
+            $user = new User();
+            $user = $user::findOne(Yii::$app->user->identity->getId());
+            if(!empty($user)){
+                if ($socialName === 'facebook') {
+                    $user->facebook_id = User::find()->where(['facebook_id' => $id])->one();
+                }
+                if ($socialName === 'vkontakte') {
+                    $user->vkontakte_id = User::find()->where(['vkontakte_id' => $id])->one();
+                }
+                if ($socialName === 'google') {
+                    $user->google_id = User::find()->where(['google_id' => $id])->one();
+                }
+                if($user->save()){
+                    Yii::$app->session->setFlash('success', 'СоцСет '.$socialName. ' подключен!');
+                    return $this->redirect(['personal-area/index']);
+                }
+            }
+        }
+
     }
 
 }
