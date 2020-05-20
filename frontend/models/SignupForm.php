@@ -117,6 +117,9 @@ class SignupForm extends Model
             $code->delete();
         }
         $user->hotel_id = $hotels->id;
+        $last_id = $user->id;
+        $userRole = \Yii::$app->authManager->getRole('director');
+        \Yii::$app->authManager->assign($userRole, $last_id);
         return $user->save() ? $user : null;
     }
 

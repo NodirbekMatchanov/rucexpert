@@ -35,12 +35,17 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    if(\backend\components\User::getRoleName() == 'director'){
+        $menuItems = [
+            ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']],
+        ];
+    }
     $menuItems = [
-        ['label' => 'Поиск', 'url' => ['/site/index']],
+        ['label' => 'Поиск', 'url' => ['/personal-area/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Логин', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/personal-area/index']];
+        $menuItems[] = ['label' => 'Логин', 'url' => ['/personal-area/signup']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

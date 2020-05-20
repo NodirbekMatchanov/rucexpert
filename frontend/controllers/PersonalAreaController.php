@@ -7,6 +7,8 @@ use backend\models\News;
 use common\models\Hotels;
 use common\models\Sms;
 use common\models\User;
+use frontend\models\EmplayeeForm;
+use frontend\models\UserSearch;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
@@ -36,17 +38,16 @@ class PersonalAreaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'send-code'],
+                        'actions' => ['index','search','logout'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['manager'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout','index','signup','employe'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['director'],
                     ],
                 ],
             ],
@@ -156,9 +157,15 @@ class PersonalAreaController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
+    public function actionEmploye()
     {
-        return $this->render('about');
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('employe',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -168,12 +175,11 @@ class PersonalAreaController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new EmplayeeForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
+                Yii::$app->session->setFlash('success', 'Сотрудник успешно добавлено');
+                return $this->redirect(['personal-area/employe']);
             }
         }
 
@@ -229,6 +235,14 @@ class PersonalAreaController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $user = new User();
+        $user::findOne($id)->delete();
+
+        return $this->redirect(['employe']);
     }
 
     /**

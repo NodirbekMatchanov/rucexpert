@@ -33,7 +33,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup','send-code'],
                 'rules' => [
                     [
                         'actions' => ['signup', 'send-code'],
@@ -234,9 +234,10 @@ class SiteController extends Controller
             $code = rand(1000, 9999);
             $sms = new Sms();
             $sms->code = $code;
-            $sms->phone = $phone;
+            $sms->phone = "+".trim($phone);
             $sms->create_at = date("Y-m-d h:i:s");
             if ($sms->save()) {
+                die();
                 $messages = new Sender(Yii::$app->params['sms_login'], Yii::$app->params['sms_passwd']);
                 $messages = $messages->messageObj;
                 $messages->setUrl(Yii::$app->params['sms_host']);

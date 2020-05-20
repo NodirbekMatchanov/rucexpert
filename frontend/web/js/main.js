@@ -9,8 +9,7 @@ $(document).ready(function () {
     function bindAction() {
         $(document).on('click', '#send-sms', function () {
             $.ajax({
-                url: 'index.php',
-                data: {"r": "site/send-code", 'phone': $('#phone').val()}
+                url: '/site/send-code?phone=' + $('#phone').val(),
             }).done(function (data) {
                 if (data) {
                     alert('sms отправлено!');
