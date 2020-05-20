@@ -35,14 +35,10 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    if(\backend\components\User::getRoleName() == 'director'){
-        $menuItems = [
-            ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']],
-        ];
+    if (\backend\components\User::getRoleName() == 'director') {
+        $menuItems[] =      ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']];
     }
-    $menuItems = [
-        ['label' => 'Поиск', 'url' => ['/personal-area/index']],
-    ];
+    $menuItems[] =  ['label' => 'Поиск', 'url' => ['/personal-area/index']];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/personal-area/index']];
         $menuItems[] = ['label' => 'Логин', 'url' => ['/personal-area/signup']];
@@ -56,7 +52,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
-    $menuItems[] = '<li><a href="#" id="specialButton"><i class="fa fa-eye"></i></a>'."</li>";
+    $menuItems[] = '<li><a href="#" id="specialButton"><i class="fa fa-eye"></i></a>' . "</li>";
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

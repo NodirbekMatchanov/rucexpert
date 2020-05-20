@@ -6,7 +6,6 @@ use yii\helpers\Url;
 use \yii\helpers\Html;
 
 $this->title = 'Поиск';
-
 ?>
 <div class="site-index">
     <div class="panel panel-success">
