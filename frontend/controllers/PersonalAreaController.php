@@ -38,14 +38,15 @@ class PersonalAreaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['logout', 'index', 'signup', 'employe', 'send-code'],
                 'rules' => [
                     [
-                        'actions' => ['index','search','logout'],
+                        'actions' => ['index', 'search', 'logout'],
                         'allow' => true,
                         'roles' => ['manager'],
                     ],
                     [
-                        'actions' => ['logout','index','signup','employe'],
+                        'actions' => ['logout', 'index', 'signup', 'employe'],
                         'allow' => true,
                         'roles' => ['director'],
                     ],
@@ -162,7 +163,7 @@ class PersonalAreaController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('employe',[
+        return $this->render('employe', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -258,7 +259,7 @@ class PersonalAreaController extends Controller
         if (!Yii::$app->user->isGuest && $id) {
             $user = new User();
             $user = $user::findOne(Yii::$app->user->identity->getId());
-            if(!empty($user)){
+            if (!empty($user)) {
                 if ($socialName === 'facebook') {
                     $user->facebook_id = $id;
                 }
@@ -268,8 +269,8 @@ class PersonalAreaController extends Controller
                 if ($socialName === 'google') {
                     $user->google_id = $id;
                 }
-                if($user->save()){
-                    Yii::$app->session->setFlash('success', 'СоцСет '.$socialName. ' подключен!');
+                if ($user->save()) {
+                    Yii::$app->session->setFlash('success', 'СоцСет ' . $socialName . ' подключен!');
                     return $this->redirect(['personal-area/index']);
                 }
             }
