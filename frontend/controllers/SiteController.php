@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use backend\components\Sender;
 use backend\models\News;
+use common\models\BlackList;
 use common\models\Sms;
 use common\models\User;
 use Yii;
@@ -85,8 +86,10 @@ class SiteController extends Controller
     {
         $news = new News();
         $newsList = $news::find()->orderBy('id desc')->limit(3)->all();
+        $count = BlackList::find()->count();
         return $this->render('index', [
-            "news" => $newsList
+            "news" => $newsList,
+            "count" => $count,
         ]);
     }
 
