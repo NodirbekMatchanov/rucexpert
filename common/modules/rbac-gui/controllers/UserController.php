@@ -2,6 +2,7 @@
 
 namespace mdm\admin\controllers;
 
+use common\models\Hotels;
 use Yii;
 use mdm\admin\models\form\Login;
 use mdm\admin\models\form\PasswordResetRequest;
@@ -36,11 +37,11 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => [ 'error'],
+                        'actions' => ['error'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => [ 'index','activate','delete', 'view'],
+                        'actions' => ['index', 'activate', 'delete', 'view'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -100,7 +101,7 @@ class UserController extends Controller
             'title' => $title,
 
         ]);
-    } 
+    }
 
 
     /**
@@ -110,8 +111,12 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $hotels = new Hotels();
+        $hotels = $hotels::findOne($model->hotel_id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'hotels' => $hotels,
         ]);
     }
 
@@ -127,7 +132,7 @@ class UserController extends Controller
 
         return $this->redirect(['index']);
     }
-  
+
 
     /**
      * Request reset password

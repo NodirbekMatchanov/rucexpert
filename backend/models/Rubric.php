@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $title
+ * @property float $price
  */
 class Rubric extends \yii\db\ActiveRecord
 {
@@ -29,6 +30,7 @@ class Rubric extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 50],
+            [['price'], 'number'],
             [['title'], 'unique'],
         ];
     }
@@ -41,6 +43,7 @@ class Rubric extends \yii\db\ActiveRecord
         return [
             'id' => 'Ид',
             'title' => 'Название',
+            'price' => 'Цена',
         ];
     }
 

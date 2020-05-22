@@ -6,6 +6,7 @@ use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $model mdm\admin\models\User */
+/* @var $hotels \common\models\Hotels */
 
 $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Users'), 'url' => ['index']];
@@ -41,17 +42,19 @@ $controllerId = $this->context->uniqueId . '/';
         }
         ?>
     </p>
+    <?= \yii\bootstrap\Tabs::widget([
+        'items' => [
+            [
+                'label' => 'Личные данные',
+                'content' => $this->render('tab_detail', ['model' => $model,'tab_id' => 1]),
+                'active' => true
+            ],
+            [
+                'label' => 'Дополнительная информация',
+                'content' => $this->render('tab_detail', ['hotels' => $hotels,'tab_id' => 2])
+            ]
+        ]
+    ]); ?>
 
-    <?=
-    DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'username',
-            'email:email',
-            'created_at:date',
-            'status',
-        ],
-    ])
-    ?>
 
 </div>

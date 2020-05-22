@@ -36,21 +36,43 @@ AppAsset::register($this);
         ],
     ]);
     if (\backend\components\User::getRoleName() == 'director') {
-        $menuItems[] =      ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']];
+        $menuItems[] = ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']];
+        $menuItems[] = ['label' => 'Поиск', 'url' => ['/black-list/search']];
     }
-    $menuItems[] =  ['label' => 'Поиск', 'url' => ['/personal-area/index']];
+    $menuItems[] = ['label' => 'Добавить в реестр', 'url' => ['/black-list/index']];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/personal-area/index']];
         $menuItems[] = ['label' => 'Логин', 'url' => ['/personal-area/signup']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $balance = '';
+        if(\backend\components\User::getRoleName() == 'director'){
+            $hotel = \common\models\User::findHotel(Yii::$app->user->identity->hotel_id);
+            $balance = ' Баланс ('.$hotel->balance.') ';
+        }
+        $menuItems[] = [
+            'url' => ['services/index'],
+            'options' => ['class' => 'dropdown'],
+            'label' => '<span class="fa fa-user">'.$balance.'</span>',
+            'items' => [
+                ['label' => 'Быстрый поиск', 'url' => ['black-list/search']],
+                ['label' => 'Написать нам', 'url' => ['personal-area/facebook']],
+                ['label' => 'ВАШ ПРОФИЛЬ', 'url' => ['personal-area/index']],
+                [
+                    'options' => ['class' => ''],
+                    'encode' => false,
+                    'label' =>
+                        Html::beginForm(['/site/logout'], 'post')
+                        . Html::submitButton(
+                            'Выход',
+                            ['class' => ' logout']
+                        )
+                        . Html::endForm()
+                ],
+
+            ],
+            'encode' => false
+        ];
     }
     $menuItems[] = '<li><a href="#" id="specialButton"><i class="fa fa-eye"></i></a>' . "</li>";
     echo Nav::widget([

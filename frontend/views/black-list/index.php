@@ -4,28 +4,32 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\RubricSearch */
+/* @var $searchModel frontend\models\BlackListSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Рубрики';
+$this->title = 'Список';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="rubric-index">
+<div class="black-list-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Создать рубрик', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
-            'id',
-            'title',
-            'price',
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'first_name',
+            'last_name',
+            'middle_name',
+            'moder',
+            'type_org',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

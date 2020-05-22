@@ -53,15 +53,18 @@ class Hotels extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'company' => 'Company',
-            'phone' => 'Phone',
-            'license_file' => 'License File',
-            'license_id' => 'License ID',
-            'license_date' => 'License Date',
+            'company' => 'НАЗВАНИЕ ОРГАНИЗАЦИИ',
+            'phone' => 'ТЕЛЕФОН',
+            'license_file' => 'ЗАГРУЗИТЕ ЛИЦЕНЗИЮ (ПРИ НАЛИЧИИ)',
+            'license_id' => '№ ЛИЦЕНЗИИ (ПРИ НАЛИЧИИ)',
+            'license_date' => 'ДАТА ВЫДАЧИ (ПРИ НАЛИЧИИ)',
             'politics' => 'Politics',
             'date_create' => 'Date Create',
-            'balance' => 'Balance',
-            'count_bonus_find' => 'Count Bonus Find',
+            'balance' => 'Баланс',
+            'count_bonus_find' => 'Бонус',
+            'reg_hotel_type' => 'ОТЕЛИ / ХОСТЕЛЫ',
+            'reg_car_type' => 'ПРОКАТ АВТОМАШИН/КАРШЕРИНГ',
+            'reg_rent_type' => 'АРЕНДА ПОМЕЩЕНИЙ',
         ];
     }
 }

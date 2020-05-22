@@ -17,6 +17,7 @@ $this->title = 'Поиск';
             <?php if (\backend\components\User::getRoleName() == 'director'): ?>
                 <h4>НАЗВАНИЕ ОРГАНИЗАЦИИ: <?= $hotel->company ?></h4>
                 <h4>ТЕЛЕФОН: <?= $hotel->phone ?></h4>
+                <h4>Счет: <?= $hotel->balance ?> руб</h4>
             <?php endif; ?>
         </div>
         <div class="story-container log">
