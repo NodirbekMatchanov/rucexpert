@@ -26,10 +26,10 @@ class BlackListController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['search'],
+                'only' => ['search','delete'],
                 'rules' => [
                     [
-                        'actions' => ['search'],
+                        'actions' => ['search','delete'],
                         'allow' => true,
                         'roles' => ['director'],
                     ],
