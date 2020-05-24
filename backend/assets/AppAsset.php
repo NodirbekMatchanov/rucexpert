@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
         'css/bootstrap-datepicker.css',
         'css/site.css',
         'vuex-assets/vendors/css/vendors.min.css',
-//        'vuex-assets/vendors/css/charts/apexcharts.css',
+        'vuex-assets/vendors/css/charts/apexcharts.css',
         'vuex-assets/vendors/css/extensions/tether-theme-arrows.css',
         'vuex-assets/vendors/css/extensions/tether.min.css',
         'vuex-assets/vendors/css/extensions/shepherd-theme-default.css',
@@ -44,7 +44,7 @@ class AppAsset extends AssetBundle
 //        'js/bootstrap-datepicker.js',
         'vuex-assets/vendors/js/vendors.min.js',
         'vuex-assets/vendors/js/ui/jquery.sticky.js',
-//        'vuex-assets/vendors/js/charts/apexcharts.min.js',
+        'vuex-assets/vendors/js/charts/apexcharts.min.js',
         'vuex-assets/vendors/js/extensions/tether.min.js',
         'vuex-assets/vendors/js/extensions/shepherd.min.js',
         'vuex-assets/vendors/js/extensions/dropzone.min.js',
@@ -60,7 +60,7 @@ class AppAsset extends AssetBundle
         'vuex-assets/js/core/app-menu.js',
         'vuex-assets/js/core/app.js',
         'vuex-assets/js/scripts/components.js',
-//        'vuex-assets/js/scripts/pages/dashboard-analytics.js'
+        'vuex-assets/js/scripts/pages/dashboard-analytics.js',
         'vuex-assets/js/scripts/ui/data-list-view.js',
         'vuex-assets/js/scripts/datatables/datatable.js'
 

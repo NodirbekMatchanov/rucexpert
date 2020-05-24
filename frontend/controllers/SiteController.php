@@ -170,7 +170,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(['personal-area/index']);
+                    return $this->redirect(['personal-area/index','new-user' => true]);
                 }
             }
         }
