@@ -9,6 +9,7 @@ use common\models\Sms;
 use common\models\User;
 use frontend\models\EmplayeeForm;
 use frontend\models\UserSearch;
+use mdm\admin\models\form\ChangePassword;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
@@ -28,7 +29,7 @@ use frontend\models\ContactForm;
  */
 class PersonalAreaController extends Controller
 {
-    public $layout = 'main_area';
+    public $layout = 'main_';
 
     /**
      * @inheritdoc
@@ -38,7 +39,7 @@ class PersonalAreaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index', 'signup', 'employe', 'send-code'],
+                'only' => ['logout', 'signup', 'employe', 'send-code'],
                 'rules' => [
                     [
                         'actions' => ['index', 'search', 'logout'],
@@ -46,7 +47,7 @@ class PersonalAreaController extends Controller
                         'roles' => ['manager'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'signup', 'employe'],
+                        'actions' => ['logout', 'signup', 'employe'],
                         'allow' => true,
                         'roles' => ['director'],
                     ],
@@ -92,9 +93,31 @@ class PersonalAreaController extends Controller
         $user = $user::findOne(Yii::$app->user->identity->getId());
         $hotel = new Hotels();
         $hotel = $hotel::findOne($user->hotel_id);
+        if (\backend\components\User::getRoleName() == 'director' && $hotel->load(Yii::$app->request->post()) && $hotel->save()) {
+            Yii::$app->session->setFlash('success', 'Данные успешно сохранены');
+        }
+        $changePassword = new ChangePassword();
         return $this->render('index', [
-            'hotel' => $hotel
+            'hotel' => $hotel,
+            'model' => $user,
+            'changePassword' => $changePassword
         ]);
+    }
+
+    /**
+     * actionChangePassword
+     *
+     * @return mixed
+     */
+    public function actionChangePassword()
+    {
+        $user = new ChangePassword();
+        if ($user->load(Yii::$app->request->post()) && $user->change()) {
+            Yii::$app->session->setFlash('success', 'Данные успешно сохранены');
+        } else {
+            Yii::$app->session->setFlash('error', 'Ошибка при сохранении');
+        }
+        $this->redirect('index');
     }
 
     /**

@@ -1,10 +1,12 @@
 <?php
+
 namespace backend\widgets;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
+
 /**
  * Class Menu
  * Theme menu widget.
@@ -15,7 +17,7 @@ class InspiniaMenu extends \yii\widgets\Menu
      * @inheritdoc
      */
     public $linkTemplate = '<a href="{url}" {target}>{icon} {label}</a>';
-    public $submenuTemplate = "\n<ul class='nav nav-second-level collapse in' {show}>\n{items}\n</ul>\n";
+    public $submenuTemplate = "\n<ul class='dropdown-menu' >\n{items}\n</ul>\n";
     public $activateParents = true;
 
     /**
@@ -27,7 +29,7 @@ class InspiniaMenu extends \yii\widgets\Menu
      */
     public static function widget($config = [])
     {
-        foreach ($config['items'] as $key=>$item) {
+        foreach ($config['items'] as $key => $item) {
             $config['items'][$key]['isTopLevel'] = true;
         }
 
@@ -40,11 +42,10 @@ class InspiniaMenu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if(isset($item['items'])) {
+        if (isset($item['items'])) {
             $labelTemplate = '<a href="{url}">{label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
             $linkTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-        }
-        else {
+        } else {
             $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
         }
@@ -53,12 +54,12 @@ class InspiniaMenu extends \yii\widgets\Menu
             $template = ArrayHelper::getValue($item, 'template', $linkTemplate);
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
-                '{label}' => (isset($item['isTopLevel']) && $item['isTopLevel']) ? '<span>'.$item['label'].'</span>' : $item['label'],
+                '{label}' => (isset($item['isTopLevel']) && $item['isTopLevel']) ? '<span>' . $item['label'] . '</span>' : $item['label'],
                 '{icon}' => '<i class="' . $item['icon'] . '"></i> ',
                 '{target}' => isset($item['target']) ? sprintf('target="%s"', $item['target']) : ''
             ] : [
                 '{url}' => Url::to($item['url']),
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{icon}' => null,
                 '{target}' => null
             ];
@@ -66,16 +67,17 @@ class InspiniaMenu extends \yii\widgets\Menu
         } else {
             $template = ArrayHelper::getValue($item, 'template', $labelTemplate);
             $replace = !empty($item['icon']) ? [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{icon}' => '<i class="' . $item['icon'] . '"></i> ',
                 '{target}' => null
             ] : [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{target}' => null
             ];
             return strtr($template, $replace);
         }
     }
+
     /**
      * Recursively renders the menu items (without the container tag).
      * @param array $items the menu items to be rendered recursively
@@ -87,7 +89,11 @@ class InspiniaMenu extends \yii\widgets\Menu
         $lines = [];
         foreach ($items as $i => $item) {
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-            $tag = ArrayHelper::remove($options, 'tag', 'li');
+            if (!$this->isItemActive($item)) {
+                $tag = ArrayHelper::remove($options, 'tag', 'li class="dropdown nav-item" data-menu="dropdown"');
+            } else {
+                $tag = ArrayHelper::remove($options, 'tag', 'li class="dropdown nav-item active" data-menu="dropdown"');
+            }
             $class = [];
             if ($item['active']) {
                 $class[] = $this->activeCssClass;
@@ -108,7 +114,6 @@ class InspiniaMenu extends \yii\widgets\Menu
             $menu = $this->renderItem($item);
             if (!empty($item['items'])) {
                 $menu .= strtr($this->submenuTemplate, [
-//                    '{show}' => $item['active'] ? "style='display: block'" : '',
                     '{items}' => $this->renderItems($item['items']),
                 ]);
             }
@@ -117,6 +122,7 @@ class InspiniaMenu extends \yii\widgets\Menu
 
         return implode("\n", $lines);
     }
+
     /**
      * @inheritdoc
      */
@@ -156,6 +162,7 @@ class InspiniaMenu extends \yii\widgets\Menu
         }
         return array_values($items);
     }
+
     /**
      * Checks whether a menu item is active.
      * This is done by checking if [[route]] and [[params]] match that specified in the `url` option of the menu item.
@@ -173,8 +180,13 @@ class InspiniaMenu extends \yii\widgets\Menu
             if ($route[0] !== '/' && Yii::$app->controller) {
                 $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
             }
+
             $arrayRoute = explode('/', ltrim($route, '/'));
             $arrayThisRoute = explode('/', $this->route);
+            if ($arrayThisRoute[0] == Yii::$app->controller) {
+                return true;
+            }
+
             if ($arrayRoute[0] !== $arrayThisRoute[0]) {
                 return false;
             }
@@ -184,9 +196,11 @@ class InspiniaMenu extends \yii\widgets\Menu
             if (isset($arrayRoute[2]) && $arrayRoute[2] !== $arrayThisRoute[2]) {
                 return false;
             }
+
             unset($item['url']['#']);
             if (count($item['url']) > 1) {
                 foreach (array_splice($item['url'], 1) as $name => $value) {
+
                     if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
                         return false;
                     }

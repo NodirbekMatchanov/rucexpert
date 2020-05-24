@@ -16,7 +16,7 @@ use yii\filters\VerbFilter;
  */
 class BlackListController extends Controller
 {
-    public $layout = 'main_area';
+    public $layout = 'main_';
 
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class BlackListController extends Controller
                     [
                         'actions' => ['search','delete'],
                         'allow' => true,
-                        'roles' => ['director'],
+                        'roles' => ['director','admin'],
                     ],
                 ],
             ],
@@ -65,7 +65,7 @@ class BlackListController extends Controller
     public function actionSearch()
     {
         $searchModel = new BlackListSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
         return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

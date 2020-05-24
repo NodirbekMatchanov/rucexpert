@@ -9,12 +9,16 @@
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
-/* @var $content string */
-use yii\widgets\Breadcrumbs;
-backend\assets\AppAsset::register($this);
-backend\assets\InspiniaAsset::register($this);
 
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/yii2-smartysoft-inspinia/assets');
+/* @var $content string */
+
+use yii\widgets\Breadcrumbs;
+if(!Yii::$app->user->isGuest){
+    backend\assets\AppAsset::register($this);
+}
+//backend\assets\InspiniaAsset::register($this);
+
+//$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/yii2-smartysoft-inspinia/assets');
 
 ?>
 
@@ -23,56 +27,44 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/smartysoft/y
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 
-<body class="<?= (Yii::$app->controller->action->id==='login' || Yii::$app->controller->action->id==='signup') ? 'gray-bg':'' ?>">
-
+<body class="horizontal-layout horizontal-menu 2-columns  navbar-floating footer-static" data-open="hover"
+      data-menu="horizontal-menu" data-col="2-columns">
 <?php $this->beginBody() ?>
 
-<div id="wrapper">
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <?= $this->render('header.php') ?>
+<?php endif; ?>
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <?= $this->render('sidebar.php') ?>
+<?php endif; ?>
+<div class="container">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
 
-
-    <?php if (!Yii::$app->user->isGuest) : ?>
-
-        <?= $this->render('sidebar.php', ['directoryAsset' => $directoryAsset]) ?>
-    <?php endif; ?>
-
-
-    <?php if (!Yii::$app->user->isGuest) : ?>
-    <div id="page-wrapper" class="gray-bg dashbard-1" style="min-height: 576px;">
-        <?= $this->render('header.php', ['directoryAsset' => $directoryAsset]) ?>
-
-        <div class="row white-bg">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content">
-                    <div class="row col-lg-12">
-                        <?= $this->render('content.php', ['directoryAsset' => $directoryAsset, 'content'=>$content]) ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--
-        <?= $this->render('footer.php', ['directoryAsset' => $directoryAsset]) ?>
-        -->
-
-    </div>
-    <?php else : ?>
-
-        <?= $this->render('content.php', ['directoryAsset' => $directoryAsset, 'content'=>$content]) ?>
-
-    <?php endif; ?>
+    <?= \common\widgets\Alert::widget() ?>
+    <?= $this->render('content.php', ['content' => $content]) ?>
 
 </div>
 
-<?php $this->endBody() ?>
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
 <?php if (!Yii::$app->user->isGuest) : ?>
-    <script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+    <?= $this->render('footer.php', []) ?>
 <?php endif; ?>
+
+<?php $this->endBody() ?>
+<script src="/admin/js/bootstrap-datepicker.js"></script>
 
 </body>
 </html>

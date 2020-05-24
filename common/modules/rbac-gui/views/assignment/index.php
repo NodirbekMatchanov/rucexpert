@@ -22,7 +22,15 @@ if (!empty($extraColumns)) {
 }
 $columns[] = [
     'class' => 'yii\grid\ActionColumn',
-    'template' => '{view}'
+    'template' => '{view}',
+    'buttons' => [
+        'view' => function ($url, $model) {
+            return Html::a('<i class="kt-nav__link-icon fa fa-eye"></i>', \yii\helpers\Url::to(['view', 'id' => $model->id]), [
+                'class' => 'pull-right',
+            ]);
+        }
+
+    ],
 ];
 ?>
 <div class="assignment-index">
@@ -30,13 +38,21 @@ $columns[] = [
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(); ?>
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => $columns,
-    ]);
-    ?>
+    <div class="card">
+        <div class="card-body card-dashboard">
+            <div class="table-responsive">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => $columns,
+
+                    'tableOptions' => ['class' => 'table table-striped dataex-html5-selectors dataTable', 'id' => 'DataTables_Table_4'],
+                    'options' => ['class' => ' dataTables_wrapper dt-bootstrap4', 'id' => 'DataTables_Table_4_wrapper'],
+
+                ]); ?>
+            </div>
+        </div>
+    </div>
+
     <?php Pjax::end(); ?>
 
 </div>

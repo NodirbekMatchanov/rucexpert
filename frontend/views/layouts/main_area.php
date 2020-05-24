@@ -35,9 +35,11 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    if (\backend\components\User::getRoleName() == 'director') {
-        $menuItems[] = ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']];
+    if (\yii\helpers\ArrayHelper::isIn(\backend\components\User::getRoleName(),['director','admin' ])) {
         $menuItems[] = ['label' => 'Поиск', 'url' => ['/black-list/search']];
+    }
+    if (\yii\helpers\ArrayHelper::isIn(\backend\components\User::getRoleName(),['director' ])) {
+        $menuItems[] = ['label' => 'Сотрудники', 'url' => ['/personal-area/employe']];
     }
     $menuItems[] = ['label' => 'Добавить в реестр', 'url' => ['/black-list/index']];
 

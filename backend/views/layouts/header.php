@@ -8,142 +8,85 @@
 ?>
 
 
-
-
-<div class="row border-bottom">
-    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
-        </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <!--                <li>-->
-            <!--                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>-->
-            </li>
-            <li class="dropdown">
-                <!--  <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                </a> -->
-
-                <ul class="dropdown-menu dropdown-messages">
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a7.jpg">
-                            </a>
-                            <div class="media-body">
-                                <small class="pull-right">46h ago</small>
-                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a4.jpg">
-                            </a>
-                            <div class="media-body ">
-                                <small class="pull-right text-navy">5h ago</small>
-                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/profile.jpg">
-                            </a>
-                            <div class="media-body ">
-                                <small class="pull-right">23h ago</small>
-                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="text-center link-block">
-                            <a href="mailbox.html">
-                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-               <?php if(\backend\components\User::getRole() == 'admin'):?>
-                <a class=" count-info" href="<?=Yii::$app->request->baseUrl?>/places/places-request">
-                    <i class="fa fa-bell"></i>
-                </a>
-                <?php endif;?>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="mailbox.html">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="profile.html">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="grid_options.html">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="text-center link-block">
-                            <a href="notifications.html">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li class="enterOnSite_option enterOnSite_option--logout">
-                <a href="#" id="specialButton"><i class="fa fa-eye"></i></a>
-            </li>
-            <li class="enterOnSite_option enterOnSite_option--logout">
-
-                <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post')
-                . \yii\helpers\Html::submitButton(
-                    ' Выход',
-                    ['class' => 'btn btn-link fa fa-sign-out']
-                )
-                . \yii\helpers\Html::endForm() ?>
-            </li>
-
-
-            <!--                <li>-->
-            <!--                    <a class="right-sidebar-toggle">-->
-            <!--                        <i class="fa fa-tasks"></i>-->
-            <!--                    </a>-->
-            <!--                </li>-->
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-shadow navbar-brand-center" >
+    <div class="navbar-header d-xl-block d-none">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item"><a class="navbar-brand" href="#">
+                    <div class="brand-logo"></div>
+                </a></li>
         </ul>
+    </div>
+    <div class="navbar-wrapper">
+        <div class="navbar-container content">
+            <div class="navbar-collapse" id="navbar-mobile">
+                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a
+                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                                        class="ficon feather icon-menu"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="nav navbar-nav bookmark-icons"><a
+                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                                        class=" "></i>Админ панель</a></li>
+                    </ul>
+                </div>
+                <ul class="nav navbar-nav float-right">
 
-    </nav>
-</div>
 
+                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
+                                                                           data-toggle="dropdown"><i
+                                    class="ficon feather icon-bell"></i><span
+                                    class="badge badge-pill badge-primary badge-up">1</span></a>
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                            <li class="dropdown-menu-header">
+                                <div class="dropdown-header m-0 p-2">
+                                    <h3 class="white">1 New</h3><span
+                                            class="notification-title">App Notifications</span>
+                                </div>
+                            </li>
+                            <li class="scrollable-container media-list"><a class="d-flex justify-content-between"
+                                                                           href="javascript:void(0)">
 
+                               <a class="d-flex justify-content-between" href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="warning media-heading">Generate monthly report</h6><small
+                                                    class="notification-text">Chocolate cake oat cake tiramisu
+                                                marzipan</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month
+                                            </time>
+                                        </small>
+                                    </div>
+                                </a></li>
+                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
+                                                                href="javascript:void(0)">Read all notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
+                                                                   href="#" data-toggle="dropdown">
+                            <div class="user-nav d-sm-flex d-none"><span
+                                        class="user-name text-bold-600"><?= Yii::$app->user->identity->username ?></span><span
+                                        class="user-status"><?= Yii::$app->user->identity->email ?></span></div>
+                            <span><img class="round" src="/admin/images/portrait/small/avatar-s-11.jpg"
+                                       alt="avatar" height="40" width="40"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
+                                                                          href="page-user-profile.html"><i
+                                        class="feather icon-user"></i> Настройка</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/admin/site/logout?id=<?= Yii::$app->user->identity->id ?>"><i
+                                        class="feather icon-power"></i>
+                                Выход</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -5,12 +5,13 @@ use yii\grid\GridView;
 use mdm\admin\components\Helper;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel mdm\admin\models\searchs\User */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = "Admin";
+$this->title = "Все пользователи";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -18,84 +19,39 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= Html::a('Создать', ['/site/create-user'], ['class' => 'btn btn-success']) ?>
+    <div class="card">
+        <div class="card-body card-dashboard">
+            <div class="table-responsive">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
 
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'username',
-            'email:email',
-            'created_at:date',
-//            [
-//                'attribute' => 'status',
-//                'value' => function ($model) {
-//                    return $model->status == 0 ? 'Inactive' : 'Active';
-//                },
-//                'filter' => [
-//                    0 => 'Inactive',
-//                    10 => 'Active'
-//                ]
-//            ],
-            [
-                'attribute' => 'role',
-                'format' => 'raw',
-                'value' => function ($model)
-                {
-                    $role = \backend\components\User::getRole($model->id);
-                    if($role == 'admin'){
-                        return 'admin';
-                        
-                    }
-                    $status = \backend\components\User::getRoleNames();
-                    $status = ArrayHelper::map($status, 'name', 'name');
-                    if(empty($role)){
-                        return Html::dropDownList('statusRole',$role,$status,['data-id' => $model->id]);
-                    }
-//                    $form = ActiveForm::begin([
-//                        'action' => ['index'],
-//                        'method' => 'get',
-//                    ]);
-                    return Html::dropDownList('statusRole',$role,$status,['data-id' => $model->id]);
-//            ActiveForm::end();
+                    'columns' => [
+                        'id',
+                        'username',
+                        'email:email',
+                        'created_at:date',
 
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '{delete}',
+                            'buttons' => [
+                                'delete' => function ($url, $model) {
+                                    return Html::a('<i class="kt-nav__link-icon fa fa-trash-o"></i>', Url::to(['delete', 'id' => $model->id]), [
+                                        'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
+                                        'class' => 'pull-right',
+                                        'data-method' => 'post',
+                                    ]);
+                                }
 
-                },
-            ],
-           
-//            [
-//                'attribute' => 'role',
-//                'value' => function ($model) {
-//                    $assigment =new \mdm\admin\models\Assignment($model->id);
-//                    $items = $assigment->getItems();
-//                    return implode(',',array_keys($items['assigned']));
-//                },
-//                'filter' => [
-//                    0 => 'Inactive',
-//                    10 => 'Active'
-//                ]
-//            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => Helper::filterActionColumn(['view', 'activate', 'delete']),
-                'buttons' => [
-                    'activate' => function ($url, $model) {
-                        if ($model->status == 10) {
-                            return '';
-                        }
-                        $options = [
-                            'title' => Yii::t('rbac-admin', 'Activate'),
-                            'aria-label' => Yii::t('rbac-admin', 'Activate'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
-                            'data-method' => 'post',
-                            'data-pjax' => '0',
-                        ];
-                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
-                    }
-                ]
-            ],
-        ],
-    ]);
-    ?>
+                            ],
+                        ],
+                    ],
+                    'tableOptions' => ['class' => 'table table-striped dataex-html5-selectors dataTable', 'id' => 'DataTables_Table_4'],
+                    'options' => ['class' => ' dataTables_wrapper dt-bootstrap4', 'id' => 'DataTables_Table_4_wrapper'],
+
+                ]); ?>
+            </div>
+        </div>
+    </div>
+
 </div>

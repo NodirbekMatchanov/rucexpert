@@ -4,6 +4,15 @@
 
 $this->title = 'Admin Panel';
 ?>
-<div class="site-index">
+<br>
+<br>
+<div class="site-index" style="margin-bottom: 20%">
     <h3>Добро пожаловать!!</h3>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

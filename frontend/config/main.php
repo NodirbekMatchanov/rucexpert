@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'ru',
     'homeUrl' => '/',
+    'aliases' => [
+        '@mdm/admin' => '@common/modules/rbac-gui',
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',

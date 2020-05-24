@@ -11,11 +11,12 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Регистрация сотрудников';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title) ?></h1>
 
+<div class="card">
 
-    <div class="row">
+    <div class="card-content">
+
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 

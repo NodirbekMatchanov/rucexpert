@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use backend\components\User;
 use backend\models\Rubric;
 use common\models\Hotels;
 use yii\base\Model;
@@ -59,7 +60,7 @@ class BlackListSearch extends BlackList
     public function search($params)
     {
         $query = BlackList::find();
-
+        $isAdmin = User::getRoleName() == 'admin';
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -72,14 +73,15 @@ class BlackListSearch extends BlackList
             $rubric = $rubric::findOne($this->type_org);
             $price = (float)$rubric->price;
         }
-        if (($this->hotel->balance >= $price || $this->hotel->count_bonus_find) && $this->searching) {
-            if ($this->hotel->count_bonus_find) {
-                $this->hotel->count_bonus_find = $this->hotel->count_bonus_find - 1;
-            } else {
-
-                $this->hotel->balance = $this->hotel->balance - $price;
+        if (($isAdmin && $this->searching) || $this->searching && (($this->hotel->balance >= $price || $this->hotel->count_bonus_find) )) {
+            if (!$isAdmin) {
+                if ($this->hotel->count_bonus_find) {
+                    $this->hotel->count_bonus_find = $this->hotel->count_bonus_find - 1;
+                } else {
+                    $this->hotel->balance = $this->hotel->balance - $price;
+                }
             }
-            if ($this->hotel->save()) {
+            if ($isAdmin || $this->hotel->save()) {
 
                 if (!$this->validate()) {
                     // uncomment the following line if you do not want to return any records when validation fails
