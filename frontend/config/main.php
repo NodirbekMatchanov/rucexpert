@@ -70,7 +70,16 @@ return [
             'rules' => [
             ],
         ],
-
+        'robokassa' => [
+            'class' => '\robokassa\Merchant',
+            'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
+            'sMerchantLogin' => 'ruc.center',
+//            'sMerchantPass1' => 'noNu3N38bTytM1adC7lt',
+            'sMerchantPass1' => 'MPEz31tRMts1pA5gr6Ut',
+//            'sMerchantPass2' => 'Z12dbGUBT1hcsm7wU7WX',
+            'sMerchantPass2' => 'OJAynvKVxa97uOz2C2j6',
+            'isTest' => true,
+        ]
     ],
     'params' => $params,
 ];

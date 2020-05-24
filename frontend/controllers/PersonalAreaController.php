@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use backend\components\Sender;
 use backend\models\News;
 use common\models\Hotels;
+use common\models\Invoice;
 use common\models\Sms;
 use common\models\User;
 use frontend\models\EmplayeeForm;
@@ -90,6 +91,7 @@ class PersonalAreaController extends Controller
     public function actionIndex()
     {
         $user = new User();
+        $invoice = new Invoice();
         $user = $user::findOne(Yii::$app->user->identity->getId());
         $hotel = new Hotels();
         $hotel = $hotel::findOne($user->hotel_id);
@@ -100,7 +102,8 @@ class PersonalAreaController extends Controller
         return $this->render('index', [
             'hotel' => $hotel,
             'model' => $user,
-            'changePassword' => $changePassword
+            'changePassword' => $changePassword,
+            'invoice' => $invoice
         ]);
     }
 
