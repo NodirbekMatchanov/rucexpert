@@ -15,6 +15,7 @@ use yii\base\InvalidParamException;
 
 class PaymentController extends Controller
 {
+
     public function actionInvoice()
     {
         $model = new Invoice();
@@ -94,7 +95,7 @@ class PaymentController extends Controller
      */
     protected function loadModel($id)
     {
-        $model = Invoice::find($id);
+        $model = Invoice::findOne($id);
         if ($model === null) {
             throw new BadRequestHttpException;
         }
