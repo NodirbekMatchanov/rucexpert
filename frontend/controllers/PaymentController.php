@@ -84,7 +84,8 @@ class PaymentController extends Controller
             Yii::$app->session->setFlash('error', 'Счет пополнен!');
             return $this->redirect('/personal-area/index');
         } else {
-            return 'Status has not changed';
+            Yii::$app->session->setFlash('error', 'Счет пополнен!');
+            return $this->redirect('/personal-area/index');
         }
     }
 
