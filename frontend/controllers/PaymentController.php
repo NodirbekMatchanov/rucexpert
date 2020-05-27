@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $model->updateAttributes(['status' => Invoice::STATUS_ACCEPTED]);
         $user = User::findOne($model->user_id);
         $hotel = Hotels::findOne($user->hotel_id);
-        $hotel->balance = $model->summ;
+        $hotel->balance += $model->summ;
         $hotel->save();
         Yii::$app->session->setFlash('success', 'Счет пополнен!');
         return $this->redirect('index');
@@ -80,11 +80,7 @@ class PaymentController extends Controller
         $model = $this->loadModel($nInvId);
         if ($model->status == Invoice::STATUS_PENDING) {
             $model->updateAttributes(['status' => Invoice::STATUS_FAIL]);
-            $user = User::findOne($model->user_id);
-            $hotel = Hotels::findOne($user->hotel_id);
-            $hotel->balance = $model->summ;
-            $hotel->save();
-            Yii::$app->session->setFlash('success', 'Счет пополнен!');
+            Yii::$app->session->setFlash('error', 'Счет пополнен!');
             return $this->redirect('index');
         } else {
             return 'Status has not changed';
