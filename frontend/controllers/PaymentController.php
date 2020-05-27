@@ -67,7 +67,7 @@ class PaymentController extends Controller
         $hotel->balance += $model->summ;
         $hotel->save();
         Yii::$app->session->setFlash('success', 'Счет пополнен!');
-        return $this->redirect('index');
+        return $this->redirect('/personal-area/index');
     }
 
     public function resultCallback($merchant, $nInvId, $nOutSum, $shp)
@@ -82,7 +82,7 @@ class PaymentController extends Controller
         if ($model->status == Invoice::STATUS_PENDING) {
             $model->updateAttributes(['status' => Invoice::STATUS_FAIL]);
             Yii::$app->session->setFlash('error', 'Счет пополнен!');
-            return $this->redirect('index');
+            return $this->redirect('/personal-area/index');
         } else {
             return 'Status has not changed';
         }
