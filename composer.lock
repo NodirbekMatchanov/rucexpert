@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37b4d32e1937af212a76dde25261cc16",
+    "content-hash": "678092198ea59c182a72be8c2aa49953",
     "packages": [
         {
             "name": "2amigos/yii2-arrayquery-component",
@@ -264,6 +264,32 @@
             }
         },
         {
+            "name": "bower-asset/toastr",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnpapa/toastr-bower.git",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnpapa/toastr-bower/zipball/e648a870a60103bbc3986c1fe2b2de86ea4a9569",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6.3"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "toastr.js",
+                    "toastr.css"
+                ]
+            },
+            "time": "2015-08-10T03:16:59+00:00"
+        },
+        {
             "name": "bower-asset/yii2-pjax",
             "version": "2.0.7.1",
             "source": {
@@ -400,6 +426,60 @@
                 "yii"
             ],
             "time": "2013-12-10T17:49:58+00:00"
+        },
+        {
+            "name": "diecoding/yii2-toastr",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/die-coding/yii2-toastr.git",
+                "reference": "7091a322a8c335cfcd6c66f999e00eaf2f49c1e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/die-coding/yii2-toastr/zipball/7091a322a8c335cfcd6c66f999e00eaf2f49c1e5",
+                "reference": "7091a322a8c335cfcd6c66f999e00eaf2f49c1e5",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/toastr": "^2.1",
+                "php": ">=7.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "<7"
+            },
+            "type": "yii2-widget",
+            "autoload": {
+                "psr-4": {
+                    "diecoding\\toastr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Die Coding",
+                    "email": "diecoding@gmail.com"
+                },
+                {
+                    "name": "Sugeng Sulistiyawan",
+                    "email": "sugeng.sulistiyawan@gmail.com"
+                }
+            ],
+            "description": "Simple flash toastr notifications for Yii2",
+            "keywords": [
+                "flash",
+                "jquery",
+                "notification",
+                "session",
+                "toastr",
+                "widget",
+                "yii2"
+            ],
+            "time": "2020-03-04T01:03:43+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

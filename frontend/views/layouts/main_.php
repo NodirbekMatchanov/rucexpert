@@ -48,8 +48,21 @@ if(!Yii::$app->user->isGuest){
     <?= $this->render('sidebar.php') ?>
 <?php endif; ?>
 <div class="container" style="padding-top: 160px">
-    <?= \common\widgets\Alert::widget() ?>
-
+    <?=\diecoding\toastr\ToastrFlash::widget();?>
+    <?php if(Yii::$app->session->hasFlash('success')):?>
+        <div class="alert alert-success" role="alert">
+            <p class="mb-0">
+                <?=Yii::$app->session->getFlash('success')?>
+            </p>
+        </div>
+    <?php endif;?>
+    <?php if(Yii::$app->session->hasFlash('error')):?>
+        <div class="alert alert-danger" role="alert">
+            <p class="mb-0">
+                <?=Yii::$app->session->getFlash('error')?>
+            </p>
+        </div>
+    <?php endif;?>
     <?= $this->render('content.php', ['content' => $content]) ?>
 
 </div>
