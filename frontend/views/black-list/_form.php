@@ -8,7 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="card">
-    <div class="card-content container">
+    <div class="card-content ">
+        <div class="card-body ">
 
             <?php $form = ActiveForm::begin(); ?>
 
@@ -46,7 +47,8 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'file[]')->widget(\kartik\file\FileInput::className(), [
+                    <?=
+                    $form->field($model, 'file[]')->widget(\kartik\file\FileInput::className(), [
                         'language' => 'ru',
                         'options' => ['multiple' => true],
                     ]) ?>
@@ -54,12 +56,12 @@ use yii\widgets\ActiveForm;
             </div>
 
 
+            <div class="form-group">
+                <?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
+            </div>
 
-        <div class="form-group">
-            <?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+
         </div>
-
-        <?php ActiveForm::end(); ?>
-
     </div>
 </div>

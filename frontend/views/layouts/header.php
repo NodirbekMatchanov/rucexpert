@@ -29,6 +29,11 @@ if(\backend\components\User::getRoleName() == 'director'){
                     <ul class="nav navbar-nav">
                         <li class="nav navbar-nav bookmark-icons"><a
                                     class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                                        class=" "></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="nav navbar-nav bookmark-icons"><a
+                                    class="nav-link nav-menu-main " href="/personal-area/"><i
                                         class=" "></i>Личный кабинет</a></li>
                     </ul>
                 </div>

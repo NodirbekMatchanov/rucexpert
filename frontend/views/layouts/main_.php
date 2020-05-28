@@ -47,7 +47,7 @@ if(!Yii::$app->user->isGuest){
 <?php if (!Yii::$app->user->isGuest) : ?>
     <?= $this->render('sidebar.php') ?>
 <?php endif; ?>
-<div class="container" style="padding-top: 160px">
+<div class="container-fluid" style="padding-top: 160px">
     <?=\diecoding\toastr\ToastrFlash::widget();?>
     <?php if(Yii::$app->session->hasFlash('success')):?>
         <div class="alert alert-success" role="alert">

@@ -28,46 +28,51 @@
                     <ul class="nav navbar-nav">
                         <li class="nav navbar-nav bookmark-icons"><a
                                     class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                                        class=" "></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="nav navbar-nav bookmark-icons"><a
+                                    class="nav-link nav-menu-main" href="/admin/"><i
                                         class=" "></i>Админ панель</a></li>
                     </ul>
                 </div>
                 <ul class="nav navbar-nav float-right">
 
 
-                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
-                                                                           data-toggle="dropdown"><i
-                                    class="ficon feather icon-bell"></i><span
-                                    class="badge badge-pill badge-primary badge-up">1</span></a>
-                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                            <li class="dropdown-menu-header">
-                                <div class="dropdown-header m-0 p-2">
-                                    <h3 class="white">1 New</h3><span
-                                            class="notification-title">App Notifications</span>
-                                </div>
-                            </li>
-                            <li class="scrollable-container media-list"><a class="d-flex justify-content-between"
-                                                                           href="javascript:void(0)">
-
-                               <a class="d-flex justify-content-between" href="javascript:void(0)">
-                                    <div class="media d-flex align-items-start">
-                                        <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="warning media-heading">Generate monthly report</h6><small
-                                                    class="notification-text">Chocolate cake oat cake tiramisu
-                                                marzipan</small>
-                                        </div>
-                                        <small>
-                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month
-                                            </time>
-                                        </small>
-                                    </div>
-                                </a></li>
-                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
-                                                                href="javascript:void(0)">Read all notifications</a>
-                            </li>
-                        </ul>
-                    </li>
+<!--                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"-->
+<!--                                                                           data-toggle="dropdown"><i-->
+<!--                                    class="ficon feather icon-bell"></i><span-->
+<!--                                    class="badge badge-pill badge-primary badge-up">1</span></a>-->
+<!--                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">-->
+<!--                            <li class="dropdown-menu-header">-->
+<!--                                <div class="dropdown-header m-0 p-2">-->
+<!--                                    <h3 class="white">1 New</h3><span-->
+<!--                                            class="notification-title">App Notifications</span>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li class="scrollable-container media-list"><a class="d-flex justify-content-between"-->
+<!--                                                                           href="javascript:void(0)">-->
+<!---->
+<!--                               <a class="d-flex justify-content-between" href="javascript:void(0)">-->
+<!--                                    <div class="media d-flex align-items-start">-->
+<!--                                        <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>-->
+<!--                                        </div>-->
+<!--                                        <div class="media-body">-->
+<!--                                            <h6 class="warning media-heading">Generate monthly report</h6><small-->
+<!--                                                    class="notification-text">Chocolate cake oat cake tiramisu-->
+<!--                                                marzipan</small>-->
+<!--                                        </div>-->
+<!--                                        <small>-->
+<!--                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month-->
+<!--                                            </time>-->
+<!--                                        </small>-->
+<!--                                    </div>-->
+<!--                                </a></li>-->
+<!--                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"-->
+<!--                                                                href="javascript:void(0)">Read all notifications</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
                                                                    href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none"><span

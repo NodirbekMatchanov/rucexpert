@@ -47,7 +47,7 @@ if(!Yii::$app->user->isGuest){
 <?php if (!Yii::$app->user->isGuest) : ?>
     <?= $this->render('sidebar.php') ?>
 <?php endif; ?>
-<div class="container">
+<div class="container-fluid">
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
