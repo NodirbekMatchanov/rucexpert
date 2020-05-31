@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="media">
     <a href="">
         <?php
-        $img = '/web/images/avatar-default-icon.png';
+        $img = '/images/avatar-default-icon.png';
         if(!empty($model->avatar)){
             $img = '/uploads/files/'.$model->avatar;
         }

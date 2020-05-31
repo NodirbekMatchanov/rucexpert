@@ -2,7 +2,7 @@
 
 use \yii\helpers\Url;
 $balance = '';
-$img = '/web/images/avatar-default-icon.png';
+$img = '/images/avatar-default-icon.png';
 if(\backend\components\User::getRoleName() == 'director'){
     $hotel = \common\models\User::findHotel(Yii::$app->user->identity->hotel_id);
     $balance = ' Баланс ('.$hotel->balance.' р) ';
