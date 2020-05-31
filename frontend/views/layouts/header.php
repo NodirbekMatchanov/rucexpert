@@ -2,9 +2,13 @@
 
 use \yii\helpers\Url;
 $balance = '';
+$img = '/web/images/avatar-default-icon.png';
 if(\backend\components\User::getRoleName() == 'director'){
     $hotel = \common\models\User::findHotel(Yii::$app->user->identity->hotel_id);
     $balance = ' Баланс ('.$hotel->balance.' р) ';
+    if(!empty($hotel->avatar)){
+        $img = '/uploads/files/'.$hotel->avatar;
+    }
 }
 ?>
 
@@ -46,8 +50,8 @@ if(\backend\components\User::getRoleName() == 'director'){
                             <div class="user-nav d-sm-flex d-none"><span
                                         class="user-name text-bold-600"><?= Yii::$app->user->identity->username ?></span>
                                 <span  class="user-info"><?= $balance ?> </span></div>
-                            <span><img class="round" src="/admin/images/portrait/small/avatar-s-11.jpg"
-                                       alt="avatar" height="40" width="40"></span>
+                            <span><img class="round" src="<?=$img?>"
+                                       alt="avatar" style="object-fit: cover" height="40" width="40"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="<?= Url::to(['black-list/search']) ?>"><i

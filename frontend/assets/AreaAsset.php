@@ -42,6 +42,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/plagin/bootstrap-datepicker.js',
 //        'js/bootstrap-datepicker.js',
+        'js/main.js',
         'vuex-assets/vendors/js/vendors.min.js',
         'vuex-assets/vendors/js/ui/jquery.sticky.js',
 //        'vuex-assets/vendors/js/charts/apexcharts.min.js',

@@ -23,15 +23,57 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $model->comment ?>
                     </p>
                 </div>
-                <h3>Файлы</h3>
+                <h3>Галерея</h3>
+                <?=
+                newerton\fancybox\FancyBox::widget([
+                    'target' => 'a[rel=fancybox]',
+                    'helpers' => true,
+                    'mouse' => true,
+                    'config' => [
+                        'maxWidth' => '90%',
+                        'maxHeight' => '90%',
+                        'playSpeed' => 7000,
+                        'padding' => 0,
+                        'fitToView' => false,
+                        'width' => '70%',
+                        'height' => '70%',
+                        'autoSize' => false,
+                        'closeClick' => false,
+                        'openEffect' => 'elastic',
+                        'closeEffect' => 'elastic',
+                        'prevEffect' => 'elastic',
+                        'nextEffect' => 'elastic',
+                        'closeBtn' => false,
+                        'openOpacity' => true,
+                        'helpers' => [
+                            'title' => ['type' => 'float'],
+                            'buttons' => [],
+                            'thumbs' => ['width' => 68, 'height' => 50],
+                            'overlay' => [
+                                'css' => [
+                                    'background' => 'rgba(0, 0, 0, 0.8)'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]);
+                ?>
                 <?php $i = 0;
                 if ($model->files): ?>
+                  <div class="row">
                     <?php foreach ($model->files as $file): $i++; ?>
-                        <?= Html::a('file № ' . $i, 'web/upload/black-list/' . $file->url, ['download' => '']) ?>
-                        <br>
+                        <div class="col-sm-4 col-md-4 col-xl-4 col-xs-12">
+
+                            <?= Html::a(Html::img('/uploads/black-list/' . $file->url, ['style' => 'width:100%; object-fit:cover;']), '/uploads/black-list/' . $file->url, ['rel' => 'fancybox']);
+                            ?>
+                        </div>
+
+
                     <?php endforeach; ?>
+                  </div>
                 <?php endif; ?>
             </div>
         </div>
 
     </div>
+</div>

@@ -23,6 +23,7 @@ class SignupForm extends Model
     public $license_date;
     public $policy;
     public $phone;
+    public $avatar;
     public $password_repeat;
     public $file;
     public $fileName;
@@ -54,7 +55,7 @@ class SignupForm extends Model
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'message' => "Пароли не совпадают"],
             ['code', 'validateCode'],
-            [['policy'], 'required','requiredValue' => 1, 'message' => 'Подтвердите согласие с политикой конфидициальности'],
+            [['policy'], 'required', 'requiredValue' => 1, 'message' => 'Подтвердите согласие с политикой конфидициальности'],
 
         ];
     }
@@ -109,7 +110,8 @@ class SignupForm extends Model
             $hotels->license_file = $this->fileName;
             $hotels->politics = $this->policy;
             $hotels->phone = $this->phone;
-            $hotels->balance = 250;
+            $hotels->avatar = $this->avatar;
+            $hotels->balance = 0;
             $hotels->count_bonus_find = 5;
             $hotels->save();
             $sms = new Sms();
@@ -123,6 +125,10 @@ class SignupForm extends Model
         return $user->save() ? $user : null;
     }
 
+    /** валидация смс кода для подтвердении
+     * @param $attribute
+     * @param $params
+     */
     public function validateCode($attribute, $params)
     {
         $sms = new Sms();
@@ -134,6 +140,7 @@ class SignupForm extends Model
 
     public function beforeSave()
     {
+        // загрузка файлов
         $this->file = UploadedFile::getInstance($this, 'file');
         if (!empty($this->file)) {
 
@@ -143,6 +150,17 @@ class SignupForm extends Model
             }
             $this->file->saveAs(\Yii::getAlias('@frontend') . '/web/uploads/files/' . $fileName);
             $this->fileName = $fileName;
+        }
+        // загрузка аватара для директора
+        $this->avatar = UploadedFile::getInstance($this, 'avatar');
+        if (!empty($this->avatar)) {
+
+            $fileName = rand(0, 999) . '_' . time() . '.' . $this->file->extension;
+            if (!is_dir(\Yii::getAlias('@frontend') . '/web/uploads/files/')) {
+                mkdir(\Yii::getAlias('@frontend') . '/web/uploads/files/');
+            }
+            $this->avatar->saveAs(\Yii::getAlias('@frontend') . '/web/uploads/files/' . $fileName);
+            $this->avatar = $fileName;
         }
     }
 }

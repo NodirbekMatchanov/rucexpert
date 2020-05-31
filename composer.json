@@ -27,7 +27,8 @@
         "justinvoelker/yii2-separatedpager": "*",
         "yiisoft/yii2-authclient": "^2.2",
         "yii-cms/yii2-robokassa": "^1.3",
-        "diecoding/yii2-toastr": "*"
+        "diecoding/yii2-toastr": "*",
+        "newerton/yii2-fancybox": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
