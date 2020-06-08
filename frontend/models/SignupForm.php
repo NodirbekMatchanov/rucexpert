@@ -176,10 +176,9 @@ class SignupForm extends Model
         return \Yii::$app
             ->mailer
             ->compose()
-            ->setFrom('group.scala@mail.ru')
+            ->setFrom(['group.scala@mail.ru' => 'Robot'])
             ->setTo(\Yii::$app->params['notification'])
             ->setSubject('Зарегистрирован новый пользователь RucExport')
-            ->setTextBody('Текст сообщения')
             ->setHtmlBody('<p>Зарегистрирован пользовтель ' . Html::encode($user->username) .
                 '</p><p>Компания: ' . $hotel->company . '</p>'.
                 '</p><p>Номер телефона: ' . $hotel->phone . '</p>'

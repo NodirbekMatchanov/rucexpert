@@ -176,7 +176,7 @@ class BlackListController extends Controller
         return \Yii::$app
             ->mailer
             ->compose()
-            ->setFrom('group.scala@mail.ru')
+            ->setFrom(['group.scala@mail.ru' => 'Robot'])
             ->setTo(Yii::$app->params['notification'])
             ->setSubject('Пользователь добавил нового рарушителя')
             ->setHtmlBody($body)
