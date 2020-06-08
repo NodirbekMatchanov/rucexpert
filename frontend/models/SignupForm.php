@@ -6,6 +6,7 @@ use common\models\Hotels;
 use common\models\Sms;
 use yii\base\Model;
 use common\models\User;
+use yii\helpers\Html;
 use yii\web\UploadedFile;
 
 /**
@@ -114,6 +115,12 @@ class SignupForm extends Model
             $hotels->balance = 0;
             $hotels->count_bonus_find = 5;
             $hotels->save();
+            try {
+                $this->sendEmail($user, $hotels);
+            } catch (\Exception $e){
+                print_r($e);
+                die();
+            }
             $sms = new Sms();
             $code = $sms::find()->where(['code' => $this->code, 'phone' => $this->phone])->one();
             $code->delete();
@@ -162,5 +169,21 @@ class SignupForm extends Model
             $this->avatar->saveAs(\Yii::getAlias('@frontend') . '/web/uploads/files/' . $fileName);
             $this->avatar = $fileName;
         }
+    }
+
+    protected function sendEmail($user, $hotel)
+    {
+        return \Yii::$app
+            ->mailer
+            ->compose()
+            ->setFrom('group.scala@mail.ru')
+            ->setTo('group.scala@mail.ru')
+            ->setSubject('Зарегистрирован новый пользователь RucExport')
+            ->setTextBody('Текст сообщения')
+            ->setHtmlBody('<p>Зарегистрирован пользовтель ' . Html::encode($user->username) .
+                '</p><p>Компания: ' . $hotel->company . '</p>'.
+                '</p><p>Номер телефона: ' . $hotel->phone . '</p>'
+            )
+            ->send();
     }
 }

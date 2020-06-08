@@ -14,6 +14,7 @@ use Yii;
  * @property string $creator
  * @property int $rubric_id
  * @property string $img
+ * @property int $status
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -34,7 +35,7 @@ class News extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['content'], 'string'],
             [['date'], 'safe'],
-            [['rubric_id'], 'integer'],
+            [['rubric_id','status'], 'integer'],
             [['title', 'creator', 'img'], 'string', 'max' => 255],
         ];
     }
@@ -51,6 +52,7 @@ class News extends \yii\db\ActiveRecord
             'date' => 'Date',
             'creator' => 'Creator',
             'rubric_id' => 'Rubric ID',
+            'status' => 'Статус',
             'img' => 'Img',
         ];
     }

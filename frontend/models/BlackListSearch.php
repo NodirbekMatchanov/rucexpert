@@ -66,6 +66,7 @@ class BlackListSearch extends BlackList
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $query->where(['status' => 2]);
         $this->load($params);
         $rubric = new Rubric();
         $price = 0;

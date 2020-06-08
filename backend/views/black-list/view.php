@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 if ($model->files): ?>
                   <div class="row">
                     <?php foreach ($model->files as $file): $i++; ?>
-                        <div class="col-sm-4 col-md-4 col-xl-4 col-xs-12">
+                        <div class="col-sm-3 col-md-3 col-xl-3 col-xs-12">
 
                             <?= Html::a(Html::img('/uploads/black-list/' . $file->url, ['style' => 'width:100%; height: 200px; margin:10px; object-fit:cover;']), '/uploads/black-list/' . $file->url, ['rel' => 'fancybox']);
                             ?>

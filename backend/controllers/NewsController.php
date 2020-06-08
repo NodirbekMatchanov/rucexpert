@@ -140,4 +140,36 @@ class NewsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionNewsSuccess()
+    {
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $list = News::findOne($id);
+            if (!empty($list)) {
+                $list->status = 2;
+                if ($list->save()) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function actionNewsCancel()
+    {
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $list = News::findOne($id);
+            if (!empty($list)) {
+                $list->status = 3;
+                if ($list->save()) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 }

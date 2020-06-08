@@ -21,6 +21,19 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ""
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+             'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.mail.ru',
+                'username' => 'group.scala@mail.ru',
+                'password' => 'nodirbek199601051',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

@@ -5,59 +5,65 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\NewsSearch */
+/* @var $searchModel backend\models\BlackListSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Новости';
+$this->title = 'Список';
 $this->params['breadcrumbs'][] = $this->title;
 
-$columns = [
+$column = [
     'id',
-    'title',
-    'date',
+    'first_name',
+    'last_name',
+    'middle_name',
+    'email',
     [
         'label' => 'Статус',
         'format' => 'raw',
         'value' => function ($model) {
             if ($model->status == 0) {
                 return '<div class="alert alert-primary btn-sm text-center">Новый</div>';
-            } elseif ($model->status == 2) {
+            } elseif($model->status == 2) {
                 return '<div class="alert alert-success btn-sm text-center">опубликовано</div>';
-            } elseif ($model->status == 3) {
+            } elseif($model->status == 3) {
                 return '<div class="alert alert-danger btn-sm text-center">Отменено</div>';
             }
         }
     ],
 
 ];
-// поле модерация толтко для админа
-if (\backend\components\User::getRoleName() == 'admin') {
-    $columns = array_merge($columns, [[
+if(\backend\components\User::getRoleName() == 'admin'){
+    $columns =  array_merge($column,[[
         'label' => '',
-        'headerOptions' => ['style' => 'width:10%'],
         'format' => 'raw',
         'value' => function ($model) {
-            $success = '<button data-id="' . $model->id . ' " class="btn btn-success btn-sm news-success text-center" style="margin-bottom: 5px">Разрешить</button>';
-            $error = '<button data-id="' . $model->id . '" class="btn btn-danger btn-sm news-cancel text-center" >Отменить</button>';
-            if ($model->status == 2) {
+            $success = '<button data-id="' . $model->id . ' " class="btn btn-success btn-sm admin-success">Разрешить</button>';
+            $error = '<button data-id="' . $model->id . '" class="btn btn-danger btn-sm admin-cancel">Отменить</button>';
+            if($model->status == 2){
                 return $error;
-            } elseif ($model->status == 3) {
+            } elseif($model->status == 3) {
                 return $success;
             } else {
-                return $success . ' ' . $error;
+                return $success. ' '. $error;
             }
         }
     ]]);
 }
-
 $columns = array_merge($columns, [[
     'class' => 'yii\grid\ActionColumn',
     'buttons' => [
+        'view' => function ($url, $model) {
+            return '<a href="' . Url::to(['view', 'id' => $model->id]) . '" class="kt-nav__link">
+								<i class="fa fa-eye"></i>
+							</a>';
+        },
         'update' => function ($url, $model) {
             return '<a href="' . Url::to(['update', 'id' => $model->id]) . '" class="kt-nav__link">
 								<i class="fa fa-edit"></i>
 							</a>';
+
         },
+
         'delete' => function ($url, $model) {
             return Html::a('<i class="kt-nav__link-icon fa fa-trash-o"></i>', Url::to(['delete', 'id' => $model->id]), [
                 'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
@@ -66,9 +72,9 @@ $columns = array_merge($columns, [[
             ]);
         },
     ],
-]]);
+]])
 ?>
-<div class="news-index">
+<div class="black-list-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

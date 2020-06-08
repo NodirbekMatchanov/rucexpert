@@ -52,7 +52,14 @@ if(!Yii::$app->user->isGuest){
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
-    <?= \common\widgets\Alert::widget() ?>
+    <?=\diecoding\toastr\ToastrFlash::widget();?>
+    <?php if(Yii::$app->session->hasFlash('success')):?>
+        <div class="alert alert-success" role="alert">
+            <p class="mb-0">
+                <?=Yii::$app->session->getFlash('success')?>
+            </p>
+        </div>
+    <?php endif;?>
     <?= $this->render('content.php', ['content' => $content]) ?>
 
 </div>

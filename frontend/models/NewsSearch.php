@@ -47,7 +47,7 @@ class NewsSearch extends News
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $query->where(['status' => 2]);
         $this->load($params);
 
         if (!$this->validate()) {

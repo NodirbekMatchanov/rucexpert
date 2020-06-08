@@ -74,6 +74,12 @@
                                 'url' => ['/news/index']],
                         ]
                     ],
+                    [
+                        'label' => 'Реестр',
+                          'template' => '<a href="{url}" class="dropdown-item">Реестр<i class=""></i> <span
+                            class=""></span></a>',
+                        'url' => ['/black-list/index'],
+                    ],
 
 
                 ];

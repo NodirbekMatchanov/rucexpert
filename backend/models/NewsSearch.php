@@ -17,8 +17,8 @@ class NewsSearch extends News
     public function rules()
     {
         return [
-            [['id', 'rubric_id'], 'integer'],
-            [['title', 'content', 'date', 'creator'], 'safe'],
+            [['id','status', 'rubric_id'], 'integer'],
+            [['title','content', 'date', 'creator'], 'safe'],
         ];
     }
 
@@ -47,7 +47,7 @@ class NewsSearch extends News
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        $query->select(['id,creator,DATE_FORMAT(date, "%Y-%m-%d") as date,title']);
+        $query->select(['id,creator,DATE_FORMAT(date, "%Y-%m-%d") as date,title,status']);
         $this->load($params);
 
         if (!$this->validate()) {

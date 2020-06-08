@@ -1,13 +1,12 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use backend\models\Gallery;
+use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 use Yii;
-use common\models\BlackList;
-use frontend\models\BlackListSearch;
-use yii\filters\AccessControl;
-use yii\helpers\Html;
+use backend\models\BlackList;
+use backend\models\BlackListSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,25 +16,12 @@ use yii\filters\VerbFilter;
  */
 class BlackListController extends Controller
 {
-    public $layout = 'main_';
-
     /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['search', 'delete'],
-                'rules' => [
-                    [
-                        'actions' => ['search', 'delete'],
-                        'allow' => true,
-                        'roles' => ['director', 'admin'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -52,23 +38,9 @@ class BlackListController extends Controller
     public function actionIndex()
     {
         $searchModel = new BlackListSearch();
-        $dataProvider = $searchModel->searchMyBlackList(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Lists all BlackList models.
-     * @return mixed
-     */
-    public function actionSearch()
-    {
-        $searchModel = new BlackListSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
-        return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -94,18 +66,10 @@ class BlackListController extends Controller
      */
     public function actionCreate()
     {
-        $model = new BlackList();
+        $model = new \common\models\BlackList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $body = '<p>Пользователь '.Yii::$app->user->identity->username. ' добавил нового нарушителя 
-                  <a href="' . Yii::$app->params['domain'] . 'admin/black-list/view?id=' . $model->id . '"> Просмотр</a></p>';
-            try {
-                $this->sendEmail($body);
-            } catch (\Exception $e) {
-                Yii::info($e);
-            }
-            $this->sendEmail($body);
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -125,13 +89,6 @@ class BlackListController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $body = '<p>Пользователь ' .Yii::$app->user->identity->username. ' обновил запись нарушителя 
-                <a href="' . Yii::$app->params['domain'] . 'admin/black-list/view?id=' . $model->id . '"> Просмотр</a> </p>';
-            try {
-                $this->sendEmail($body);
-            } catch (\Exception $e) {
-                Yii::info($e);
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -163,23 +120,44 @@ class BlackListController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = BlackList::findOne($id)) !== null) {
+        if (($model = \common\models\BlackList::findOne($id)) !== null) {
             $model->files = Gallery::findAll(['parent_id' => $model->id]);
+
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function sendEmail($body)
+    public function actionAdminSuccess()
     {
-        return \Yii::$app
-            ->mailer
-            ->compose()
-            ->setFrom('group.scala@mail.ru')
-            ->setTo(Yii::$app->params['notification'])
-            ->setSubject('Пользователь добавил нового рарушителя')
-            ->setHtmlBody($body)
-            ->send();
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $list = \common\models\BlackList::findOne($id);
+            if (!empty($list)) {
+                $list->status = 2;
+                if ($list->save()) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function actionAdminCancel()
+    {
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $list = \common\models\BlackList::findOne($id);
+            if (!empty($list)) {
+                $list->status = 3;
+                if ($list->save()) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
     }
 }

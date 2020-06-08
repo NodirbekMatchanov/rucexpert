@@ -1,22 +1,63 @@
 $(document).ready(function () {
-    var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
-        'onclick="alert(\'Call your custom code here.\')">' +
-        '<i class="glyphicon glyphicon-tag"></i>' +
-        '</button>';
-    $("#avatar-2").fileinput({
-        overwriteInitial: true,
-        maxFileSize: 1500,
-        showClose: false,
-        showCaption: false,
-        showBrowse: false,
-        browseOnZoneClick: true,
-        removeLabel: '',
-        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-        removeTitle: 'Cancel or reset changes',
-        elErrorContainer: '#kv-avatar-errors-2',
-        msgErrorClass: 'alert alert-block alert-danger',
-        defaultPreviewContent: '<img src="/samples/default-avatar-male.png" alt="Your Avatar"><h6 class="text-muted">Click to select</h6>',
-        layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
-        allowedFileExtensions: ["jpg", "png", "gif"]
+
+
+    $(document).on('click', '.admin-success', function () {
+        $.ajax({
+            url: 'admin-success?id=' + $(this).attr('data-id')
+        }).done(function (data) {
+            if(data){
+                toastr.success('Опубликовано');
+                window.location.reload();
+            } else {
+                toastr.warning('Что то пошло не так')
+            }
+        }).fail(function (err) {
+            toastr.warning('Что то пошло не так')
+        })
     });
-})
+
+    $(document).on('click', '.admin-cancel', function () {
+        $.ajax({
+            url: 'admin-cancel?id=' + $(this).attr('data-id')
+        }).done(function (data) {
+            if(data){
+                toastr.success('Отменено');
+                window.location.reload();
+            } else {
+                toastr.warning('Что то пошло не так')
+            }
+        }).fail(function (err) {
+            toastr.warning('Что то пошло не так')
+        })
+    })
+
+    $(document).on('click', '.news-success', function () {
+        $.ajax({
+            url: 'news-success?id=' + $(this).attr('data-id')
+        }).done(function (data) {
+            if(data){
+                toastr.success('Опубликовано');
+                window.location.reload();
+            } else {
+                toastr.warning('Что то пошло не так')
+            }
+        }).fail(function (err) {
+            toastr.warning('Что то пошло не так')
+        })
+    })
+
+    $(document).on('click', '.news-cancel', function () {
+        $.ajax({
+            url: 'news-cancel?id=' + $(this).attr('data-id')
+        }).done(function (data) {
+            if(data){
+                toastr.success('Отменено');
+                window.location.reload();
+            } else {
+                toastr.warning('Что то пошло не так')
+            }
+        }).fail(function (err) {
+            toastr.warning('Что то пошло не так')
+        })
+    })
+});

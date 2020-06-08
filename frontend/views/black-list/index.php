@@ -29,6 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'last_name',
                         'middle_name',
                         'email',
+                        [
+                            'label' => 'Статус',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                if($model->status != 2){
+                                    return '<div class="alert alert-danger btn-sm text-center">на проверке</div>';
+                                } else {
+                                    return '<div class="alert alert-success text-center btn-sm">опубликовано</div>';
+                                }
+                            }
+                        ],
 
                         [
                             'class' => 'yii\grid\ActionColumn',
