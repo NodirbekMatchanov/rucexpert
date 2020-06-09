@@ -10,6 +10,7 @@ use backend\models\BlackListSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * BlackListController implements the CRUD actions for BlackList model.
@@ -19,9 +20,24 @@ class BlackListController extends Controller
     /**
      * {@inheritdoc}
      */
+
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['logout', 'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
