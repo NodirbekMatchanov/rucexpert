@@ -59,7 +59,7 @@ if(\backend\components\User::getRoleName() == 'director'){
                             <a class="dropdown-item" href="<?= Url::to(['site/contact']) ?>"><i
                                         class="feather icon-user"></i> Написать нам</a>
                             <a class="dropdown-item" href="<?= Url::to(['personal-area/index']) ?>"><i
-                                        class="feather icon-user"></i> ВАШ ПРОФИЛЬ</a>
+                                        class="feather icon-user"></i> Ваш профиль</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item"
                                href="<?= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?>"><i

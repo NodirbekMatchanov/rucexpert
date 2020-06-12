@@ -67,9 +67,9 @@ class ChangePassword extends Model
     public function attributeLabels()
     {
         return [
-            'oldPassword' => 'Старий пароль',
+            'oldPassword' => 'Действующий пароль',
             'newPassword' => 'Новый пароль',
-            'retypePassword' => 'Павторноый пароль',
+            'retypePassword' => 'Повторите пароль',
         ];
     }
 }

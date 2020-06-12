@@ -78,7 +78,7 @@ $role = \backend\components\User::getRoleName();
                     <a class="nav-link d-flex py-75" id="account-invoice-user" data-toggle="pill"
                        href="#invoice-user" aria-expanded="false">
                         <i class="feather icon-credit-card mr-50 font-medium-3"></i>
-                        Пополнения баланса
+                        Пополнение баланса
                     </a>
                 </li>
             </ul>
@@ -139,7 +139,7 @@ $role = \backend\components\User::getRoleName();
                             <div class="tab-pane fade " id="invoice-user" role="tabpanel"
                                  aria-labelledby="account-invoice-user" aria-expanded="false">
                                 <div class="form-group text-center ">
-                                    <h4 class="">Паполнить баланс</h4>
+                                    <h4 class="">Пополнить баланс</h4>
                                 </div>
                                 <?php if ($role == 'director'): ?>
                                     <?php $form = ActiveForm::begin(['action' => '/payment/invoice']); ?>
