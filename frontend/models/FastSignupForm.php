@@ -136,7 +136,9 @@ class FastSignupForm extends Model
             ->setFrom(['group.scala@mail.ru' => 'Robot'])
             ->setTo($this->email)
             ->setSubject('Вы зарегистрировались на сайте ruc.expert')
-            ->setHtmlBody('<p>Вы зарегистрировались на сайте ruc.expert Логин: ' . Html::encode($this->email) . ' Пароль: ' . $this->password)
+            ->setHtmlBody('<p>Вы зарегистрировались на сайте ruc.expert Логин: ' . Html::encode($this->email) . ' Пароль: ' . $this->password.'<p>
+Не забудьте заполнить свои контактные данные в профиле пользователя
+</p>')
             ->send();
     }
 
