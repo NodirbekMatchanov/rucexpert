@@ -56,7 +56,7 @@ if(\backend\components\User::getRoleName() == 'director'){
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="<?= Url::to(['black-list/search']) ?>"><i
                                         class="feather icon-user"></i> Быстрый поиск</a>
-                            <a class="dropdown-item" href="<?= Url::to(['personal-area/facebook']) ?>"><i
+                            <a class="dropdown-item" href="<?= Url::to(['site/contact']) ?>"><i
                                         class="feather icon-user"></i> Написать нам</a>
                             <a class="dropdown-item" href="<?= Url::to(['personal-area/index']) ?>"><i
                                         class="feather icon-user"></i> ВАШ ПРОФИЛЬ</a>

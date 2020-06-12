@@ -54,7 +54,7 @@ AppAsset::register($this);
             'label' => '<span class="fa fa-user">'.$balance.'</span>',
             'items' => [
                 ['label' => 'Быстрый поиск', 'url' => ['black-list/search']],
-                ['label' => 'Написать нам', 'url' => ['personal-area/facebook']],
+                ['label' => 'Написать нам', 'url' => ['site/contact']],
                 ['label' => 'ВАШ ПРОФИЛЬ', 'url' => ['personal-area/index']],
                 [
                     'options' => ['class' => ''],

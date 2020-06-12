@@ -1,6 +1,7 @@
 <?php
 return [
     'supportEmail' => 'group.scala@mail.ru',
+//    'supportEmail' => 'support@ruc.expert',
     'adminEmail' => 'group.scala@mail.ru',
     'sms_login' => 'rucexpert',
     'sms_passwd' => '9bq98rLNR',

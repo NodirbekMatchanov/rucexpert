@@ -25,7 +25,9 @@ use yii\web\UploadedFile;
  * @property int $user_id
  * @property int $phone
  * @property int $email
- * @property int $status
+ * @property string $passport_num
+ * @property string $passport_ser
+ * @property string $numb_car
  */
 class BlackList extends \yii\db\ActiveRecord
 {
@@ -61,6 +63,7 @@ class BlackList extends \yii\db\ActiveRecord
             [['moder','status', 'type_org', 'user_id'], 'integer'],
             [['file'], 'file', 'extensions'=>'jpg, gif, png', 'maxSize'=>'3000000','maxFiles' => 4],
             [['first_name','phone','email', 'last_name', 'middle_name', 'place_born', 'ser_num_car'], 'string', 'max' => 255],
+            [['numb_car','passport_ser','passport_num'], 'string', 'max' => 50],
         ];
     }
 
@@ -79,11 +82,14 @@ class BlackList extends \yii\db\ActiveRecord
             'place_born' => 'МЕСТО РОЖДЕНИЯ',
             'moder' => 'Moder',
             'moder_comment' => 'Moder Comment',
-            'ser_num_car' => 'Ser Num Car',
+            'ser_num_car' => 'Серия водительского удостоверения',
             'type_org' => 'БАЗА ДАННЫХ',
             'user_id' => 'User ID',
             'phone' => 'ТЕЛЕФОН',
             'email' => 'EMAIL',
+            'passport_ser' => 'Серия паспорта',
+            'passport_num' => 'Номер паспорта',
+            'numb_car' => 'Номер водительского удостоверения',
         ];
     }
     

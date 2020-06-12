@@ -10,6 +10,12 @@ use \yii\helpers\Url;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/']];
+
+foreach ($rubric as $item) {
+    if ($model->rubric_id == $item->id) {
+        $this->params['breadcrumbs'][] = ['url' => '/news?rubric_id='.$item->id, 'label' => $item->title];
+    }
+}
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-index">

@@ -50,12 +50,13 @@ $this->title = 'Главная страница';
                 ?>
                 <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                     <div class="" style="height: 200px">
+                       <a href="<?=Url::to(['news/view', 'id' => $item->id])?>">
                         <?php if ($item->img != ''): ?>
                             <?= Html::img('/uploads/news/' . $item->img, ['class' => 'home-img']) ?>
                         <?php else: ?>
                             <?= Html::img("/images/notfound.png", ['class' => 'home-img']) ?>
                         <?php endif; ?>
-
+                       </a>
                     </div>
                     <h5>
                         <?= Html::a($item->title, Url::to(['news/view', 'id' => $item->id]), ['class' => '']) ?>

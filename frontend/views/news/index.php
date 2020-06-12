@@ -9,7 +9,14 @@ use \yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Новости';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['url' => '/news', 'label' => $this->title];
+if(Yii::$app->request->get('rubric_id')){
+    foreach ($rubric as $item){
+        if($item->id  == Yii::$app->request->get('rubric_id')){
+            $this->params['breadcrumbs'][] = $item->title;
+        }
+    }
+}
 ?>
 <div class="news-index">
     <div class="row">
