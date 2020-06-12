@@ -97,14 +97,20 @@ class BlackListController extends Controller
         $model = new BlackList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $body = '<p>Пользователь '.Yii::$app->user->identity->username. ' добавил нового нарушителя 
-                  <a href="' . Yii::$app->params['domain'] . 'admin/black-list/view?id=' . $model->id . '"> Просмотр</a></p>';
+            $body = '<p>Пользователь ' . Yii::$app->user->identity->username . ' добавил нового нарушителя 
+                  <a href="' . Yii::$app->params['domain'] . 'admin/black-list/view?id=' . $model->id . '"> Просмотр</a></p>'
+                . "<p>ИМЯ: {$model->first_name}</p>"
+                . "<p>ФАМИЛИЯ: {$model->last_name}</p>"
+                . "<p>ОТЧЕСТВО: {$model->middle_name}</p>"
+                . "<p>ДАТА РОЖДЕНИЯ: {$model->date_born}</p>"
+                . "<p>МЕСТО РОЖДЕНИЯ: {$model->place_born}</p>"
+                . "<p>ТЕЛЕФОН:{$model->phone} </p>"
+                . "<p>КРАТКОЕ ОПИСАНИЕ ПРАВОНАРУШЕНИЯ: {$model->comment}</p>";
             try {
                 $this->sendEmail($body);
             } catch (\Exception $e) {
                 Yii::info($e);
             }
-            $this->sendEmail($body);
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -124,15 +130,22 @@ class BlackListController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $body = '<p>Пользователь ' .Yii::$app->user->identity->username. ' обновил запись нарушителя 
+        if ($model->load(Yii::$app->request->post())) {
+
+            $pastModel = $this->findModel($id);
+            $body = '<p>Пользователь ' . Yii::$app->user->identity->username . ' обновил запись нарушителя 
                 <a href="' . Yii::$app->params['domain'] . 'admin/black-list/view?id=' . $model->id . '"> Просмотр</a> </p>';
+
+            $body .= $this->checkBlackList($model, $pastModel);
+
             try {
                 $this->sendEmail($body);
             } catch (\Exception $e) {
                 Yii::info($e);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
@@ -178,8 +191,36 @@ class BlackListController extends Controller
             ->compose()
             ->setFrom(['group.scala@mail.ru' => 'Robot'])
             ->setTo(Yii::$app->params['notification'])
-            ->setSubject('Пользователь добавил нового рарушителя')
+            ->setSubject('Rucexpert')
             ->setHtmlBody($body)
             ->send();
+    }
+
+    protected function checkBlackList($model, $pastModel)
+    {
+        $body = '';
+        if ($model->first_name != $pastModel->first_name) {
+            $body .= '<p>  Поле ИМЯ было: ' . $pastModel->first_name . ' стало ' . $model->first_name.'</p>';
+        }
+        if ($model->last_name != $pastModel->last_name) {
+            $body .= '<p>  Поле ФАМИЛИЯ было: ' . $pastModel->last_name . ' стало ' . $model->last_name.'</p>';
+        }
+        if ($model->middle_name != $pastModel->middle_name) {
+            $body .= '<p> Поле ОТЧЕСТВО было: ' . $pastModel->middle_name . ' стало ' . $model->middle_name .'</p>';
+        }
+        if ($model->date_born != $pastModel->date_born) {
+            $body .= '<p> Поле ДАТА РОЖДЕНИЯ было: ' . $pastModel->date_born . ' стало ' . $model->date_born.'</p>';
+        }
+        if ($model->place_born != $pastModel->place_born) {
+            $body .= '<p> Поле МЕСТО РОЖДЕНИЯ было: ' . $pastModel->place_born . ' стало ' . $model->place_born.'</p>';
+        }
+        if ($model->phone != $pastModel->phone) {
+            $body .= '<p> Поле ТЕЛЕФОН было: ' . $pastModel->phone . ' стало ' . $model->phone.'</p>';
+        }
+        if ($model->comment != $pastModel->comment) {
+            $body .= '<p> Поле КРАТКОЕ ОПИСАНИЕ ПРАВОНАРУШЕНИЯ было: ' . $pastModel->comment . ' стало ' . $model->comment.'</p>';
+        }
+
+        return $body;
     }
 }

@@ -15,6 +15,10 @@ body {
     width: 100%;
     text-align: inherit;
 }
+.fast-sign-email{
+    max-width: 604px;
+    margin: 10px;
+}
 .wrap {
     min-height: 100%;
     height: auto;

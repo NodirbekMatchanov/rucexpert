@@ -29,7 +29,7 @@ class NewsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'news-cancel','delete-image', 'view', 'news-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout', 'news-cancel', 'delete-image', 'view', 'news-success', 'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -82,6 +82,12 @@ class NewsController extends Controller
         $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $body = "Добавлено новост <a href='" . Yii::$app->params['domain'] . "admin/news/view?id={$model->id}'>Просмотр</a>" .
+                "<p> Заголовок: {$model->title}</p>"
+                . "<p> Дата: {$model->date}</p>"
+                . "<p> Кароткая описание: {$model->short_content}</p>"
+                . "<p> Описание: {$model->content}</p>";
+            $this->sendEmail($body);
             return $this->redirect(['index']);
         }
 
@@ -100,8 +106,12 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                $oldModel = $this->findModel($id);
+                $body = $this->checkBlackList($model, $oldModel);
+                $this->sendEmail($body);
+            }
         }
         $model->date = date("d.m.Y", strtotime($model->date));
 
@@ -133,7 +143,7 @@ class NewsController extends Controller
     {
         $model = $this->findModel($id);
         if (file_exists(Yii::getAlias('@frontend') . '/web/uploads/news/' . $model->img)) {
-            unlink(Yii::getAlias('@frontend'). '/web/uploads/news/' . $model->img);
+            unlink(Yii::getAlias('@frontend') . '/web/uploads/news/' . $model->img);
             $model->img = '';
             $model->save();
         }
@@ -186,5 +196,36 @@ class NewsController extends Controller
                 return false;
             }
         }
+    }
+
+    protected function sendEmail($body)
+    {
+        return \Yii::$app
+            ->mailer
+            ->compose()
+            ->setFrom(['group.scala@mail.ru' => 'Robot'])
+            ->setTo(Yii::$app->params['notification'])
+            ->setSubject('Rucexpert')
+            ->setHtmlBody($body)
+            ->send();
+    }
+
+    protected function checkBlackList($model, $pastModel)
+    {
+        $body = '';
+        if ($model->title != $pastModel->title) {
+            $body .= '<p>  Поле Заголовок было: ' . $pastModel->title . ' стало ' . $model->title . '</p>';
+        }
+        if ($model->date != $pastModel->date) {
+            $body .= '<p>  Поле Дата было: ' . $pastModel->date . ' стало ' . $model->date . '</p>';
+        }
+        if ($model->short_content != $pastModel->short_content) {
+            $body .= '<p> Поле Кароткая описание было: ' . $pastModel->short_content . ' стало ' . $model->short_content . '</p>';
+        }
+        if ($model->content != $pastModel->content) {
+            $body .= '<p> Поле Кароткая описание было: ' . $pastModel->content . ' стало ' . $model->content . '</p>';
+        }
+
+        return $body;
     }
 }

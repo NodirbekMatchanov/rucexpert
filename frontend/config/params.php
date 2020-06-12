@@ -6,6 +6,6 @@ return [
     'sms_passwd' => '9bq98rLNR',
     'sms_host' => 'https://sms.targetsms.ru',
     'sms_sender' => 'ruc.expert',
-    'notification' => 'group.scala@mail.ru',
+    'notification' => 'notification@ruc.expert',
     'domain' => 'https://rucexpert.ru/',
 ];

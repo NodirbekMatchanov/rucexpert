@@ -21,25 +21,25 @@ $(document).ready(function () {
             })
         });
         $(document).on('change', '.reg_type', function () {
-           let regType = $('.reg_type');
-           $.each(regType,function (key,item) {
-              if(item.checked){
-                  if($(item).attr('data-type') == 'hotel'){
-                    $('.hotel-inputs').removeClass('hidden');
-                  } else {
-                      $('.hotel-inputs').addClass('hidden');
-                  }
-                  $('.registration-form').removeClass('hidden');
-                  return false;
-              } else {
-                  $('.registration-form').addClass('hidden');
-              }
-           });
+            let regType = $('.reg_type');
+            $.each(regType, function (key, item) {
+                if (item.checked) {
+                    if ($(item).attr('data-type') == 'hotel') {
+                        $('.hotel-inputs').removeClass('hidden');
+                    } else {
+                        $('.hotel-inputs').addClass('hidden');
+                    }
+                    $('.registration-form').removeClass('hidden');
+                    return false;
+                } else {
+                    $('.registration-form').addClass('hidden');
+                }
+            });
         });
     }
 
 
-    var readURL = function(input) {
+    var readURL = function (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -51,10 +51,58 @@ $(document).ready(function () {
         }
     };
 
-    $("#account-upload").on('change', function(){
+    $("#account-upload").on('change', function () {
         readURL(this);
     });
 
-    $(".avatar-upload").on('click', function() {
+    $(".avatar-upload").on('click', function () {
     });
+
+    $(document).on('click', '.fast-sign-reg', function () {
+        let email = $('input[name="email"]').val();
+        let phone = $('input[name="phone"]').val();
+        if (phone != '' && email != '') {
+            if (ValidateEmail(email)) {
+
+                $.ajax({
+                    url: '/site/fast-signup?phone=' + $('input[name="phone"]').val() + '&email=' + $('input[name="email"]').val()
+                }).done(function (data) {
+                    $('.modal-body').html(data);
+                    $('#openModal').trigger('click');
+                }).fail(function (err) {
+
+                })
+            } else {
+                alert('Значение «email» не является правильным email адресом.')
+            }
+        } else {
+            alert('Зполняйте полей для быстрого регистрации');
+        }
+
+    });
+
+    $(document).on('click', '.signup-button', function () {
+        var phone = $('input[name="FastSignupForm[phone]"]').val();
+        var email = $('input[name="FastSignupForm[email]"]').val();
+        var code = $('input[name="FastSignupForm[code]"]').val();
+        $.ajax({
+            url: '/site/fast-signup',
+            method: "POST",
+            data: {"FastSignupForm[code]": code, "FastSignupForm[email]": email, "FastSignupForm[phone]": phone}
+        }).done(function (data) {
+            if (!data) {
+                $('.field-fastsignupform-code').addClass('has-error');
+                $('.field-fastsignupform-code').find('.help-block.help-block-error').html('Некорректный код');
+            }
+        }).fail(function (err) {
+
+        })
+    });
+
+    function ValidateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }
 });

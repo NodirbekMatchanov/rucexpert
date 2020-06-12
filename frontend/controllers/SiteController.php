@@ -7,6 +7,7 @@ use backend\models\News;
 use common\models\BlackList;
 use common\models\Sms;
 use common\models\User;
+use frontend\models\FastSignupForm;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
@@ -34,7 +35,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup','send-code'],
+                'only' => ['logout', 'signup', 'send-code'],
                 'rules' => [
                     [
                         'actions' => ['signup', 'send-code'],
@@ -51,7 +52,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post','get'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -170,7 +171,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(['personal-area/index','new-user' => true]);
+                    return $this->redirect(['personal-area/index', 'new-user' => true]);
                 }
             }
         }
@@ -178,6 +179,36 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Fast Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionFastSignup()
+    {
+        $model = new FastSignupForm();
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->get()) {
+            $model->email = Yii::$app->request->get('email');
+            $model->phone = '+'.Yii::$app->request->get('phone');
+            $model->code = '';
+            $this->actionSendCode();
+            return $this->renderAjax('fast_signup', [
+                'model' => $model,
+            ]);
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->redirect(['personal-area/index', 'new-user' => true]);
+                }
+            } else {
+                return false;
+            }
+        }
+
     }
 
     /**
@@ -237,7 +268,7 @@ class SiteController extends Controller
             $code = rand(1000, 9999);
             $sms = new Sms();
             $sms->code = $code;
-            $sms->phone = "+".trim($phone);
+            $sms->phone = "+" . trim($phone);
             $sms->create_at = date("Y-m-d h:i:s");
             if ($sms->save()) {
                 $messages = new Sender(Yii::$app->params['sms_login'], Yii::$app->params['sms_passwd']);
@@ -266,19 +297,20 @@ class SiteController extends Controller
         }
     }
 
+
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
         $access_token = $client->getAccessToken()->getToken();
         $id = ArrayHelper::getValue($attributes, 'id');
         $socialName = $client->getName();
-        if($socialName === 'facebook'){
+        if ($socialName === 'facebook') {
             $auth = User::find()->where(['facebook_id' => $id])->one();
         }
-        if($socialName === 'vkontakte'){
+        if ($socialName === 'vkontakte') {
             $auth = User::find()->where(['vkontakte_id' => $id])->one();
         }
-        if($socialName === 'google'){
+        if ($socialName === 'google') {
             $auth = User::find()->where(['google_id' => $id])->one();
         }
         if (Yii::$app->user->isGuest && !empty($auth)) {
@@ -288,7 +320,7 @@ class SiteController extends Controller
                 $auth->addError('ошибка при входе');
             }
         } else {
-            $auth->addError("facebook_id",'ошибка при входе');
+            $auth->addError("facebook_id", 'ошибка при входе');
         }
     }
 }

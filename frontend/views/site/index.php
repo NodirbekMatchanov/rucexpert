@@ -13,7 +13,7 @@ $this->title = 'Главная страница';
         <img src="/images/desc.png" width="50%">
     </p>
     <div class="text-justify">
-        <h3>База реестра: <?=$count?></h3>
+        <h3>База реестра: <?= $count ?></h3>
         <p>
             Въехать в отель, снять апартаменты, одолжить машину в каршеринге сейчас проще простого: достаточно скачать
             приложение и иметь под рукой кредитку. Недобросовестные граждане пользуются этой доступностью, портя
@@ -35,6 +35,11 @@ $this->title = 'Главная страница';
             упростит жизнь законопослушным гражданам и бизнесу. Подключайтесь!
         </p>
     </div>
+    <div class="row" style="display: flex; align-items: center; justify-content: space-around">
+        <?= Html::textInput('email', '', ['class' => 'form-control fast-sign-email', 'placeholder' => 'email']) ?>
+        <?= Html::textInput('phone', '', ['class' => 'form-control', 'placeholder' => 'phone']) ?>
+        <?= Html::button('Регистрация', ['class' => 'btn btn-success fast-sign-reg']) ?>
+    </div>
     <div class="row">
         <?= \yii\helpers\Html::a('Все новости', Url::to(['news/index']), ['class' => 'btn btn-warning']) ?>
     </div>
@@ -46,9 +51,9 @@ $this->title = 'Главная страница';
                 <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                     <div class="" style="height: 200px">
                         <?php if ($item->img != ''): ?>
-                        <?= Html::img('/uploads/news/' . $item->img, ['class' => 'home-img']) ?>
+                            <?= Html::img('/uploads/news/' . $item->img, ['class' => 'home-img']) ?>
                         <?php else: ?>
-                            <?= Html::img("/images/notfound.png",['class' => 'home-img']) ?>
+                            <?= Html::img("/images/notfound.png", ['class' => 'home-img']) ?>
                         <?php endif; ?>
 
                     </div>
@@ -62,3 +67,13 @@ $this->title = 'Главная страница';
         ?>
     </div>
 </div>
+
+<?php
+\yii\bootstrap\Modal::begin([
+    'header' => 'Подтвердите код',
+    'toggleButton' => ['label' => 'click me', 'id' => 'openModal', 'class' => 'hidden'],
+]);
+
+
+\yii\bootstrap\Modal::end();
+?>

@@ -76,7 +76,7 @@ class BlackList extends \yii\db\ActiveRecord
             'middle_name' => 'ОТЧЕСТВО',
             'comment' => 'КРАТКОЕ ОПИСАНИЕ ПРАВОНАРУШЕНИЯ *',
             'date_born' => 'ДАТА РОЖДЕНИЯ',
-            'place_born' => 'ДАТА РОЖДЕНИЯ',
+            'place_born' => 'МЕСТО РОЖДЕНИЯ',
             'moder' => 'Moder',
             'moder_comment' => 'Moder Comment',
             'ser_num_car' => 'Ser Num Car',

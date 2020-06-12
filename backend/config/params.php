@@ -1,4 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'supportEmail' => 'group.scala@mail.ru',
+    'adminEmail' => 'group.scala@mail.ru',
+    'notification' => 'notification@ruc.expert',
+    'domain' => 'https://rucexpert.ru/',
 ];
