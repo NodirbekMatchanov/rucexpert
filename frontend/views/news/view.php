@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             <?php endif; ?>
+            <br>
             <?php if (!empty($video)): ?>
                 <div class="row">
                     <div style="display: flex;
