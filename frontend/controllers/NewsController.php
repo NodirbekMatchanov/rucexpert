@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use backend\models\Rubric;
+use common\models\Video;
 use Yii;
 use common\models\News;
 use frontend\models\NewsSearch;
@@ -61,9 +62,11 @@ class NewsController extends Controller
     {
         $rubric = new Rubric();
         $rubric = $rubric::find()->all();
+        $video = Video::find()->where(['parent_id' => $id])->one();
         return $this->render('view', [
             'model' => $this->findModel($id),
             'rubric' => $rubric,
+            'video' => $video,
         ]);
     }
 

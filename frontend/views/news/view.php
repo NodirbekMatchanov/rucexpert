@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/'
 
 foreach ($rubric as $item) {
     if ($model->rubric_id == $item->id) {
-        $this->params['breadcrumbs'][] = ['url' => '/news?rubric_id='.$item->id, 'label' => $item->title];
+        $this->params['breadcrumbs'][] = ['url' => '/news?rubric_id=' . $item->id, 'label' => $item->title];
     }
 }
 $this->params['breadcrumbs'][] = $this->title;
@@ -40,6 +40,28 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-8 col-sm-6 col-xs-12 col wow fadeInUp line-br">
             <?= $model->content ?>
+            <?php if ($model->is_video): ?>
+                <h4>Видео к материалу</h4>
+            <?php endif; ?>
+            <?php if ($model->video != ''): ?>
+                <div class="row">
+
+                    <div style="display: flex;
+    justify-content: space-around;">
+                        <?= $model->video ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($video)): ?>
+                <div class="row">
+                    <div style="display: flex;
+    justify-content: space-around;">
+                        <video width="620"  controls>
+                            <source src="/uploads/news/video/<?= $video->url ?>" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

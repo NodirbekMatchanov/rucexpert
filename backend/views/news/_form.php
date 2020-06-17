@@ -38,6 +38,10 @@ use kartik\select2\Select2;
 
         <?= $form->field($model, 'creator')->textInput(['maxlength' => true, 'class' => 'hidden', 'value' => \Yii::$app->user->identity->username])->label(false) ?>
 
+        <?= $form->field($model, 'video')->textarea(['row' => 10]) ?>
+
+        <?= $form->field($model, 'videoFile')->fileInput() ?>
+
 
         <?= $form->field($model, 'image')->fileInput() ?>
 
