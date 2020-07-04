@@ -15,6 +15,7 @@ use Yii;
 use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
+use yii\httpclient\CurlTransport;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -24,7 +25,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use yii\httpclient\Client;
 /**
  * Site controller
  */
@@ -114,6 +115,15 @@ class PersonalAreaController extends Controller
      */
     public function actionChangePassword()
     {
+        $client = new Client();
+        $response = $client->createRequest()
+            ->setMethod('POST')
+            ->setUrl('http://example.com/api/1.0/users')
+            ->setData(['name' => 'John Doe', 'email' => 'johndoe@example.com'])
+            ->send();
+        if ($response->isOk) {
+            $newUserId = $response->data['id'];
+        }
         $user = new ChangePassword();
         if ($user->load(Yii::$app->request->post()) && $user->change()) {
             Yii::$app->session->setFlash('success', 'Данные успешно сохранены');

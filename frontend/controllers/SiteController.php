@@ -86,11 +86,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $news = new News();
+        $loginModel = new LoginForm();
+        $signModel = new SignupForm();
         $newsList = $news::find()->orderBy('id desc')->limit(3)->all();
         $count = BlackList::find()->count();
         return $this->render('index', [
             "news" => $newsList,
             "count" => $count,
+            "model" => $loginModel,
+            "signModel" => $signModel,
         ]);
     }
 

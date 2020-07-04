@@ -2,46 +2,63 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
+
 /* @var $model \common\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Вход';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="panel-login container">
 
+    <p style="font-size: 16px">Добро пожаловать на сайт <b>Ruc.expert</b>
+    </p>
+    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <div class="input-icons">
+        <i class="fa fa-user icon">
+        </i>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => 'login-input form-control', 'placeholder' => 'Имя пользовтаеля'])->label(false) ?>
+    </div>
+    <div class="input-icons">
+        <i class="fa fa-key icon">
+        </i>
+    <?= $form->field($model, 'password')->passwordInput(['class' => 'login-input form-control', 'placeholder' => 'Пароль'])->label(false) ?>
+    </div>
+    <div class="login-form-buttons">
+        <label class="checkcontainer"><span style="margin-top: 2px">Запоминить меня</span>
+            <input id="hold_on" name="LoginForm[rememberMe]"  style="display: none" type="checkbox">
+            <span class="checkmark"></span>
+        </label>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <?= Html::a('Восстановить
+            пароль', ['site/request-password-reset']) ?>.
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Логин') ?>
-
-                <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox()->label('запомнить пароль') ?>
-
-            <div class="story-container log">
-                <div class="form-group" style="display: flex; align-items: center">
-                    <h4 class="">Войти через</h4>
-                    <?php echo yii\authclient\widgets\AuthChoice::widget([
-                        'baseAuthUrl' => ['site/auth'],
-                        'popupMode' => false,
-                    ]) ?>
-                </div>
-            </div>
-                <div style="color:#999;margin:1em 0">
-                    Если вы не помните пароль <?= Html::a('Сброс пароль', ['site/request-password-reset']) ?>.
-                </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+    </div>
+    <div class="login-form-buttons">
+        <button data-toggle="modal" data-target="#signModal"
+                class="btn btn-signup">Регистрация
+        </button>
+            <?= Html::submitButton('Вход', ['class' => 'btn btn-login', 'name' => 'login-button']) ?>
+    </div>
+    <br>
+    <p class="text-center  sign-social" style="font-size: 14px"><span
+                style="color: #000;">Войти через сеть</span>
+    </p>
+    <div class="story-container log">
+        <div class="form-group" style="display: flex; align-items: center;     justify-content: center;">
+            <?php echo yii\authclient\widgets\AuthChoice::widget([
+                'baseAuthUrl' => ['site/auth'],
+                'popupMode' => false,
+            ]) ?>
         </div>
     </div>
+    <div style="color:#999;margin:1em 0">
+
+    </div>
+
+
+
+    <?php ActiveForm::end(); ?>
 </div>
+
+

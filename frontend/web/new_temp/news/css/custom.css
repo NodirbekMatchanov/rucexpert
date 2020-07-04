@@ -1,0 +1,5 @@
+/* Add here all your CSS customizations */
+.page-link.active{
+    background: #0088CC;
+    color: white;
+}
