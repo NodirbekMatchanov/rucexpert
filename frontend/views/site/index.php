@@ -199,16 +199,33 @@ $this->title = 'Главная страница';
 
     <section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer" style="background: #0097e5;">
         <div class="container">
+            <h3 class="text-center" style="color: white">Быстрая регистрация</h3>
+            <div class="row" style="display: flex; align-items: center; justify-content: center">
+                    <?= Html::textInput('email', '', ['class' => 'form-control fast-sign-email', 'placeholder' => 'email']) ?>
+<!--                    --><?//= Html::button('Регистрация', ['class' => 'btn btn-success fast-sign-reg']) ?>
+                    <div class="input-group" style="width: 36%">
+                        <?= Html::textInput('phone', '', ['class' => 'form-control fast-sign-phone', 'placeholder' => 'phone']) ?>
+                        <div class="input-group-append">
+                            <button style=" width: 150px;
+                      border-bottom-left-radius: 0px!important;
+                      border-top-left-radius: 0px!important;
+                      border-top-right-radius: 5px!important;
+                      border-bottom-right-radius: 5px!important;
+                      background: #267df4;
+                      color: white;
+                        " class="btn btn-outline-secondary fast-sign-reg" type="button">РЕГИСТРАЦИЯ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <br>
             <div class="row">
                 <div class="col-sm-9 col-lg-9">
+
                     <div class="call-to-action-content">
                         <h3 style="color: white;">У нас всегда актуальная база нарушителей. <br><strong class="font-weight-extra-bold"> Пополняется ежедневно</strong></h3>
 
-                        <!--    <div class="row" style="display: flex; align-items: center; justify-content: space-around">-->
-                        <!--        --><?//= Html::textInput('email', '', ['class' => 'form-control fast-sign-email', 'placeholder' => 'email']) ?>
-                        <!--        --><?//= Html::textInput('phone', '', ['class' => 'form-control', 'placeholder' => 'phone']) ?>
-                        <!--        --><?//= Html::button('Регистрация', ['class' => 'btn btn-success fast-sign-reg']) ?>
-                        <!--    </div>-->
+
                     </div>
                 </div>
                 <div class="col-sm-3 col-lg-3">
@@ -283,7 +300,7 @@ echo $this->render('login',['model' => $model]);
 
 <?php
 \yii\bootstrap\Modal::begin([
-    'header' => 'Авторизация',
+    'header' => 'Регистрация',
     'size' => 'modal-lg',
     'options' => ['class' => 'modal fade','id' => 'signModal', 'aria-labelledby' => "signModalLabel"],
 ]);

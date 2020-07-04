@@ -7,13 +7,14 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
+use yii\widgets\Pjax;
 ?>
+<?php Pjax::begin(); ?>
 <div class="panel-login container">
 
     <p style="font-size: 16px">Добро пожаловать на сайт <b>Ruc.expert</b>
     </p>
-    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'login-form','action' => '/site/login','options' => [ 'data-pjax' => true],]); ?>
     <div class="input-icons">
         <i class="fa fa-user icon">
         </i>
@@ -60,5 +61,5 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 </div>
-
+<?php Pjax::end(); ?>
 

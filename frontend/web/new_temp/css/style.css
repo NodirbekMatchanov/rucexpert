@@ -19,6 +19,14 @@
     font-size: 20px;
     font-weight: 700;
 }
+
+.fast-sign-email{
+    width: 36%;
+    height: 36px;
+}
+.fast-sign-phone{
+    width: 35% !important;
+}
 @media (min-width: 768px) {
     .modal-dialog {
         width: 500px!important;

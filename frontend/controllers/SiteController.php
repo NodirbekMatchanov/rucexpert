@@ -113,7 +113,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(['personal-area/index']);
         } else {
-            return $this->render('login', [
+            return $this->renderAjax('login', [
                 'model' => $model,
             ]);
         }
@@ -178,6 +178,10 @@ class SiteController extends Controller
                     return $this->redirect(['personal-area/index', 'new-user' => true]);
                 }
             }
+        } else {
+            return $this->renderAjax('signup', [
+                'model' => $model,
+            ]);
         }
 
         return $this->render('signup', [
