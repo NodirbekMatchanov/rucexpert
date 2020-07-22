@@ -88,6 +88,7 @@ class SiteController extends Controller
         $news = new News();
         $loginModel = new LoginForm();
         $signModel = new SignupForm();
+        $contactModel = new ContactForm();
         $newsList = $news::find()->orderBy('id desc')->limit(3)->all();
         $count = BlackList::find()->count();
         return $this->render('index', [
@@ -95,6 +96,7 @@ class SiteController extends Controller
             "count" => $count,
             "model" => $loginModel,
             "signModel" => $signModel,
+            "contact" => $contactModel,
         ]);
     }
 
@@ -105,17 +107,22 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['personal-area/index']);
-        }
+        if (Yii::$app->request->isAjax) {
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['personal-area/index']);
+            if (!Yii::$app->user->isGuest) {
+                return $this->redirect(['personal-area/index']);
+            }
+
+            $model = new LoginForm();
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                return $this->redirect(['personal-area/index']);
+            } else {
+                return $this->renderAjax('login', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->renderAjax('login', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['index']);
         }
     }
 
@@ -139,19 +146,28 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Благодарим вас за обращение к нам. Мы ответим вам как можно скорее.');
-            } else {
-                Yii::$app->session->setFlash('error', 'При отправке вашего сообщения произошла ошибка.');
-            }
+        if (Yii::$app->request->isAjax) {
 
-            return $this->refresh();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail()) {
+                    Yii::$app->session->setFlash('success', 'Благодарим вас за обращение к нам. Мы ответим вам как можно скорее.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'При отправке вашего сообщения произошла ошибка.');
+                }
+                echo $this->renderAjax('contact', [
+                    'model' => $model,
+                ]);
+                exit();
+            } else {
+                echo $this->renderAjax('contact', [
+                    'model' => $model,
+                ]);
+                exit();
+            }
         } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+            return $this->redirect('index');
         }
+
     }
 
     /**
@@ -171,22 +187,32 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(['personal-area/index', 'new-user' => true]);
+        if (Yii::$app->request->isAjax) {
+
+            $model = new SignupForm();
+            if ($model->load(Yii::$app->request->post())) {
+                if ($user = $model->signup()) {
+                    if (Yii::$app->getUser()->login($user)) {
+                        return $this->redirect(['personal-area/index', 'new-user' => true]);
+                    }
+                } else {
+                    echo $this->renderAjax('signup', [
+                        'model' => $model,
+                    ]);
+                    exit();
                 }
+            } else {
+                return $this->renderAjax('signup', [
+                    'model' => $model,
+                ]);
             }
-        } else {
+
             return $this->renderAjax('signup', [
                 'model' => $model,
             ]);
+        } else {
+            return $this->redirect('index');
         }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -200,7 +226,7 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isAjax && Yii::$app->request->get()) {
             $model->email = Yii::$app->request->get('email');
-            $model->phone = '+'.Yii::$app->request->get('phone');
+            $model->phone = '+' . Yii::$app->request->get('phone');
             $model->code = '';
             $this->actionSendCode();
             return $this->renderAjax('fast_signup', [

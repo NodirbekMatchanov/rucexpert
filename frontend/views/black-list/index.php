@@ -11,8 +11,11 @@ use yii\helpers\Url;
 $this->title = 'Список';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php $this->beginBlock('sidebar'); ?>
+<h2><?= $this->title ?></h2>
+<?php $this->endBlock(); ?>
 <div class="black-list-index">
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>

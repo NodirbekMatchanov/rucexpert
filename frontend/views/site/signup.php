@@ -7,13 +7,16 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\Pjax;
 
 ?>
+<?php Pjax::begin(); ?>
+
 <div class="site-signup">
 
     <div class="row">
         <div class="col-lg-12">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup','action' => '/site/signup']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup','action' => '/site/signup','options' => [ 'data-pjax' => true]]); ?>
 
             <?= $form->field($model, 'reg_hotel_type')->checkbox(['class' => 'reg_type', 'data-type' => 'hotel']) ?>
             <?= $form->field($model, 'reg_car_type')->checkbox(['class' => 'reg_type', 'data-type' => 'car']) ?>
@@ -53,3 +56,5 @@ use yii\bootstrap\ActiveForm;
         </div>
     </div>
 </div>
+<?php Pjax::end(); ?>
+

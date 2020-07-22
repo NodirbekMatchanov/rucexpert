@@ -11,55 +11,120 @@ $this->title = 'Главная страница';
 
 <div role="main" class="main">
 
-    <div class="slider-container rev_slider_wrapper" style="height: 100vh;">
-        <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider data-plugin-options="{'addOnTypewriter': { 'enable': true }, 'sliderLayout': 'fullscreen', 'delay': 9000, 'gridwidth': [1410,1110,930,690], 'gridheight': 700, 'disableProgressBar': 'on', 'responsiveLevels': [4096,1422,1182,974], 'navigation' : {'arrows': { 'enable': true, 'style': 'arrows-style-1 arrows-primary' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 70, 'h_offset': 0}}}">
-            <ul>
-                <li class="slide-overlay slide-overlay-level-8" data-transition="fade">
-                    <img src="/new_temp/news/img/slides/slide-corporate-14-1.jpg"
-                         alt=""
-                         data-bgposition="center center"
-                         data-bgfit="cover"
-                         data-bgrepeat="no-repeat"
-                         class="rev-slidebg">
+    <div class="slider-with-overlay">
 
-                    <h1 class="tp-caption font-weight-extra-bold text-color-light"
-                        data-frames='[{"delay":1000,"speed":500,"frame":"0","from":"opacity:0;x:50%;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-                        data-x="['left','left','left','center']"
-                        data-y="center" data-voffset="['-100','-100','-100','-100']"
-                        data-fontsize="['48','48','48','48']"
-                        data-lineheight="['70','70','70','70']"
-                        data-letterspacing="-1">Ruc Expert</h1>
+        <div class="forcefullwidth_wrapper_tp_banner" id="revolutionSlider_forcefullwidth" style="position:relative;width:100%;height:auto;margin-top:0px;margin-bottom:0px"><div class="slider-container rev_slider_wrapper" style="height: 670px; margin-top: 0px; margin-bottom: 0px; position: absolute; overflow: visible; width: 1349px; left: 0px;">
+                <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider data-plugin-options="{'addOnTypewriter': { 'enable': true }, 'sliderLayout': 'fullscreen', 'delay': 9000, 'gridwidth': [1410,1110,930,690], 'gridheight': 700, 'disableProgressBar': 'on', 'responsiveLevels': [4096,1422,1182,974], 'navigation' : {'arrows': { 'enable': true, 'style': 'arrows-style-1 arrows-primary' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 70, 'h_offset': 0}}}">
+                    <ul>
+                        <li class="slide-overlay slide-overlay-level-8" data-transition="fade">
+                            <img src="/new_temp/news/img/slides/slide-corporate-14-1.jpg"
+                                 alt=""
+                                 data-bgposition="center center"
+                                 data-bgfit="cover"
+                                 data-bgrepeat="no-repeat"
+                                 class="rev-slidebg">
 
-                    <div class="tp-caption font-weight-extra-bold text-color-light"
-                         data-frames='[{"delay":500,"speed":2500,"from":"y:50px;sX:1;sY:1;opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]'
-                         data-type="text"
-                         data-typewriter='{"lines":"аренды жилых<br>и нежилых помещений,правил%20пользования%20<br>сервисом%20каршеринга<br>и аренды авто,правил%20проживания<br>в отелях и хостелах","enabled":"on","speed":"60","delays":"1%7C100","looped":"on","cursorType":"one","blinking":"on","word_delay":"off","sequenced":"on","hide_cursor":"off","start_delay":"1500","newline_delay":"1000","deletion_speed":"20","deletion_delay":"1000","blinking_speed":"500","linebreak_delay":"60","cursor_type":"two","background":"off"}'
-                         data-x="['left','left','left','center']"
-                         data-y="center" data-voffset="['-33','-33','-33','-33']"
-                         data-responsive_offset="on"
-                         data-width="['750','750','750','750']"
-                         data-fontsize="['48','48','48','48']"
-                         data-lineheight="['50','50','50','50']"
-                         data-textAlign="['left','left','left','center']">Международный реестр <br>нарушителей</div>
+                            <h3 class="tp-caption font-weight-extra-bold text-color-light"
+                                data-frames='[{"delay":1000,"speed":500,"frame":"0","from":"opacity:0;x:50%;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                                data-x="['left','left','left','center']"
+                                data-y="center" data-voffset="['-100','-100','-100','-100']"
+                                data-fontsize="['36','36','36','36']"
+                                data-lineheight="['70','70','70','70']"
+                                data-letterspacing="-1">Ruc Expert</h3>
+
+                            <div class="tp-caption font-weight-extra-bold text-color-light"
+                                 data-frames='[{"delay":500,"speed":2500,"from":"y:50px;sX:1;sY:1;opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]'
+                                 data-type="text"
+                                 data-typewriter='{"lines":"аренды жилых<br>и нежилых помещений,правил%20пользования%20<br>сервисом%20каршеринга<br>и аренды авто,правил%20проживания<br>в отелях и хостелах","enabled":"on","speed":"60","delays":"1%7C100","looped":"on","cursorType":"one","blinking":"on","word_delay":"off","sequenced":"on","hide_cursor":"off","start_delay":"1500","newline_delay":"1000","deletion_speed":"20","deletion_delay":"1000","blinking_speed":"500","linebreak_delay":"60","cursor_type":"two","background":"off"}'
+                                 data-x="['left','left','left','center']"
+                                 data-y="center" data-voffset="['-33','-33','-33','-33']"
+                                 data-responsive_offset="on"
+                                 data-width="['750','750','750','750']"
+                                 data-fontsize="['36','36','36','36']"
+                                 data-lineheight="['50','50','50','50']"
+                                 data-textAlign="['left','left','left','center']">Международный реестр <br>нарушителей</div>
 
 
 
 
-                    <a class="tp-caption btn btn-primary font-weight-bold rounded"
-                       href="#" data-toggle="modal" data-target="#signModal"
-                       data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-                       data-x="['left','left','left','center']"
-                       data-y="center" data-voffset="['103','103','103','140']"
-                       data-paddingtop="['16','16','16','24']"
-                       data-paddingbottom="['16','16','16','24']"
-                       data-paddingleft="['40','40','40','45']"
-                       data-paddingright="['40','40','40','45']"
-                       data-fontsize="['14','14','14','18']"
-                       data-lineheight="['20','20','20','22']">РЕГИСТРАЦИЯ <i class="fas fa-lock-right ml-1"></i></a>
+                            <a class="tp-caption btn btn-primary font-weight-bold rounded"
+                               href="#" data-toggle="modal" data-target="#largesizemodal"
+                               data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                               data-x="['left','left','left','center']"
+                               data-y="center" data-voffset="['103','103','103','140']"
+                               data-paddingtop="['16','16','16','24']"
+                               data-paddingbottom="['16','16','16','24']"
+                               data-paddingleft="['40','40','40','45']"
+                               data-paddingright="['40','40','40','45']"
+                               data-fontsize="['14','14','14','18']"
+                               data-lineheight="['20','20','20','22']"> <i class="fas fa-lock-right ml-1">РЕГИСТРАЦИЯ</i></a>
 
-                </li>
-            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div><div class="tp-fullwidth-forcer" style="width: 100%; height: 670px;"></div></div>
+
+        <div class="slider-contact-form">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-lg-6">
+                        <div class="featured-box featured-box-primary text-left mt-5">
+                            <div class="slider-contact-form-wrapper box-content  bg-primary rounded p-5 appear-animation animated fadeInLeftShorter appear-animation-visible" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="2000" style="animation-delay: 2000ms; margin: 1rem!important;">
+                                <div class="row">
+                                    <a href="#"
+                                       target="_blank" class="py-3 d-block">
+                                        <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/blog/mariott.gif"/>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <article
+                                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+
+                                        </article>
+
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6">
+                                        <article
+                                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                                            <div class="row align-items-center pb-1">
+
+
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <article
+                                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                                            <div class="row align-items-center pb-1">
+
+
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <article
+                                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                                            <div class="row align-items-center pb-1">
+
+
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div class="container">
@@ -130,52 +195,81 @@ $this->title = 'Главная страница';
             </div>
         </div>
     </section>
-    <div class="container container-lg py-5 my-5">
-        <div class="row justify-content-center">
-            <div class="col-xl-9 text-center">
-                <h2 class="font-weight-bold text-11 appear-animation" data-appear-animation="fadeInUpShorter">Мы поможем Вам сберечь</h2>
-                <!--<p class="line-height-9 text-4 opacity-9 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat id sapien ac varius. Fusce hendrerit ligula a consectetur ullamcorper. Vestibulum varius pharetra lorem, in maximus libero placerat sed. In a lectus vel mauris tempor lobortis feugiat sed magna.</p>-->
+    <section class="section section-default border-0 mt-5 appear-animation animated fadeIn appear-animation-visible" data-appear-animation="fadeIn" data-appear-animation-delay="1200" style="animation-delay: 1200ms;">
+        <div class="container py-4">
+
+            <div class="row justify-content-center">
+                <div class="col-xl-9 text-center">
+                    <h2 class="font-weight-bold text-11 appear-animation" data-appear-animation="fadeInUpShorter">Мы поможем Вам сберечь</h2>
+                    <!--<p class="line-height-9 text-4 opacity-9 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat id sapien ac varius. Fusce hendrerit ligula a consectetur ullamcorper. Vestibulum varius pharetra lorem, in maximus libero placerat sed. In a lectus vel mauris tempor lobortis feugiat sed magna.</p>-->
+                </div>
+            </div>
+            <div class="row featured-boxes featured-boxes-style-4">
+                <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
+                    <div class="featured-box mb-lg-0">
+                        <div class="box-content px-lg-1 px-xl-5">
+                            <i class="icon-featured icons icon-star text-color-primary text-11"></i>
+                            <h4 class="font-weight-bold text-5 mb-3">Репутацию</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200">
+                    <div class="featured-box mb-lg-0">
+                        <div class="box-content px-lg-1 px-xl-5">
+                            <i class="icon-featured icons icon-lock text-color-primary text-11"></i>
+                            <h4 class="font-weight-bold text-5 mb-3">Безопасность клиентов</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="200">
+                    <div class="featured-box mb-sm-0">
+                        <div class="box-content px-lg-1 px-xl-5">
+                            <i class="icon-featured icons icon-wallet text-color-primary text-11"></i>
+                            <h4 class="font-weight-bold text-5 mb-3">Деньги</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="400">
+                    <div class="featured-box mb-0">
+                        <div class="box-content px-lg-1 px-xl-5">
+                            <i class="icon-featured icons icon-user-following text-color-primary text-11"></i>
+                            <h4 class="font-weight-bold text-5 mb-3">Ваш покой</h4>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row featured-boxes featured-boxes-style-4">
-            <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
-                <div class="featured-box mb-lg-0">
-                    <div class="box-content px-lg-1 px-xl-5">
-                        <i class="icon-featured icons icon-star text-color-primary text-11"></i>
-                        <h4 class="font-weight-bold text-5 mb-3">Репутацию</h4>
+        <div class="container pt-5">
+
+            <div class="row py-4 mb-2">
+                <div class="col-md-7 order-2">
+                    <div class="overflow-hidden">
+                        <h2 class="text-color-dark font-weight-bold text-12 mb-0 pt-0 mt-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="300">Задайте Ваш вопрос экспертам</h2>
+                    </div>
+                    <div class="overflow-hidden mb-3">
+                        <p class="font-weight-bold text-primary text-uppercase mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="500">ruc.expert</p>
+                    </div>
+                    <p class="lead appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="700">У каждого из нас в жизни случаются моменты, когда неоходима грамотная консультация эксперта по тому или иному вопросу в такой узкоспециализированной области, как аренда помещений жилых и нежилых, каршеринг и прибывание в отеле.</p>
+                    <p class="pb-3 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="800">В среднем ответ составляет от 3 до 7 рабочих дней.</p>
+                    <hr class="solid my-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="900">
+                    <div class="row align-items-center appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1000">
+                        <div class="col-lg-12">
+                            <a href="#"  data-toggle="modal" data-target="#signModal" class="btn btn-modern mt-3 btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+                            <a href="#" data-toggle="modal"  data-target="#feedBackModal" class="btn btn-modern btn-primary mt-3">Получить консультацию</a>
+                        </div>
 
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200">
-                <div class="featured-box mb-lg-0">
-                    <div class="box-content px-lg-1 px-xl-5">
-                        <i class="icon-featured icons icon-lock text-color-primary text-11"></i>
-                        <h4 class="font-weight-bold text-5 mb-3">Безопасность клиентов</h4>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="200">
-                <div class="featured-box mb-sm-0">
-                    <div class="box-content px-lg-1 px-xl-5">
-                        <i class="icon-featured icons icon-wallet text-color-primary text-11"></i>
-                        <h4 class="font-weight-bold text-5 mb-3">Деньги</h4>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="400">
-                <div class="featured-box mb-0">
-                    <div class="box-content px-lg-1 px-xl-5">
-                        <i class="icon-featured icons icon-user-following text-color-primary text-11"></i>
-                        <h4 class="font-weight-bold text-5 mb-3">Ваш покой</h4>
-
-                    </div>
+                <div class="col-md-5 order-md-2 mb-4 mb-lg-0 appear-animation" data-appear-animation="fadeInRightShorter">
+                    <img src="img/man.png" class="img-fluid mb-2" alt="" style="height: 400px;">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
 
 
@@ -202,9 +296,8 @@ $this->title = 'Главная страница';
             <h3 class="text-center" style="color: white">Быстрая регистрация</h3>
             <div class="row" style="display: flex; align-items: center; justify-content: center">
                     <?= Html::textInput('email', '', ['class' => 'form-control fast-sign-email', 'placeholder' => 'email']) ?>
-<!--                    --><?//= Html::button('Регистрация', ['class' => 'btn btn-success fast-sign-reg']) ?>
                     <div class="input-group" style="width: 36%">
-                        <?= Html::textInput('phone', '', ['class' => 'form-control fast-sign-phone', 'placeholder' => 'phone']) ?>
+                        <?= Html::textInput('phone', '', ['class' => 'form-control fast-sign-phone', 'placeholder' => 'телефон']) ?>
                         <div class="input-group-append">
                             <button style=" width: 150px;
                       border-bottom-left-radius: 0px!important;
@@ -309,4 +402,15 @@ echo $this->render('signup',['model' => $signModel]);
 \yii\bootstrap\Modal::end();
 ?>
 
-<!--Sign up END-->
+<!--Contact start-->
+<?php
+\yii\bootstrap\Modal::begin([
+    'header' => 'Получить консультацию',
+    'size' => 'modal-lg',
+    'options' => ['class' => 'modal fade','id' => 'feedBackModal', 'aria-labelledby' => "feedBackModalLabel"],
+]);
+echo $this->render('contact',['model' => $contact]);
+
+\yii\bootstrap\Modal::end();
+?>
+<!--Contact END-->

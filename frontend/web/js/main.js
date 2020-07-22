@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     $(".avatar-upload").on('click', function () {
     });
-
+    //
     $(document).on('click', '.fast-sign-reg', function () {
         let email = $('input[name="email"]').val();
         let phone = $('input[name="phone"]').val();
@@ -80,7 +80,7 @@ $(document).ready(function () {
         }
 
     });
-
+    // быстрая регистрация
     $(document).on('click', '.signup-button', function () {
         var phone = $('input[name="FastSignupForm[phone]"]').val();
         var email = $('input[name="FastSignupForm[email]"]').val();
@@ -105,4 +105,9 @@ $(document).ready(function () {
         }
         return (false)
     }
+
+    // кликаем на кнопку вход чтобы открывался модалка для входа
+    $(document).on('click','.authorization',function () {
+        $('#headerAccount .login').trigger('click');
+    })
 });

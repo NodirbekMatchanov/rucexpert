@@ -29,7 +29,7 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+//            ['verifyCode', 'captcha'],
         ];
     }
 
@@ -40,10 +40,11 @@ class ContactForm extends Model
     {
         return [
             'verifyCode' => 'Verification Code',
-            'name' => 'Имя',
-            'phone' => 'Телефон',
-            'subject' => 'Тип обращения:',
-            'body' => 'Сообщение',
+            'name' => 'Ваше имя*',
+            'phone' => 'Ваш номер телефона*',
+            'email' => 'Ваша почта',
+            'subject' => 'Рубрика:',
+            'body' => 'Текст вопроса',
         ];
     }
 
@@ -74,9 +75,9 @@ class ContactForm extends Model
     public static function getSubjects()
     {
         return [
-            'Тех.поддержка' => 'Тех.поддержка',
-            'Финансовая служба' => ' Финансовая служба',
-            'Удаление пользователя из реестра' => 'Удаление пользователя из реестра'
+            'Отели' => 'Отели',
+            'Каршеринг' => 'Каршеринг',
+            'Аренда' => 'Аренда'
         ];
     }
 }

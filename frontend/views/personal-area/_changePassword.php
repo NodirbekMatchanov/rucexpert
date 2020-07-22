@@ -11,9 +11,15 @@ use yii\widgets\ActiveForm;
 
 <div class="registration-form ">
 
-    <?= $form->field($model, 'oldPassword')->passwordInput(['autofocus' => true]) ?>
-    <?= $form->field($model, 'newPassword')->passwordInput() ?>
-    <?= $form->field($model, 'retypePassword')->passwordInput() ?>
+    <div class="row">
+        <?= $form->field($model, 'oldPassword')->passwordInput(['autofocus' => true,'class' => 'form-control']) ?>
+    </div>
+    <div class="row">
+        <?= $form->field($model, 'newPassword')->passwordInput(['class' => 'form-control']) ?>
+    </div>
+    <div class="row">
+        <?= $form->field($model, 'retypePassword')->passwordInput(['class' => 'form-control']) ?>
+    </div>
 
 
     <div class="form-group">

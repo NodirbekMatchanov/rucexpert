@@ -50,7 +50,7 @@ class SignupForm extends Model
             [['license_id', 'reg_rent_type', 'reg_car_type', 'reg_hotel_type', 'phone', 'policy'], 'string', 'max' => 50],
             ['license_date', 'safe'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Этот адрес электронной почты уже занят.'],
             [['file'], 'file', 'maxSize' => '100000'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -142,6 +142,7 @@ class SignupForm extends Model
         $code = $sms::find()->where(['code' => $this->code, 'phone' => $this->phone])->one();
         if (empty($code)) {
             $this->addError($attribute, 'код не корректный');
+            return null;
         }
     }
 

@@ -18,7 +18,7 @@ use yii\widgets\Pjax;
     <div class="input-icons">
         <i class="fa fa-user icon">
         </i>
-    <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => 'login-input form-control', 'placeholder' => 'Имя пользовтаеля'])->label(false) ?>
+    <?= $form->field($model, 'username')->textInput([ 'class' => 'login-input form-control', 'placeholder' => 'Имя пользовтаеля'])->label(false) ?>
     </div>
     <div class="input-icons">
         <i class="fa fa-key icon">

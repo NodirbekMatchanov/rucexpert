@@ -7,10 +7,9 @@
  */
 
 ?>
-<div class="content-wrapper ">
-    <div class="content-header row">
-    </div>
-    <div class="content-body"  >
-        <?= $content ?>
-    </div>
+<div class="container-fluid">
+    <section class="card">
+                <?= $content ?>
+    </section>
 </div>
+

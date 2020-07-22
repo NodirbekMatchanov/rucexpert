@@ -13,8 +13,9 @@ use yii\helpers\Html;
 /* @var $content string */
 
 use yii\widgets\Breadcrumbs;
-if(!Yii::$app->user->isGuest){
-    backend\assets\AppAsset::register($this);
+
+if (!Yii::$app->user->isGuest) {
+    \frontend\assets\AreaAsset::register($this);
 }
 //backend\assets\InspiniaAsset::register($this);
 
@@ -38,44 +39,48 @@ if(!Yii::$app->user->isGuest){
 </head>
 
 <body class="horizontal-layout horizontal-menu 2-columns  navbar-floating footer-static" data-open="hover"
-      data-menu="horizontal-menu" data-col="2-columns" style="margin-bottom: 15%">
+      data-menu="horizontal-menu" data-col="2-columns" >
 <?php $this->beginBody() ?>
 
 <?php if (!Yii::$app->user->isGuest) : ?>
     <?= $this->render('header.php') ?>
 <?php endif; ?>
 <?php if (!Yii::$app->user->isGuest) : ?>
-    <?= $this->render('sidebar.php') ?>
-<?php endif; ?>
-<div class="container-fluid" style="padding-top: 160px">
-    <?=\diecoding\toastr\ToastrFlash::widget();?>
-    <?php if(Yii::$app->session->hasFlash('success')):?>
-        <div class="alert alert-success" role="alert">
-            <p class="mb-0">
-                <?=Yii::$app->session->getFlash('success')?>
-            </p>
-        </div>
-    <?php endif;?>
-    <?php if(Yii::$app->session->hasFlash('error')):?>
-        <div class="alert alert-danger" role="alert">
-            <p class="mb-0">
-                <?=Yii::$app->session->getFlash('error')?>
-            </p>
-        </div>
-    <?php endif;?>
-    <?= $this->render('content.php', ['content' => $content]) ?>
+<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <?= $this->render('sidebar.php') ?>
+        <?php endif; ?>
 
+                        <?= \diecoding\toastr\ToastrFlash::widget(); ?>
+                        <?php if (Yii::$app->session->hasFlash('success')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <p class="mb-0">
+                                    <?= Yii::$app->session->getFlash('success') ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (Yii::$app->session->hasFlash('error')): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <p class="mb-0">
+                                    <?= Yii::$app->session->getFlash('error') ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
+
+        <?= $this->render('content.php', ['content' => $content]) ?>
+
+
+        <div class="sidenav-overlay"></div>
+        <div class="drag-target"></div>
+
+
+        <?php $this->endBody() ?>
+        <?php if (!Yii::$app->user->isGuest) : ?>
+    </section>
 </div>
-
-<div class="sidenav-overlay"></div>
-<div class="drag-target"></div>
-
-
-<?php $this->endBody() ?>
-<?php if (!Yii::$app->user->isGuest) : ?>
-    <?= $this->render('footer.php', []) ?>
+<?= $this->render('footer.php', []) ?>
 <?php endif; ?>
-<script src="/admin/js/bootstrap-datepicker.js"></script>
+<!--<script src="/admin/js/bootstrap-datepicker.js"></script>-->
 
 </body>
 </html>
