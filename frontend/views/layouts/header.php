@@ -88,21 +88,19 @@ if(\backend\components\User::getRoleName() == 'director'){
                     <li>
                         <a role="menuitem" tabindex="-1" href="<?= Url::to(['personal-area/index']) ?>"><i class="fas fa-user"></i> Ваш профиль</a>
                     </li>
-<!--                    --><?php
-//                    if (IsAdminSite()==true){
-////              ?>
+                <?php
+                    if (\backend\components\User::getRoleName(Yii::$app->user->identity->id) == 'admin'):?>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="/rowdys"><i class="fas fa-cog"></i> Модерация нарушителей</a>
+                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/black-list/index']) ?>"><i class="fas fa-cog"></i> Модерация нарушителей</a>
                         </li>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="/hotels"><i class="fas fa-cog"></i> Модерация отелей</a>
+                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/news/index']) ?>"><i class="fas fa-cog"></i> Модерация отелей</a>
                         </li>
-                        <li>
-                            <a role="menuitem" tabindex="-1" href="/config"><i class="fas fa-cog"></i> Настройки сайта</a>
-                        </li>
-<!--                        --><?php
-//                    };
-//                    ?>
+<!--                        <li>-->
+<!--                            <a role="menuitem" tabindex="-1" href="--><?//= Url::to(['personal-area/index']) ?><!--"><i class="fas fa-cog"></i> Настройки сайта</a>-->
+<!--                        </li>-->
+                    <?php
+                    endif; ?>
                     <li>
                         <a role="menuitem" tabindex="-1" href="<?= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?>"><i class="fas fa-power-off"></i> Выход</a>
                     </li>

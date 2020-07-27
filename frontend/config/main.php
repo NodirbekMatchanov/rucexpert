@@ -17,6 +17,20 @@ return [
         '@mdm/admin' => '@common/modules/rbac-gui',
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'css' => [],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => null,
+                    'js'=>[
+                        '/new_temp/news/vendor/jquery/jquery.min.js'
+                    ]
+                ],
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ""
@@ -81,7 +95,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'news/<url:\w+>' => 'news/rubric',
+                'news/view' => 'news/view',
+                'search' => 'news/search',
+                'news/<url>' => 'news/rubric',
                 'about' => 'site/about',
             ],
         ],

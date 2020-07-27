@@ -71,74 +71,53 @@ class NewsController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new News model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new News();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
 
     /**
-     * Updates an existing News model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $url
+     * @return string|\yii\web\Response
      */
-    public function actionUpdate($id)
+    public function actionRubric($url)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionRubric($url){
         $model = new News();
         $rubric = News::getRubric();
-        if(isset($rubric[$url])){
-          $rubricId = $rubric[$url];
+        if (isset($rubric[$url])) {
+            $rubricId = $rubric[$url];
         } else {
             return $this->redirect('/news');
         }
         $otherNews = NewsSearch::getOtherNews($rubricId);
-        $news = $model::find()->where(['rubric_id' => $rubricId])->all();
-        return $this->render('rubric',[
-           'model' => $news,
-           'otherNews' => $otherNews,
-           'rubricId' => $rubricId,
+        $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2]);
+        $pageData = clone $news;
+        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 2, 'defaultPageSize' => 2]);
+        $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
+        return $this->render('rubric', [
+            'model' => $newsItems,
+            'otherNews' => $otherNews,
+            'rubricId' => $rubricId,
+            'url' => $url,
+            'pages' => $page,
         ]);
     }
 
-    /**
-     * Deletes an existing News model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
+    public function actionSearch()
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (Yii::$app->request->post()) {
+            $search = Yii::$app->request->post('search');
+            $model = new NewsSearch();
+            $news = $model->search( $search);
+            $pageData = clone $news;
+            $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 8, 'defaultPageSize' => 8]);
+            $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
+            return $this->render('search', [
+                'model' => $newsItems,
+                'pages' => $page,
+                'q' => $search,
+            ]);
+        } else {
+            return $this->redirect('/news');
+        }
     }
+
 
     /**
      * Finds the News model based on its primary key value.

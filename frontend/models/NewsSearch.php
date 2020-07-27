@@ -12,6 +12,7 @@ use common\models\News;
  */
 class NewsSearch extends News
 {
+    public  $search;
     /**
      * {@inheritdoc}
      */
@@ -45,31 +46,14 @@ class NewsSearch extends News
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+
         $query->where(['status' => 2]);
-        $this->load($params);
+//        $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
+        $query->andFilterWhere(['like', 'title', $params])
+            ->orWhere(['like', 'content', $params]);
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
-            'rubric_id' => $this->rubric_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'creator', $this->creator])
-            ->andFilterWhere(['like', 'img', $this->img]);
-
-        return $dataProvider;
+        return $query;
     }
 
     public function searchIndex($params)
@@ -109,7 +93,7 @@ class NewsSearch extends News
         $newsList = [];
         foreach ($rubrics as $rubric) {
             $newsList [] = [
-                'news' => self::find()->where(['rubric_id' => $rubric->id])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
                 'title' => $rubric->title
             ];
         }
@@ -123,7 +107,7 @@ class NewsSearch extends News
         $newsList = [];
         foreach ($rubrics as $rubric) {
             $newsList [] = [
-                'news' => self::find()->where(['rubric_id' => $rubric->id])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
                 'title' => $rubric->title
             ];
         }
@@ -132,7 +116,7 @@ class NewsSearch extends News
 
     public static function getMainNews()
     {
-        return self::find()->orderBy(['id' => 'desc'])->limit(1)->one();
+        return self::find()->orderBy(['id' => 'desc'])->andWhere(['status' => 2])->limit(1)->one();
     }
 
     // Todo нужно перенести в отдельный helper класс

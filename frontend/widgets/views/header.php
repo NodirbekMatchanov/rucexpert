@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 ?>
 <?php if(Yii::$app->controller->action->id == 'index' && Yii::$app->controller->id == 'site'):?>
@@ -179,7 +181,7 @@ use yii\helpers\Url;
                             <nav class="header-nav-top">
                                 <ul class="nav nav-pills" style="align-items: center">
                                     <li class="nav-item nav-item-borders py-2">
-                                        <a href="news.html"><i class="far fa-newspaper text-4 text-color-primary"
+                                        <a href="<?= Url::to(['/news']) ?>"><i class="far fa-newspaper text-4 text-color-primary"
                                                                style="top: 0;"></i>Новости</a>
                                     </li>
 
@@ -308,31 +310,39 @@ use yii\helpers\Url;
                                                         </li>
                                                         <li class="dropdown dropdown-full-color dropdown-light dropdown-mega">
                                                             <a class="dropdown-item dropdown-toggle "
-                                                               href="<?= Url::to(['/karshering']) ?>">
+                                                               href="<?= Url::to(['/news/karshering']) ?>">
                                                                 Каршеринг
                                                             </a>
 
                                                         </li>
                                                         <li class="dropdown dropdown-full-color dropdown-light">
                                                             <a class="dropdown-item dropdown-toggle "
-                                                               href="/news-hotels">
+                                                               href="<?= Url::to(['/news/hotel']) ?>">
                                                                 Отели / Хостелы
                                                             </a>
 
                                                         </li>
                                                         <li class="dropdown dropdown-full-color dropdown-light">
                                                             <a class="dropdown-item dropdown-toggle "
-                                                               href="/news-rent">
+                                                               href="<?= Url::to(['/news/rent']) ?>">
                                                                 Аренда
                                                             </a>
 
                                                         </li>
                                                         <li class="dropdown dropdown-full-color dropdown-light">
-                                                            <a class="dropdown-item dropdown-toggle" href="#">
-                                                                Добавить новость
+                                                            <a class="dropdown-item dropdown-toggle "
+                                                               href="<?= Url::to(['/news/car-rent']) ?>">
+                                                                Арендовать авто
                                                             </a>
 
                                                         </li>
+<!--                                                        -->
+<!--                                                        <li class="dropdown dropdown-full-color dropdown-light">-->
+<!--                                                            <a class="dropdown-item dropdown-toggle" href="#">-->
+<!--                                                                Добавить новость-->
+<!--                                                            </a>-->
+<!---->
+<!--                                                        </li>-->
 
                                                     </ul>
                                                 </nav>
@@ -347,10 +357,10 @@ use yii\helpers\Url;
                                 <div class="header-column order-1 order-lg-2">
                                     <div class="header-row justify-content-end">
                                         <div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
-                                            <form role="search" class="d-flex w-100" action="" method="get">
-                                                <div class="simple-search input-group w-100">
-                                                    <input class="form-control border-0 text-1" id="headerSearch"
-                                                           name="q" type="search" value=""
+                                            <?php $form = ActiveForm::begin(['id' => 'login-form','action' => 'search']); ?>
+                                            <div class="simple-search input-group w-100">
+                                                <input class="form-control border-0 text-1" id="headerSearch"
+                                                           name="search" type="search" value=""
                                                            placeholder="Поиск новостей...">
                                                     <span class="input-group-append bg-light border-0">
 																<button class="btn" type="submit">
@@ -358,7 +368,7 @@ use yii\helpers\Url;
 																</button>
 															</span>
                                                 </div>
-                                            </form>
+                                            <?php ActiveForm::end(); ?>
                                         </div>
                                     </div>
                                 </div>

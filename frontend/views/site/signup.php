@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 ?>
 <?php Pjax::begin(); ?>
 
-<div class="site-signup">
+<div class="site-signup container">
 
     <div class="row">
         <div class="col-lg-12">
@@ -44,8 +44,8 @@ use yii\widgets\Pjax;
 
                 <?= $form->field($model, 'password_repeat')->passwordInput()->label('ПОВТОРИТЕ ПАРОЛЬ') ?>
 
-                <?= $form->field($model, 'policy')->checkbox()
-                    ->label(' <div style="color:#999;">ПРИНИМАЮ ' . Html::a('ПОЛИТИКУ КОНФИДЕНЦИАЛЬНОСТИ', ['#']) . '</div>') ?>
+                <?= $form->field($model, 'policy',['template' => '{label} <div class="custom-control custom-checkbox">{input}{error}{hint}</div>'])->checkbox()
+                    ->label(' <span  style="color:#999;">ПРИНИМАЮ ' . Html::a('ПОЛИТИКУ КОНФИДЕНЦИАЛЬНОСТИ', ['#']) . '</span>') ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

@@ -56,13 +56,44 @@ use yii\widgets\ActiveForm;
             <br>
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'date_born')->textInput() ?>
+                    <?= $form->field($model, 'email',[
+                        'template' => '{label}<div class="input-group"><span class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="fas fa-envelope"></i>
+												</span>
+											</span>{input}</div>',
+                    ])->textInput(['maxlength' => true,'placeholder' => 'mail@domain.com'])->label('E-mail') ?>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'place_born')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'phone',[
+                        'template' => '{label}<div class="input-group"><span class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="fas fa-phone"></i>
+												</span>
+											</span>{input}</div>',
+                    ])->textInput(['maxlength' => true,'placeholder' => 'номер телефона'])->label('Телефон') ?>
                 </div>
+
                 <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'date_born',[
+                        'template' => '{label}<div class="input-group"><span class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="fas fa-calendar"></i>
+												</span>
+											</span>{input}</div>',
+                    ])->textInput(['maxlength' => true,'placeholder' => '01/01/2000'])->label('Дата рождения') ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'place_born',[
+                        'template' => '{label}<div class="input-group"><span class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="fas fa-globe"></i>
+												</span>
+											</span>{input}</div>',
+                    ])->textInput(['maxlength' => true,'placeholder' => 'Страна, Область (штат), Город'])->label('Место рождения') ?>
                 </div>
             </div>
             <div class="row">
@@ -79,6 +110,7 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'numb_car')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>

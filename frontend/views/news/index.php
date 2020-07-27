@@ -18,7 +18,7 @@ if (Yii::$app->request->get('rubric_id')) {
     }
 }
 ?>
-<div role="main" class="main pt-3 mt-3" style="margin-top: 40px!important;">
+<div role="main" class="main pt-3 mt-3" style="margin-top: 60px!important;">
     <div class="container">
         <div class="row pb-1">
             <?php if (!empty($mainNews)): ?>
@@ -82,7 +82,7 @@ if (Yii::$app->request->get('rubric_id')) {
                     <?php foreach ($newsItems as $categoryNews):?>
                         <div class="heading heading-border heading-middle-border">
                             <h3 class="text-4"><strong
-                                        class="font-weight-bold text-1 px-3 text-light py-2 bg-secondary"><?=$categoryNews['title']?></strong>
+                                        class="font-weight-bold text-1 px-3 text-light py-2 bg-tertiary"><?=$categoryNews['title']?></strong>
                             </h3>
                         </div>
                         <div class="row pb-1">

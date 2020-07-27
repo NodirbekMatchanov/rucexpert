@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use \yii\helpers\Url;
+use frontend\components\Helper;
 //$this->title = $model->title;
 
 ?>
@@ -13,7 +14,7 @@ use \yii\helpers\Url;
 
             <div class="col-md-12 align-self-center p-static order-2 text-center">
 
-                <h1 class="text-dark font-weight-bold text-8"></h1>
+                <h1 class="text-dark font-weight-bold text-8">Новости <?=Helper::getRubricWords()[$url]?></h1>
             </div>
 
             <div class="col-md-12 align-self-center order-1">
@@ -43,7 +44,7 @@ use \yii\helpers\Url;
                                         <div class="post-image">
                                             <a href="/news?id=<?= $item->id ?>">
                                                 <img src="/uploads/news/<?= $item->img ?>"
-                                                     class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0"
+                                                     class="img-fluid cover-img img-thumbnail img-thumbnail-no-borders rounded-0"
                                                      alt="">
                                             </a>
                                         </div>
@@ -54,7 +55,7 @@ use \yii\helpers\Url;
                                                 <a href="/news?id=<?= $item->id ?> "><?= $item->title ?> </a>
                                             </h2>
                                             <p class="mb-0">
-                                                <?= $item->short_content ?>
+                                                <?= \yii\helpers\StringHelper::truncate($item->short_content,250) ?>
                                             </p>
                                         </div>
                                     </div>
@@ -72,7 +73,37 @@ use \yii\helpers\Url;
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
 
+                            <div class="row">
+                                <div class="col-md-12 pull-left ">
+                                    <?php
+                                    echo \justinvoelker\separatedpager\LinkPager::widget([
+                                        'pagination' => $pages,
+                                        'activePageCssClass' => 'active-page',
+                                        'prevPageLabel' => false,
+                                        'nextPageLabel' => false,
+                                        'maxButtonCount' => 5,
+                                        'options' => [
+                                            'class' => 'pagin-list',
+                                        ]
+                                    ]);
 
+                                    ?>
+                                    <p>
+                                        <?php
+                                        $totalCount = $pages->totalCount;
+                                        $begin = $pages->getPage() + 1;
+                                        $count = $pages->pageCount;
+                                        $end = $totalCount - 4;
+                                        if ($begin > $end) {
+                                            $begin = $end;
+                                        }
+                                        $page = $pages->getPage() + 1;
+                                        $pageCount = $pages->pageCount;
+
+
+                                        ?>
+                                    </p>
+                                </div>
                         </ul>
                     </nav>
                 </div>
@@ -129,6 +160,7 @@ use \yii\helpers\Url;
 
                         <img src="/new_temp/news/img/blog/hilton.gif">
                     </div>
+
                 </div>
 
 

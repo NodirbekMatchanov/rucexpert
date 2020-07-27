@@ -5,8 +5,6 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\NewAppAsset;
 use common\widgets\Alert;
@@ -68,6 +66,7 @@ NewAppAsset::register($this);
     <?php if (
             Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'
             || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id == 'view'
+            || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id != 'index'
     ) : ?>
             <?= $content ?>
     <?php else: ?>

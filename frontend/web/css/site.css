@@ -151,10 +151,11 @@ a.desc:after {
 .pagin-list > li > a {
     color: #fff;
     padding: 7px;
+    text-decoration: none;
 }
 
 .active-page {
-    background: rgba(2, 61, 134, 1) !important;
+    background: rgb(0, 136, 204) !important;;
 }
 
 .pagin-list > li {
@@ -318,6 +319,10 @@ a.desc:after {
     width:100%;
     height:100%;
 }
-
+.cover-img {
+    height: 200px!important;
+    width: 400px;
+    object-fit: cover;
+}
 
 /*------------------14. blog-area end --------------------*/

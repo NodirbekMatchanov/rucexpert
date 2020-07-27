@@ -71,7 +71,8 @@ class AreaAsset extends AssetBundle
         'new_temp/admin/js/theme.init.js',
         'new_temp/admin/js/examples/examples.header.menu.js',
         'new_temp/admin/js/examples/examples.dashboard.js',
-        'new_temp/admin/js/examples/examples.advanced.form.js'
+        'new_temp/admin/js/examples/examples.advanced.form.js',
+        'js/main.js'
 
     ];
     public $depends = [

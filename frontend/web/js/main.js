@@ -109,5 +109,17 @@ $(document).ready(function () {
     // кликаем на кнопку вход чтобы открывался модалка для входа
     $(document).on('click','.authorization',function () {
         $('#headerAccount .login').trigger('click');
+    });
+
+    $(document).on('click','#specialButton',function () {
+        $('.header.header-nav-menu').css("margin-top","50px")
+    });
+    setTimeout(function () {
+        if($('.special-quit button').length){
+            $('.header.header-nav-menu').css("margin-top","50px")
+        }
+    },2000);
+    $(document).on('click','.special-quit button',function () {
+        $('.header.header-nav-menu').css("margin-top","0px")
     })
 });

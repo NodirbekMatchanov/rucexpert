@@ -81,6 +81,7 @@ if (!Yii::$app->user->isGuest) {
 <?= $this->render('footer.php', []) ?>
 <?php endif; ?>
 <!--<script src="/admin/js/bootstrap-datepicker.js"></script>-->
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
 
 </body>
 </html>

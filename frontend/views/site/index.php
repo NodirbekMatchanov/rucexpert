@@ -370,37 +370,11 @@ $this->title = 'Главная страница';
 </div>
 
 
-<!--    <div class="row">-->
-<!--        --><? //= \yii\helpers\Html::a('Все новости', Url::to(['news/index']), ['class' => 'btn btn-warning']) ?>
-<!--    </div>-->
-<!--    <div class="row">-->
-<!--        <br>-->
-<!--        --><?php //if (!empty($news)):
-//            foreach ($news as $item):
-//                ?>
-<!--                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">-->
-<!--                    <div class="" style="height: 200px">-->
-<!--                       <a href="--><? //=Url::to(['news/view', 'id' => $item->id])?><!--">-->
-<!--                        --><?php //if ($item->img != ''): ?>
-<!--                            --><? //= Html::img('/uploads/news/' . $item->img, ['class' => 'home-img']) ?>
-<!--                        --><?php //else: ?>
-<!--                            --><? //= Html::img("/images/notfound.png", ['class' => 'home-img']) ?>
-<!--                        --><?php //endif; ?>
-<!--                       </a>-->
-<!--                    </div>-->
-<!--                    <h5>-->
-<!--                        --><? //= Html::a($item->title, Url::to(['news/view', 'id' => $item->id]), ['class' => '']) ?>
-<!--                    </h5>-->
-<!--                </div>-->
-<!--            --><?php
-//            endforeach;
-//        endif;
-//        ?>
 
 
 <?php
 \yii\bootstrap\Modal::begin([
-    'header' => 'Подтвердите код',
+    'header' => '<h4 class="modal-title">Подтвердите код</h4>',
     'toggleButton' => ['label' => 'click me', 'id' => 'openModal', 'class' => 'hidden'],
 ]);
 \yii\bootstrap\Modal::end();
@@ -411,7 +385,7 @@ $this->title = 'Главная страница';
 
 <?php
 \yii\bootstrap\Modal::begin([
-    'header' => 'Авторизация',
+    'header' => '<h4 class="modal-title">Авторизация</h4>',
     'options' => ['class' => 'modal fade', 'id' => 'loginModal', 'aria-labelledby' => "loginModalLabel"],
 ]);
 echo $this->render('login', ['model' => $model]);
@@ -425,7 +399,7 @@ echo $this->render('login', ['model' => $model]);
 
 <?php
 \yii\bootstrap\Modal::begin([
-    'header' => 'Регистрация',
+    'header' => '<h4 class="modal-title">Регистрация</h4>',
     'size' => 'modal-lg',
     'options' => ['class' => 'modal fade', 'id' => 'signModal', 'aria-labelledby' => "signModalLabel"],
 ]);
@@ -437,7 +411,7 @@ echo $this->render('signup', ['model' => $signModel]);
 <!--Contact start-->
 <?php
 \yii\bootstrap\Modal::begin([
-    'header' => 'Получить консультацию',
+    'header' => '<h4 class="modal-title">Получить консультацию</h4>',
     'size' => 'modal-lg',
     'options' => ['class' => 'modal fade', 'id' => 'feedBackModal', 'aria-labelledby' => "feedBackModalLabel"],
 ]);

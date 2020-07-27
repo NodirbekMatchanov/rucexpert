@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="black-list-index">
 
     <p>
-        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     <div class="card">
         <div class="card-body card-dashboard">
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 if($model->status != 2){
                                     return '<div class="alert alert-danger btn-sm text-center">на проверке</div>';
                                 } else {
-                                    return '<div class="alert alert-success text-center btn-sm">опубликовано</div>';
+                                    return '<div class="alert alert-success btn-sm  text-center btn-sm">опубликовано</div>';
                                 }
                             }
                         ],
