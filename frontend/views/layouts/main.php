@@ -22,12 +22,15 @@ NewAppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light%7CPlayfair+Display:400" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light%7CPlayfair+Display:400"
+          rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <?php $this->head() ?>
 </head>
-<body class="loading-overlay-showing" data-plugin-page-transition data-loading-overlay data-plugin-options="{'hideDelay': 500}">
+<body class="loading-overlay-showing" data-plugin-page-transition data-loading-overlay
+      data-plugin-options="{'hideDelay': 500}">
 <?php $this->beginBody() ?>
 <div class="loading-overlay">
     <div class="bounce-loader">
@@ -37,10 +40,7 @@ NewAppAsset::register($this);
     </div>
 </div>
 <div class="body">
-    <div class="alert alert-success alert-dismissible" role="alert" style="text-align: center;">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <i class="fas fa-exclamation-triangle"></i>На сайте проводятся технические работы, некоторые функции могут работать некорректно. Приносим свои извинения за неудобства.
-    </div>
+
     <?php
     $menuItems = [
         ['label' => 'Главная страница', 'url' => ['/site/index']],
@@ -48,65 +48,33 @@ NewAppAsset::register($this);
     ];
     ?>
 
-    <?=\frontend\widgets\Header::widget(['items' => $menuItems])?>
-<!--    --><?php
-//
-//    NavBar::begin([
-//        'brandLabel' => 'RUCexpert',
-//        'brandUrl' => Yii::$app->homeUrl,
-//        'options' => [
-//            'class' => 'navbar-inverse navbar-fixed-top',
-//        ],
-//    ]);
-//
-//    if (Yii::$app->user->isGuest) {
-//        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-//        $menuItems[] = ['label' => 'Логин', 'url' => ['/site/login']];
-//    } else {
-//        $balance = '';
-//        if(\backend\components\User::getRoleName() == 'director'){
-//            $hotel = \common\models\User::findHotel(Yii::$app->user->identity->hotel_id);
-//            $balance = ' Баланс ('.$hotel->balance.') ';
-//        }
-//        $menuItems[] = [
-//            'url' => ['services/index'],
-//            'options' => ['class' => 'dropdown'],
-//            'label' => '<span class="fa fa-user">'.$balance.'</span>',
-//            'items' => [
-//                ['label' => 'Быстрый поиск', 'url' => ['black-list/search']],
-//                ['label' => 'Написать нам', 'url' => ['site/contact']],
-//                ['label' => 'ВАШ ПРОФИЛЬ', 'url' => ['personal-area/index']],
-//                [
-//                    'options' => ['class' => ''],
-//                    'encode' => false,
-//                    'label' =>
-//                        Html::beginForm(['/site/logout'], 'post')
-//                        . Html::submitButton(
-//                            'Выход',
-//                            ['class' => ' logout']
-//                        )
-//                        . Html::endForm()
-//                ],
-//
-//            ],
-//            'encode' => false
-//        ];
-//    }
-//    $menuItems[] = '<li><a href="#" id="specialButton"><i class="fa fa-eye"></i></a>' . "</li>";
-//    echo Nav::widget([
-//        'options' => ['class' => 'navbar-nav navbar-right'],
-//        'items' => $menuItems,
-//    ]);
-//    NavBar::end();
-//    ?>
-<!--    <div class="container">-->
-
-<!--        --><?//= Breadcrumbs::widget([
-//            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-//        ]) ?>
-<!--        --><?//= Alert::widget() ?>
-        <?= $content ?>
-<!--    </div>-->
+    <?= \frontend\widgets\Header::widget(['items' => $menuItems]) ?>
+    <?= \diecoding\toastr\ToastrFlash::widget(); ?>
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <p class="mb-0">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </p>
+        </div>
+    <?php endif; ?>
+    <?php if (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <p class="mb-0">
+                <?= Yii::$app->session->getFlash('error') ?>
+            </p>
+        </div>
+    <?php endif; ?>
+<!--  Если главная страница то контейнер не нужно  -->
+    <?php if (
+            Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'
+            || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id == 'view'
+    ) : ?>
+            <?= $content ?>
+    <?php else: ?>
+        <div class="container" >
+            <?= $content ?>
+        </div>
+    <?php endif; ?>
 </div>
 
 <footer id="footer" class="mt-0">
@@ -116,9 +84,11 @@ NewAppAsset::register($this);
                 <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Личный кабинет</h5>
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
                     <li class="text-4 mb-2"><a href="#" data-toggle="modal"
-                                               data-target="#signModal" class="link-hover-style-1 ml-1"> Авторизация</a></li>
+                                               data-target="#signModal" class="link-hover-style-1 ml-1"> Авторизация</a>
+                    </li>
                     <li class="text-4 mb-2"><a href="#" data-toggle="modal"
-                                               data-target="#largesizemodal" class="link-hover-style-1 ml-1"> Регистрация</a></li>
+                                               data-target="#largesizemodal" class="link-hover-style-1 ml-1">
+                            Регистрация</a></li>
                     <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Личный кабинет</a></li>
                     <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Поиск нарушителя</a></li>
                 </ul>
@@ -127,9 +97,12 @@ NewAppAsset::register($this);
                 <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">О нас</h5>
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
                     <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> О проекте</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Правила пользования сервисом</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Обработка персональных данных</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Политика конфиденциальности</a></li>
+                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Правила пользования
+                            сервисом</a></li>
+                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Обработка персональных
+                            данных</a></li>
+                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Политика конфиденциальности</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
@@ -148,7 +121,8 @@ NewAppAsset::register($this);
             <div class="py-2">
                 <div class="row py-4">
                     <div class="col d-flex align-items-center justify-content-center mb-4 mb-lg-0">
-                        <p>Copyright 2019 © RUC.EXPERT - Реестр недобросовестных пользователей услугами отелей/хостелами, проката автомашин/каршеринга, арендой помещений.</p>
+                        <p>Copyright 2019 © RUC.EXPERT - Реестр недобросовестных пользователей услугами
+                            отелей/хостелами, проката автомашин/каршеринга, арендой помещений.</p>
                     </div>
                 </div>
             </div>
@@ -161,7 +135,7 @@ NewAppAsset::register($this);
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" >
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title" id="defaultModalLabel">Выбать язык сайта</h5>
             </div>
@@ -170,34 +144,45 @@ NewAppAsset::register($this);
                 <a href="#" onclick="doGTranslate('ru|en');return false;" title="English" class="nturl btn btn-default"
                    style="font-size: 15px;background-position:-0px -0px;"><img src="/new_temp/news/img/lang/english.png"
                                                                                height="24" width="30" alt="English"
-                                                                               style=" object-fit: fill;  padding: 2px;     margin-right: 4px;">English</a>
+                                                                               style=" object-fit: fill;  padding: 2px;     margin-right: 4px;"><p>English</p></a>
                 <a href="#"
                    onclick="doGTranslate('ru|fr');return false;"
                    title="French"
                    class=" nturl btn btn-default"
-                   style="font-size: 15px; background-position:-200px -100px;"><img src="/new_temp/news/img/lang/french.png"
-                                                                                    height="24" width="30" alt="French"
-                                                                                    style=" object-fit: fill; padding: 2px;   margin-right: 4px;">French</a>
+                   style="font-size: 15px; background-position:-200px -100px;"><img
+                            src="/new_temp/news/img/lang/french.png"
+                            height="24" width="30" alt="French"
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"><p>French</p></a>
                 <a href="#"
                    onclick="doGTranslate('ru|de');return false;"
                    title="German"
                    class=" nturl btn btn-default"
                    style="background-position:-300px -100px;"><img
-                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"       src="/new_temp/news/img/lang/german.png" height="24" width="30" alt="German"/>German</a><a href="#"
-                                                                                                                                                                                           onclick="doGTranslate('ru|it');return false;"
-                                                                                                                                                                                           title="Italian"
-                                                                                                                                                                                           class="nturl btn btn-default"
-                                                                                                                                                                                           style="font-size: 15px; background-position:-600px -100px;"><img
-                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"   src="/new_temp/news/img/lang/russian.png" height="24" width="24" alt="Italian"/>Italian</a>
-                <a href="#"  onclick="doGTranslate('uz|uz');return false;"   title="Uzbek"          class=" nturl btn btn-default"
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
+                            src="/new_temp/news/img/lang/german.png" height="24" width="30" alt="German"/><p>German</p></a><a
+                        href="#"
+                        onclick="doGTranslate('ru|it');return false;"
+                        title="Italian"
+                        class="nturl btn btn-default"
+                        style="font-size: 15px; background-position:-600px -100px;"><img
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
+                            src="/new_temp/news/img/lang/russian.png" height="24" width="24" alt="Italian"/><p>Italian</p></a>
+                <a href="#" onclick="doGTranslate('uz|uz');return false;" title="Uzbek" class=" nturl btn btn-default"
                    style="background-position:-300px -200px;"><img
-                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"   src="/new_temp/news/img/lang/uz.png" height="24" width="30" alt="Uzbek"/>Uzbek</a><a
-                        href="#" onclick="doGTranslate('ru|ru');return false;" title="Russian" class=" nturl btn btn-default"
-                        style="font-size: 15px; background-position:-500px -200px;"><img style=" object-fit: fill; padding: 2px;   margin-right: 4px;" src="/new_temp/news/img/lang/russian.png"
-                                                                                         height="24" width="30" alt="Russian"/>Russian</a><a
-                        href="#" onclick="doGTranslate('ru|es');return false;" title="Spanish" class="btn btn-default nturl"
-                        style="font-size: 15px; background-position:-600px -200px;"><img style=" object-fit: fill; padding: 2px;   margin-right: 4px;" src="/new_temp/news/img/lang/spanish.png"
-                                                                                         height="24" width="30" alt="Spanish"/>Spanish</a>
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
+                            src="/new_temp/news/img/lang/uz.png" height="24" width="30" alt="Uzbek"/><p>Uzbek</p></a><a
+                        href="#" onclick="doGTranslate('ru|ru');return false;" title="Russian"
+                        class=" nturl btn btn-default"
+                        style="font-size: 15px; background-position:-500px -200px;"><img
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
+                            src="/new_temp/news/img/lang/russian.png"
+                            height="24" width="30" alt="Russian"/><p>Russian</p></a><a
+                        href="#" onclick="doGTranslate('ru|es');return false;" title="Spanish"
+                        class="btn btn-default nturl"
+                        style="font-size: 15px; background-position:-600px -200px;"><img
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
+                            src="/new_temp/news/img/lang/spanish.png"
+                            height="24" width="30" alt="Spanish"/><p>Spanish</p></a>
 
                 <style type="text/css">
                     <!--

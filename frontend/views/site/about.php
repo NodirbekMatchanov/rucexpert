@@ -7,10 +7,60 @@ use yii\helpers\Html;
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 align-self-center p-static order-2 text-center">
+                <h1 class="text-dark font-weight-bold text-8">О проекте</h1>
+            </div>
+            <div class="col-md-12 align-self-center order-1">
+                <ul class="breadcrumb d-block text-center">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="#">О проекте</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div role="main" class="main pt-3 mt-3">
+    <div class="container">
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+        <div class="row pb-1 pt-2">
 
-    <code><?= __FILE__ ?></code>
+            <div class="col-md-12">
+
+                <div class="blog-posts single-post">
+
+                    <article class="post post-large blog-single-post border-0 m-0 p-0">
+
+
+                        <div class="post-content ml-0">
+                            Въехать в отель, снять апартаменты, одолжить машину в каршеринге сейчас проще простого: достаточно скачать приложение и иметь под рукой кредитку. Недобросовестные граждане пользуются этой доступностью, портя имущество и нанося вред репутации компании. Решение проблемы – прямо перед вами: RUC EXPERT – реестр безответственных постояльцев и арендаторов.<p>
+                                Подобные «черные списки» ведут гостиничные сети в США и Европе. Наш онлайн-сервис не ограничен одним регионом/государством. RUC EXPERT – международная база. Постоялец, грубо нарушивший правила в отеле в Белоруссии, получит отказ в заселении в России. В Австрии. В Греции. Где угодно. Безнаказанность – в прошлом.<p>
+                                Столкнулись с неадекватным поведением клиента? Регистрируйтесь на нашем сайте и вносите его в реестр. Обязательно нужно указать фамилию, имя, место рождения и кратко описать инцидент, будь то вождение в пьяном виде, кража ковриков из салона, агрессивное общение с персоналом, шум по ночам. «Пробить» нового клиента тоже легко: потребуется лишь ввести фамилию и уточняющие сведения (e-mail, телефон). Важный момент: мы соблюдаем законы о защите личных (в частности, паспортных) данных, принятые в разных странах. Стоп-лист не выводится целиком – только подходящие запросы.<p>
+                                RUC EXPERT – доступный в освоении инструмент для владельца отельного бизнеса, службы каршеринга, арендодателя. Реестр решает сразу две задачи – наказать недобросовестных арендаторов и оградиться от них в дальнейшем. Работа нашей базы в перспективе усилит ответственность гостей, исключит нежелательных клиентов и упростит жизнь законопослушным гражданам и бизнесу. Подключайтесь! <p>
+                  </div>
+                    </article>
+
+                </div>
+
+
+
+
+
+                <div class="text-center py-3 mb-4">
+                    <a href="http://themeforest.net/item/porto-responsive-html5-template/4106987" target="_blank" class="d-block">
+                        <?= Html::img('new_temp/img/blog-ad-3.jpg',['class' => 'img-fluid pl-3']) ?>
+                    </a>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
 </div>

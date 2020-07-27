@@ -19,6 +19,10 @@ body {
 	margin: 0;
 }
 
+.slider-contact-form-wrapper a{
+   text-decoration: none;
+}
+
 body a {
 	outline: none !important;
 }
@@ -30,7 +34,6 @@ body a {
 html.safari .body {
 	overflow-x: hidden;
 }
-
 li {
 	line-height: 24px;
 }
@@ -1280,9 +1283,11 @@ html #header.header-transparent {
 }
 
 html #header.header-transparent .header-body:not(.header-border-bottom) {
-	border-bottom: 0;
+	border-bottom: 1px solid #ececec;
 }
-
+.nturl p{
+    margin: 0 0 2px;
+}
 html:not(.sticky-header-active) #header.header-transparent:not(.header-semi-transparent) .header-body {
 	background-color: transparent !important;
 }
@@ -2028,7 +2033,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 
 	#header .header-nav.header-nav-stripe nav > ul > li > a {
 		background: transparent;
-		padding: 0 .9rem;
+		padding: 0 1.9rem;
 		margin: 1px 0 0;
 		height: 100%;
 	}

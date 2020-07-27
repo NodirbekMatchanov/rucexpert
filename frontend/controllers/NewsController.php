@@ -9,6 +9,7 @@ use common\models\News;
 use frontend\models\NewsSearch;
 use yii\data\Pagination;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -38,17 +39,17 @@ class NewsController extends Controller
      */
     public function actionIndex()
     {
-        $newsSearchModel = new NewsSearch();
-        $rubric = new Rubric();
-        $rubric = $rubric::find()->all();
-        $news = $newsSearchModel->searchIndex(Yii::$app->request->queryParams);
-        $pageData = clone $news;
-        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 4, 'defaultPageSize' => 4]);
-        $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
+
+        $newsItems = NewsSearch::getNewsByRubric();
+        $mainNews = NewsSearch::getMainNews();
+//        $pageData = clone $news;
+//        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 4, 'defaultPageSize' => 4]);
+//        $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
         return $this->render('index', [
             'newsItems' => $newsItems,
-            'pages' => $page,
-            'rubric' => $rubric,
+            'mainNews' => $mainNews,
+//            'pages' => $page,
+//            'rubric' => $rubric,
         ]);
     }
 
@@ -60,12 +61,12 @@ class NewsController extends Controller
      */
     public function actionView($id)
     {
-        $rubric = new Rubric();
-        $rubric = $rubric::find()->all();
+        $model = $this->findModel($id);
+        $otherNews = NewsSearch::getOtherNews($model->rubric_id);
         $video = Video::find()->where(['parent_id' => $id])->one();
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'rubric' => $rubric,
+            'model' => $model,
+            'otherNews' => $otherNews,
             'video' => $video,
         ]);
     }
@@ -105,6 +106,23 @@ class NewsController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionRubric($url){
+        $model = new News();
+        $rubric = News::getRubric();
+        if(isset($rubric[$url])){
+          $rubricId = $rubric[$url];
+        } else {
+            return $this->redirect('/news');
+        }
+        $otherNews = NewsSearch::getOtherNews($rubricId);
+        $news = $model::find()->where(['rubric_id' => $rubricId])->all();
+        return $this->render('rubric',[
+           'model' => $news,
+           'otherNews' => $otherNews,
+           'rubricId' => $rubricId,
         ]);
     }
 

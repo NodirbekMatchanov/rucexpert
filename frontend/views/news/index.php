@@ -18,111 +18,165 @@ if (Yii::$app->request->get('rubric_id')) {
     }
 }
 ?>
-<div class="wrap" style="margin-top: 200px">
+<div role="main" class="main pt-3 mt-3" style="margin-top: 40px!important;">
     <div class="container">
-
-        <div class="news-index">
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12 col">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>НОВОСТИ</h4>
-
-                        </div>
-                        <div class="panel-body">
-                            <?= Html::ul($rubric, [
-                                'item' => function ($item) {
-                                    return Html::tag(
-                                        'li',
-                                        $this->render('left_menu', ['item' => $item])
-                                    );
-                                }, 'class' => 'left-menu']) ?>
-                            <a href="<?= Url::to(['news/index']) ?>" class="btn btn-default">ВСЕ НОВОСТИ</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12 col">
-                    <?php
-                    if (!empty($newsItems)) {
-                        foreach ($newsItems
-
-                                 as $key => $newsItem):
-                            ?>
-
-                            <div class="row">
-                                <div class="col-md-4 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".1s">
-                                    <div class="blog-wrap">
-                                        <div class="blog-img" style="width: 100%; height: 150px">
-                                            <?php if ($newsItem->img != ''): ?>
-                                                <?= Html::img('/uploads/news/' . $newsItem->img) ?>
-                                            <?php else: ?>
-                                                <?= Html::img("/images/notfound.png") ?>
-                                            <?php endif; ?>
-                                        </div>
-
+        <div class="row pb-1">
+            <?php if (!empty($mainNews)): ?>
+                <div class="col-lg-7 mb-4 pb-2">
+                    <a href="/news/view?id=<?= $mainNews->id ?>">
+                        <article
+                                class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
+                            <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
+                                <img src="/uploads/news/<?= $mainNews->img ?>" class="img-fluid"
+                                     alt="<?= $mainNews->title ?>">
+                                <div class="thumb-info-title bg-transparent p-4">
+                                    <div class="thumb-info-type bg-color-dark px-2 mb-1"><?= \backend\models\Rubric::getRubricName($mainNews->rubric_id) ?></div>
+                                    <div class="thumb-info-inner mt-1">
+                                        <h2 class="font-weight-bold text-color-light line-height-2 text-5 mb-0"><?= $mainNews->title ?></h2>
                                     </div>
-                                </div>
-                                <div class="col-md-8 col-sm-6 col-xs-12 col wow fadeInUp line-br">
-                                    <div class="blog-content ">
-                                        <h4>
-                                            <b><a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>"><?= $newsItem->title ?></a></b>
-                                        </h4>
-                                        <p>
-                                            <?= \yii\helpers\StringHelper::truncate(Html::encode($newsItem->short_content), '150', '...') ?>
-                                        </p>
-                                        <div class="blog-meta pull-right">
-                                            <ul>
-                                                <li>
-                                                    <i class="fa fa-calendar"></i>
-                                                    <?= date("d.m.Y", strtotime($newsItem->date)) ?>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <a href="<?= Url::to(['news/view', 'id' => $newsItem->id]) ?>"
-                                           class=" pull-right ">Подробнее</a>
-
+                                    <div class="thumb-info-show-more-content">
+                                        <p class="mb-0 text-1 line-height-9 mb-1 mt-2 text-light opacity-5"><?= $mainNews->short_content ?></p>
                                     </div>
                                 </div>
                             </div>
+                        </article>
+                    </a>
+                </div>
+            <?php endif; ?>
+            <div class="col-lg-5">
+                <?php if (!empty($newsItems)): ?>
+                    <?php foreach ($newsItems as $categoryNews): ?>
+                        <article
+                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                            <div class="row align-items-center pb-1">
+                                <div class="col-sm-5">
+                                    <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>">
+                                        <img src="/uploads/news/<?= $categoryNews['news'][0]['img'] ?>"
+                                             class="img-fluid border-radius-0"
+                                             alt="<?= $categoryNews['news'][0]['title'] ?>">
+                                    </a>
+                                </div>
+                                <div class="col-sm-7 pl-sm-1">
+                                    <div class="thumb-info-caption-text">
+                                        <div class="thumb-info-type text-light text-uppercase d-inline-block bg-color-dark px-2 m-0 mb-1 float-none">
+                                            <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
+                                               class="text-decoration-none text-color-light"><?= $categoryNews['title'] ?></a>
+                                        </div>
+                                        <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
+                                            <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
+                                               class="text-decoration-none text-color-dark"><?= $categoryNews['news'][0]['title'] ?></a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row pb-1 pt-2">
 
-                            <br>
-                        <?php endforeach;
-                    } ?>
-                    <div class="col-md-12 pull-left ">
-                        <?php
-                        echo \justinvoelker\separatedpager\LinkPager::widget([
-                            'pagination' => $pages,
-                            'activePageCssClass' => 'active-page',
-                            'prevPageLabel' => false,
-                            'nextPageLabel' => false,
-                            'maxButtonCount' => 5,
-                            'options' => [
-                                'class' => 'pagin-list',
-                            ]
-                        ]);
+            <div class="col-md-9">
 
-                        ?>
-                        <p>
-                            <?php
-                            $totalCount = $pages->totalCount;
-                            $begin = $pages->getPage() + 1;
-                            $count = $pages->pageCount;
-                            $end = $totalCount - 4;
-                            if ($begin > $end) {
-                                $begin = $end;
-                            }
-                            $page = $pages->getPage() + 1;
-                            $pageCount = $pages->pageCount;
+                <?php if (!empty($newsItems)): ?>
+                    <?php foreach ($newsItems as $categoryNews):?>
+                        <div class="heading heading-border heading-middle-border">
+                            <h3 class="text-4"><strong
+                                        class="font-weight-bold text-1 px-3 text-light py-2 bg-secondary"><?=$categoryNews['title']?></strong>
+                            </h3>
+                        </div>
+                        <div class="row pb-1">
+
+                            <div class="col-lg-6 mb-4 pb-1">
+                                <article
+                                        class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="/news/view?id=<?=$categoryNews['news'][0]['id']?>">
+                                                <img src="/uploads/news/<?=$categoryNews['news'][0]['img']?>"
+                                                     class="img-fluid border-radius-0"
+                                                     alt="<?=$categoryNews['news'][0]['title']?>">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="thumb-info-caption-text">
+                                                <div class="d-inline-block text-default text-1 mt-2 float-none">
+                                                    <?=date('d.m.Y',strtotime($categoryNews['news'][0]['date']))?>
+                                                </div>
+                                                <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
+                                                    <a href="/news/view?id=<?=$categoryNews['news'][0]['id']?>"
+                                                       class="text-decoration-none text-color-dark"><?=$categoryNews['news'][0]['title']?></a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <?php foreach($categoryNews['news'] as $k => $news):?>
+                                    <?php if($k > 0 && $k < 4):?>
+                                        <article
+                                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                                            <div class="row align-items-center pb-1">
+                                                <div class="col-sm-4">
+                                                    <a href="/news/view?id=<?=$news['id']?>">
+                                                        <img src="/uploads/news/<?=$news['img']?>" style="object-fit: cover; width: 150px; height: 70px"
+                                                             class="img-fluid border-radius-0"
+                                                             alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-8 pl-sm-0">
+                                                    <div class="thumb-info-caption-text">
+                                                        <div class="d-inline-block text-default text-1 float-none">
+                                                            <?=date('d.m.Y',strtotime($news['date']))?>
+                                                        </div>
+                                                        <h4 class="d-block pb-2 line-height-2 text-3 text-dark font-weight-bold mb-0">
+                                                            <a href="/news/view?id=<?=$news['id']?>"
+                                                               class="text-decoration-none text-color-dark"><?=$news['title']?></a>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    <?php endif;?>
+                                <?php endforeach;?>
 
 
-                            ?>
-                        </p>
+                            </div>
+                        </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+
+
+                <div class="text-center py-3 mb-4">
+                    <a href="#"
+                       target="_blank" class="d-block">
+                        <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/toyota.gif"/>
+                    </a>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-3">
+
+
+                <div class="pb-2">
+
+
+                    <div class="mb-4 pb-2">
+
+                        <img src="/new_temp/news/img/blog/hilton.gif">
                     </div>
                 </div>
 
 
             </div>
+
         </div>
     </div>
+
 </div>

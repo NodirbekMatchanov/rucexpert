@@ -83,8 +83,11 @@ html .text-hover-light:hover {
 }
 
 html .bg-color-primary,
+html .slider-contact-form-wrapper.bg-primary {
+	background-color: #FFFFFF !important;
+}
 html .bg-primary {
-	background-color: #00AACE !important;
+	background-color: #0088CC !important;
 }
 
 html .bg-color-hover-primary:hover,

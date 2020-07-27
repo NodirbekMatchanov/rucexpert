@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use backend\models\Rubric;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\News;
@@ -99,5 +100,50 @@ class NewsSearch extends News
             ->andFilterWhere(['like', 'img', $this->img]);
 
         return $query;
+    }
+
+    public static function getNewsByRubric()
+    {
+        $rubricModel = new Rubric();
+        $rubrics = $rubricModel::find()->all();
+        $newsList = [];
+        foreach ($rubrics as $rubric) {
+            $newsList [] = [
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'title' => $rubric->title
+            ];
+        }
+        return $newsList;
+    }
+
+    public static function getOtherNews($rubric_id)
+    {
+        $rubricModel = new Rubric();
+        $rubrics = $rubricModel::find()->where(['!=','id', $rubric_id])->all();
+        $newsList = [];
+        foreach ($rubrics as $rubric) {
+            $newsList [] = [
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'title' => $rubric->title
+            ];
+        }
+        return $newsList;
+    }
+
+    public static function getMainNews()
+    {
+        return self::find()->orderBy(['id' => 'desc'])->limit(1)->one();
+    }
+
+    // Todo нужно перенести в отдельный helper класс
+    public static function getMonthString($date)
+    {
+        $date = str_replace('.', '-', $date);
+        $_mD = date("m", strtotime($date)); //для замены
+        $day = date("d", strtotime($date)); //для замены
+        $day = date("d", strtotime($date)); //для замены
+        $months = ["ЯНВ", "ФЕВ", "МАР", "АПР", "МАЙ", "ИЮН", "ИЮЛ", "АВГ", "СЕН", "ОКТ", "НОЯ", "ДЕК"];
+        $month = $months[(int)$_mD - 1];
+        return ['day' => $day, 'month' => $month];
     }
 }

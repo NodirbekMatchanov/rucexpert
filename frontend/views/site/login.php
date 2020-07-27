@@ -32,7 +32,7 @@ use yii\widgets\Pjax;
         </label>
 
         <?= Html::a('Восстановить
-            пароль', ['site/request-password-reset']) ?>.
+            пароль', ['site/request-password-reset'],['data-pjax' => false]) ?>.
 
     </div>
     <div class="login-form-buttons">

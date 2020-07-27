@@ -57,4 +57,8 @@ class Rubric extends \yii\db\ActiveRecord
         return $rubrics;
     }
 
+    public static function getRubricName($id) {
+        return self::findOne($id)->title;
+    }
+
 }

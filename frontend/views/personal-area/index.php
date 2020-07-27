@@ -69,19 +69,25 @@ $role = \backend\components\User::getRoleName();
                     <!-- left menu section -->
                     <aside class=" tabs-right tabs-navigation tabs-navigation-simple" style="padding: 0px 54px">
                         <ul class="nav nav-list flex-column mb-5">
-                            <li class="nav-item active">
-                                <a class="nav-link text-dark active" href="#tabsNavigationVertSimple1"
-                                   data-toggle="tab">Данные
-                                    профиля</a>
-                            </li>
+                            <?php if (\backend\components\User::getRoleName(Yii::$app->user->identity->id) == 'director'): ?>
+                                <li class="nav-item active">
+                                    <a class="nav-link text-dark active" href="#tabsNavigationVertSimple1"
+                                       data-toggle="tab">Данные
+                                        профиля</a>
+                                </li>
+                            <?php endif; ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#tabsNavigationVertSimple2" data-toggle="tab">Сменить
                                     пароль</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#tabsNavigationVertSimple3" data-toggle="tab">Платежный
-                                    баланс</a>
-                            </li>
+                            <?php if (\backend\components\User::getRoleName(Yii::$app->user->identity->id) == 'director'): ?>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tabsNavigationVertSimple3" data-toggle="tab">Платежный
+                                        баланс</a>
+                                </li>
+                            <?php endif; ?>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#tabsNavigationVertSimple4" data-toggle="tab">Связать с
                                     аккаунтами</a>
@@ -99,21 +105,23 @@ $role = \backend\components\User::getRoleName();
                     <div class="tab-pane tab-pane-navigation" id="tabsNavigationVertSimple2">
                         <?= $this->render('_changePassword', ['model' => $changePassword]) ?>
                     </div>
-                    <div class="tab-pane tab-pane-navigation" id="tabsNavigationVertSimple3">
-                        <div class="form-group text-center ">
-                            <h4 class="">Пополнить баланс</h4>
+                    <?php if (\backend\components\User::getRoleName(Yii::$app->user->identity->id) == 'director'): ?>
+                        <div class="tab-pane tab-pane-navigation" id="tabsNavigationVertSimple3">
+                            <div class="form-group text-center ">
+                                <h4 class="">Пополнить баланс</h4>
+                            </div>
+                            <div class="mt-2">
+                                <h6 class="mb-0">Счет</h6>
+                                <p><?= $hotel->balance ?> руб</p>
+                            </div>
+                            <?php if ($role == 'director'): ?>
+                                <?php $form = ActiveForm::begin(['action' => '/payment/invoice']); ?>
+                                <?= $form->field($invoice, 'summ')->textInput(['autofocus' => true, 'value' => 100]) ?>
+                                <?= Html::submitButton('Оплатить', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                                <?php ActiveForm::end(); ?>
+                            <?php endif; ?>
                         </div>
-                        <div class="mt-2">
-                            <h6 class="mb-0">Счет</h6>
-                            <p><?= $hotel->balance ?> руб</p>
-                        </div>
-                        <?php if ($role == 'director'): ?>
-                            <?php $form = ActiveForm::begin(['action' => '/payment/invoice']); ?>
-                            <?= $form->field($invoice, 'summ')->textInput(['autofocus' => true, 'value' => 100]) ?>
-                            <?= Html::submitButton('Оплатить', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                            <?php ActiveForm::end(); ?>
-                        <?php endif; ?>
-                    </div>
+                    <?php endif ?>
                     <div class="tab-pane tab-pane-navigation" id="tabsNavigationVertSimple4">
                         <div class="form-group text-center ">
                             <h4 class="">Подключить соцсети</h4>

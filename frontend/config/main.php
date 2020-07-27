@@ -81,6 +81,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'news/<url:\w+>' => 'news/rubric',
+                'about' => 'site/about',
             ],
         ],
         'robokassa' => [

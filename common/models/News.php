@@ -57,4 +57,13 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getRubric(){
+        return [
+            'karshering' => 2,
+            'hotel' => 1,
+            'rent' => 3,
+            'car-rent' => 4
+        ];
+    }
+
 }

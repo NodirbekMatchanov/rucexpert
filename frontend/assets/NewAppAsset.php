@@ -45,6 +45,7 @@ class NewAppAsset extends AssetBundle
         'new_temp/news/vendor/jquery.cookie/jquery.cookie.min.js',
         'new_temp/news/vendor/popper/umd/popper.min.js',
         'new_temp/news/vendor/common/common.min.js',
+        'new_temp/news/vendor/bootstrap/js/bootstrap.min.js',
         'new_temp/news/vendor/jquery.validation/jquery.validate.min.js',
         'new_temp/news/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js',
         'new_temp/news/vendor/jquery.gmap/jquery.gmap.min.js',

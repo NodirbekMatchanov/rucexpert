@@ -12,6 +12,7 @@ use Yii;
 use yii\authclient\AuthAction;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
+use yii\log\Logger;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -85,14 +86,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news = new News();
         $loginModel = new LoginForm();
         $signModel = new SignupForm();
         $contactModel = new ContactForm();
-        $newsList = $news::find()->orderBy('id desc')->limit(3)->all();
+        $newsList = News::getNewsGroupByRubric();
         $count = BlackList::find()->count();
         return $this->render('index', [
-            "news" => $newsList,
+            "newsList" => $newsList,
             "count" => $count,
             "model" => $loginModel,
             "signModel" => $signModel,
