@@ -39,7 +39,6 @@ class NewsController extends Controller
      */
     public function actionIndex()
     {
-
         $newsItems = NewsSearch::getNewsByRubric();
         $mainNews = NewsSearch::getMainNews();
 //        $pageData = clone $news;
@@ -88,7 +87,7 @@ class NewsController extends Controller
         $otherNews = NewsSearch::getOtherNews($rubricId);
         $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2]);
         $pageData = clone $news;
-        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 2, 'defaultPageSize' => 2]);
+        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 6, 'defaultPageSize' => 6]);
         $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
         return $this->render('rubric', [
             'model' => $newsItems,
@@ -99,12 +98,15 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionSearch()
     {
         if (Yii::$app->request->post()) {
             $search = Yii::$app->request->post('search');
             $model = new NewsSearch();
-            $news = $model->search( $search);
+            $news = $model->search($search);
             $pageData = clone $news;
             $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 8, 'defaultPageSize' => 8]);
             $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();

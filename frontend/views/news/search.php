@@ -1,6 +1,6 @@
 <?php
 use frontend\components\Helper;
-
+$this->title = 'Поиск'
 ?>
 
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
@@ -34,12 +34,18 @@ use frontend\components\Helper;
                     <div class="row">
 
                         <?php if (!empty($model)): ?>
-                            <?php foreach ($model as $item): ?>
+                            <?php foreach ($model as $item):
+                                if(empty($item->img)){
+                                   $item->img = '/new_temp/img/not-found.png';
+                                } else {
+                                    $item->img = '/uploads/news/'.$item->img;
+                                }
+                                ?>
                                 <div class="col-md-4">
                                     <article class="post post-medium border-0 pb-0 mb-5">
                                         <div class="post-image">
                                             <a href="/news?id=<?= $item->id ?>">
-                                                <img src="/uploads/news/<?= $item->img ?>"
+                                                <img src="<?= $item->img ?>"
                                                      class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0"
                                                      style="width: 550px; height: 250px; object-fit: cover"
                                                      alt="">
@@ -51,7 +57,7 @@ use frontend\components\Helper;
                                             <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a
                                                     href="/news?id=<?= $item->id ?>"><?= $item->title ?></a>
                                             </h2>
-                                            <p><?= $item->short_content ?></p>
+                                            <p><?= \yii\helpers\StringHelper::truncate($item->short_content, 180) ?></p>
 
 
                                         </div>

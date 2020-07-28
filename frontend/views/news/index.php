@@ -22,12 +22,17 @@ if (Yii::$app->request->get('rubric_id')) {
     <div class="container">
         <div class="row pb-1">
             <?php if (!empty($mainNews)): ?>
+                <?php if (empty($mainNews->img)) {
+                    $img = '/new_temp/img/not-found.png';
+                } else {
+                    $img = '/uploads/news/' . $mainNews->img;
+                } ?>
                 <div class="col-lg-7 mb-4 pb-2">
                     <a href="/news/view?id=<?= $mainNews->id ?>">
                         <article
                                 class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
                             <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
-                                <img src="/uploads/news/<?= $mainNews->img ?>" class="img-fluid"
+                                <img src="<?= $img ?>" class="img-fluid"
                                      alt="<?= $mainNews->title ?>">
                                 <div class="thumb-info-title bg-transparent p-4">
                                     <div class="thumb-info-type bg-color-dark px-2 mb-1"><?= \backend\models\Rubric::getRubricName($mainNews->rubric_id) ?></div>
@@ -50,8 +55,13 @@ if (Yii::$app->request->get('rubric_id')) {
                                 class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
                             <div class="row align-items-center pb-1">
                                 <div class="col-sm-5">
+                                    <?php if (empty($categoryNews['news'][0]['img'])) {
+                                        $img = '/new_temp/img/not-found.png';
+                                    } else {
+                                        $img = '/uploads/news/' . $categoryNews['news'][0]['img'];
+                                    } ?>
                                     <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>">
-                                        <img src="/uploads/news/<?= $categoryNews['news'][0]['img'] ?>"
+                                        <img src="<?= $img ?>"
                                              class="img-fluid border-radius-0"
                                              alt="<?= $categoryNews['news'][0]['title'] ?>">
                                     </a>
@@ -79,10 +89,10 @@ if (Yii::$app->request->get('rubric_id')) {
             <div class="col-md-9">
 
                 <?php if (!empty($newsItems)): ?>
-                    <?php foreach ($newsItems as $categoryNews):?>
+                    <?php foreach ($newsItems as $categoryNews): ?>
                         <div class="heading heading-border heading-middle-border">
                             <h3 class="text-4"><strong
-                                        class="font-weight-bold text-1 px-3 text-light py-2 bg-tertiary"><?=$categoryNews['title']?></strong>
+                                        class="font-weight-bold text-1 px-3 text-light py-2 bg-tertiary"><?= $categoryNews['title'] ?></strong>
                             </h3>
                         </div>
                         <div class="row pb-1">
@@ -92,10 +102,15 @@ if (Yii::$app->request->get('rubric_id')) {
                                         class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
                                     <div class="row">
                                         <div class="col">
-                                            <a href="/news/view?id=<?=$categoryNews['news'][0]['id']?>">
-                                                <img src="/uploads/news/<?=$categoryNews['news'][0]['img']?>"
+                                            <?php if (empty($categoryNews['news'][0]['img'])) {
+                                                $img = '/new_temp/img/not-found.png';
+                                            } else {
+                                                $img = '/uploads/news/' . $categoryNews['news'][0]['img'];
+                                            } ?>
+                                            <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>">
+                                                <img src="<?= $img ?>"
                                                      class="img-fluid border-radius-0"
-                                                     alt="<?=$categoryNews['news'][0]['title']?>">
+                                                     alt="<?= $categoryNews['news'][0]['title'] ?>">
                                             </a>
                                         </div>
                                     </div>
@@ -103,11 +118,11 @@ if (Yii::$app->request->get('rubric_id')) {
                                         <div class="col">
                                             <div class="thumb-info-caption-text">
                                                 <div class="d-inline-block text-default text-1 mt-2 float-none">
-                                                    <?=date('d.m.Y',strtotime($categoryNews['news'][0]['date']))?>
+                                                    <?= date('d.m.Y', strtotime($categoryNews['news'][0]['date'])) ?>
                                                 </div>
                                                 <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
-                                                    <a href="/news/view?id=<?=$categoryNews['news'][0]['id']?>"
-                                                       class="text-decoration-none text-color-dark"><?=$categoryNews['news'][0]['title']?></a>
+                                                    <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
+                                                       class="text-decoration-none text-color-dark"><?= $categoryNews['news'][0]['title'] ?></a>
                                                 </h4>
                                             </div>
                                         </div>
@@ -116,14 +131,21 @@ if (Yii::$app->request->get('rubric_id')) {
                             </div>
                             <div class="col-lg-6">
 
-                                <?php foreach($categoryNews['news'] as $k => $news):?>
-                                    <?php if($k > 0 && $k < 4):?>
+                                <?php foreach ($categoryNews['news'] as $k => $news): ?>
+                                    <?php if ($k > 0 && $k < 4):
+                                        if (empty($news['img'])) {
+                                            $img = '/new_temp/img/not-found.png';
+                                        } else {
+                                            $img = '/uploads/news/' . $news['img'];
+                                        }
+                                        ?>
                                         <article
                                                 class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
                                             <div class="row align-items-center pb-1">
                                                 <div class="col-sm-4">
-                                                    <a href="/news/view?id=<?=$news['id']?>">
-                                                        <img src="/uploads/news/<?=$news['img']?>" style="object-fit: cover; width: 150px; height: 70px"
+                                                    <a href="/news/view?id=<?= $news['id'] ?>">
+                                                        <img src="<?= $img ?>"
+                                                             style="object-fit: cover; width: 150px; height: 70px"
                                                              class="img-fluid border-radius-0"
                                                              alt="">
                                                     </a>
@@ -131,23 +153,23 @@ if (Yii::$app->request->get('rubric_id')) {
                                                 <div class="col-sm-8 pl-sm-0">
                                                     <div class="thumb-info-caption-text">
                                                         <div class="d-inline-block text-default text-1 float-none">
-                                                            <?=date('d.m.Y',strtotime($news['date']))?>
+                                                            <?= date('d.m.Y', strtotime($news['date'])) ?>
                                                         </div>
                                                         <h4 class="d-block pb-2 line-height-2 text-3 text-dark font-weight-bold mb-0">
-                                                            <a href="/news/view?id=<?=$news['id']?>"
-                                                               class="text-decoration-none text-color-dark"><?=$news['title']?></a>
+                                                            <a href="/news/view?id=<?= $news['id'] ?>"
+                                                               class="text-decoration-none text-color-dark"><?= $news['title'] ?></a>
                                                         </h4>
                                                     </div>
                                                 </div>
                                             </div>
                                         </article>
-                                    <?php endif;?>
-                                <?php endforeach;?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
 
 
                             </div>
                         </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
 
 

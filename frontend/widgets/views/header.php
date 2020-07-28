@@ -357,7 +357,7 @@ use yii\helpers\Html;
                                 <div class="header-column order-1 order-lg-2">
                                     <div class="header-row justify-content-end">
                                         <div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
-                                            <?php $form = ActiveForm::begin(['id' => 'login-form','action' => 'search']); ?>
+                                            <?php $form = ActiveForm::begin(['id' => 'login-form','action' => '/search']); ?>
                                             <div class="simple-search input-group w-100">
                                                 <input class="form-control border-0 text-1" id="headerSearch"
                                                            name="search" type="search" value=""

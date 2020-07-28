@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use \yii\helpers\Url;
 use frontend\components\Helper;
-//$this->title = $model->title;
+
+$this->title = 'Новости '. Helper::getRubricWords()[$url];
 
 ?>
 
@@ -14,14 +15,14 @@ use frontend\components\Helper;
 
             <div class="col-md-12 align-self-center p-static order-2 text-center">
 
-                <h1 class="text-dark font-weight-bold text-8">Новости <?=Helper::getRubricWords()[$url]?></h1>
+                <h1 class="text-dark font-weight-bold text-8"> <?= $this->title ?></h1>
             </div>
 
             <div class="col-md-12 align-self-center order-1">
 
                 <ul class="breadcrumb d-block text-center">
                     <li><a href="/news">Главная</a></li>
-                    <li><a href="#"> <?= \backend\models\Rubric::getRubricName($rubricId) ?></a></li>
+                    <li><a href="#"> <?=  \backend\models\Rubric::getRubricName($rubricId) ?></a></li>
 
                 </ul>
             </div>
@@ -37,13 +38,19 @@ use frontend\components\Helper;
             <div class="col-md-9">
                 <div class="blog-posts">
                     <?php if (!empty($model)): ?>
-                        <?php foreach ($model as $key => $item): ?>
+                        <?php foreach ($model as $key => $item):
+                            if(empty($item->img)){
+                                $item->img = '/new_temp/img/not-found.png';
+                            } else {
+                                $item->img = '/uploads/news/'.$item->img;
+                            }
+                            ?>
                             <article class="post post-medium">
                                 <div class="row mb-3">
                                     <div class="col-lg-5">
                                         <div class="post-image">
-                                            <a href="/news?id=<?= $item->id ?>">
-                                                <img src="/uploads/news/<?= $item->img ?>"
+                                            <a href="/news/view?id=<?= $item->id ?>">
+                                                <img src="<?= $item->img ?>"
                                                      class="img-fluid cover-img img-thumbnail img-thumbnail-no-borders rounded-0"
                                                      alt="">
                                             </a>
@@ -52,10 +59,10 @@ use frontend\components\Helper;
                                     <div class="col-lg-7">
                                         <div class="post-content">
                                             <h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
-                                                <a href="/news?id=<?= $item->id ?> "><?= $item->title ?> </a>
+                                                <a href="/news/view?id=<?= $item->id ?> "><?= $item->title ?> </a>
                                             </h2>
                                             <p class="mb-0">
-                                                <?= \yii\helpers\StringHelper::truncate($item->short_content,250) ?>
+                                                <?= \yii\helpers\StringHelper::truncate($item->short_content, 250) ?>
                                             </p>
                                         </div>
                                     </div>
@@ -104,6 +111,7 @@ use frontend\components\Helper;
                                         ?>
                                     </p>
                                 </div>
+                            </div>
                         </ul>
                     </nav>
                 </div>
@@ -117,11 +125,11 @@ use frontend\components\Helper;
 
                 <div class="pb-2">
 
-                    <?php if(!empty($otherNews)):?>
-                        <?php foreach ($otherNews as $item):?>
+                    <?php if (!empty($otherNews)): ?>
+                        <?php foreach ($otherNews as $item): ?>
                             <div class="mb-4 pb-2">
                                 <article
-                                    class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
+                                        class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
                                     <div class="row">
                                         <div class="col">
                                             <a href="/news?id=<?= $item['news'][0]['id'] ?>">
@@ -135,7 +143,7 @@ use frontend\components\Helper;
                                         <div class="col">
                                             <div class="thumb-info-caption-text">
                                                 <div class="d-inline-block text-default text-1 mt-2 float-none">
-                                                    <?=date('d.m.Y',strtotime($item['news'][0]['date']))?>
+                                                    <?= date('d.m.Y', strtotime($item['news'][0]['date'])) ?>
                                                 </div>
                                                 <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
                                                     <a href="/news?id=<?= $item['news'][0]['id'] ?>"
@@ -146,9 +154,8 @@ use frontend\components\Helper;
                                     </div>
                                 </article>
                             </div>
-                        <?php endforeach;?>
-                    <?php endif;?>
-
+                        <?php endforeach; ?>
+                    <?php endif; ?>
 
 
                 </div>
