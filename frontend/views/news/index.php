@@ -51,35 +51,37 @@ if (Yii::$app->request->get('rubric_id')) {
             <div class="col-lg-5">
                 <?php if (!empty($newsItems)): ?>
                     <?php foreach ($newsItems as $categoryNews): ?>
-                        <article
-                                class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
-                            <div class="row align-items-center pb-1">
-                                <div class="col-sm-5">
-                                    <?php if (empty($categoryNews['news'][0]['img'])) {
-                                        $img = '/new_temp/img/not-found.png';
-                                    } else {
-                                        $img = '/uploads/news/' . $categoryNews['news'][0]['img'];
-                                    } ?>
-                                    <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>">
-                                        <img src="<?= $img ?>"
-                                             class="img-fluid border-radius-0"
-                                             alt="<?= $categoryNews['news'][0]['title'] ?>">
-                                    </a>
-                                </div>
-                                <div class="col-sm-7 pl-sm-1">
-                                    <div class="thumb-info-caption-text">
-                                        <div class="thumb-info-type text-light text-uppercase d-inline-block bg-color-dark px-2 m-0 mb-1 float-none">
-                                            <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
-                                               class="text-decoration-none text-color-light"><?= $categoryNews['title'] ?></a>
+                        <?php if(!empty($categoryNews)):?>
+                            <article
+                                    class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
+                                <div class="row align-items-center pb-1">
+                                    <div class="col-sm-5">
+                                        <?php if (empty($categoryNews['news'][0]['img'])) {
+                                            $img = '/new_temp/img/not-found.png';
+                                        } else {
+                                            $img = '/uploads/news/' . $categoryNews['news'][0]['img'];
+                                        } ?>
+                                        <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>">
+                                            <img src="<?= $img ?>"
+                                                 class="img-fluid border-radius-0"
+                                                 alt="<?= $categoryNews['news'][0]['title'] ?>" style="object-fit: cover; height: 100px">
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-7 pl-sm-1">
+                                        <div class="thumb-info-caption-text">
+                                            <div class="thumb-info-type text-light text-uppercase d-inline-block bg-color-dark px-2 m-0 mb-1 float-none">
+                                                <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
+                                                   class="text-decoration-none text-color-light"><?= $categoryNews['title'] ?></a>
+                                            </div>
+                                            <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
+                                                <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
+                                                   class="text-decoration-none text-color-dark"><?= $categoryNews['news'][0]['title'] ?></a>
+                                            </h2>
                                         </div>
-                                        <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
-                                            <a href="/news/view?id=<?= $categoryNews['news'][0]['id'] ?>"
-                                               class="text-decoration-none text-color-dark"><?= $categoryNews['news'][0]['title'] ?></a>
-                                        </h2>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
+                        <?php endif;?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
