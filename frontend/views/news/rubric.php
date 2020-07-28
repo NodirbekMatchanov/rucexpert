@@ -127,33 +127,35 @@ $this->title = 'Новости '. Helper::getRubricWords()[$url];
 
                     <?php if (!empty($otherNews)): ?>
                         <?php foreach ($otherNews as $item): ?>
-                            <div class="mb-4 pb-2">
-                                <article
-                                        class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="/news?id=<?= $item['news'][0]['id'] ?>">
-                                                <img src="/uploads/news/<?= $item['news'][0]['img'] ?>"
-                                                     class="img-fluid border-radius-0"
-                                                     alt="<?= $item['news'][0]['title'] ?>">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="thumb-info-caption-text">
-                                                <div class="d-inline-block text-default text-1 mt-2 float-none">
-                                                    <?= date('d.m.Y', strtotime($item['news'][0]['date'])) ?>
-                                                </div>
-                                                <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
-                                                    <a href="/news?id=<?= $item['news'][0]['id'] ?>"
-                                                       class="text-decoration-none text-color-dark"><?= $item['news'][0]['title'] ?></a>
-                                                </h4>
+                            <?php if(!empty($item['news'])):?>
+                                <div class="mb-4 pb-2">
+                                    <article
+                                            class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="/news?id=<?= $item['news'][0]['id'] ?>">
+                                                    <img src="/uploads/news/<?= $item['news'][0]['img'] ?>"
+                                                         class="img-fluid border-radius-0"
+                                                         alt="<?= $item['news'][0]['title'] ?>">
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </article>
-                            </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="thumb-info-caption-text">
+                                                    <div class="d-inline-block text-default text-1 mt-2 float-none">
+                                                        <?= date('d.m.Y', strtotime($item['news'][0]['date'])) ?>
+                                                    </div>
+                                                    <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
+                                                        <a href="/news?id=<?= $item['news'][0]['id'] ?>"
+                                                           class="text-decoration-none text-color-dark"><?= $item['news'][0]['title'] ?></a>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            <?php endif;?>
                         <?php endforeach; ?>
                     <?php endif; ?>
 
