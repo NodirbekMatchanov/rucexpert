@@ -47,7 +47,7 @@ class News extends \yii\db\ActiveRecord
             [['rubric_id', 'is_video', 'status'], 'integer'],
             [['image'], 'safe'],
             [['image'], 'file', 'extensions' => 'jpg, gif, png'],
-            [['image'], 'file', 'maxSize' => '100000'],
+            [['image'], 'file', 'maxSize' => '1000000'],
             [['videoFile'], 'safe'],
             [['videoFile'], 'file', 'extensions' => 'avi, mp4'],
             [['videoFile'], 'file', 'maxSize' => '200000000'],
