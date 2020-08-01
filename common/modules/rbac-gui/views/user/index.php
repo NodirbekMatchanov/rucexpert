@@ -16,10 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::a('Создать', ['/site/create-user'], ['class' => 'btn btn-success']) ?>
-    <div class="card">
+    <?php $this->beginBlock('sidebar'); ?>
+    <h2><?= $this->title ?></h2>
+    <?php $this->endBlock(); ?>
+     <?= Html::a('Создать', ['/site/create-user'], ['class' => 'btn btn-success']) ?>
+    <br>
+    <br>
+        <div class="card">
         <div class="card-body card-dashboard">
             <div class="table-responsive">
                 <?= GridView::widget([
@@ -36,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{delete}',
                             'buttons' => [
                                 'delete' => function ($url, $model) {
-                                    return Html::a('<i class="kt-nav__link-icon fa fa-trash-o"></i>', Url::to(['delete', 'id' => $model->id]), [
+                                    return Html::a('<i class="kt-nav__link-icon fa fa-trash"></i>', Url::to(['delete', 'id' => $model->id]), [
                                         'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
                                         'class' => 'pull-right',
                                         'data-method' => 'post',
@@ -46,8 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ],
                     ],
-                    'tableOptions' => ['class' => 'table table-striped dataex-html5-selectors dataTable', 'id' => 'DataTables_Table_4'],
-                    'options' => ['class' => ' dataTables_wrapper dt-bootstrap4', 'id' => 'DataTables_Table_4_wrapper'],
 
                 ]); ?>
             </div>

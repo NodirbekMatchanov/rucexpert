@@ -7,10 +7,8 @@
  */
 
 ?>
-<div class="content-wrapper ">
-    <div class="content-header row">
-    </div>
-    <div class="content-body"  <?=(!Yii::$app->user->isGuest)?'style="padding-top: 12%"' : '' ?>>
+<div class="container-fluid">
+    <section class=" <?= (!Yii::$app->user->isGuest) ? 'card' :''?>">
         <?= $content ?>
-    </div>
+    </section>
 </div>

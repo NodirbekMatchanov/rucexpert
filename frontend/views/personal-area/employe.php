@@ -9,7 +9,7 @@ $this->title = 'Список сотрудников';
 
 ?>
 <div class="site-index">
-    <p> <?= Html::a('Создать', 'signup', ['class' => 'btn btn-success']) ?></p>
+    <p> <?= Html::a('Создать', 'signup', ['class' => 'btn btn-primary']) ?></p>
 
 
     <div class="card">

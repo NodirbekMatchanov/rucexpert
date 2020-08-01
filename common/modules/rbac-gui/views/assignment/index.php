@@ -35,8 +35,9 @@ $columns[] = [
 ?>
 <div class="assignment-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <?php $this->beginBlock('sidebar'); ?>
+    <h2><?= $this->title ?></h2>
+    <?php $this->endBlock(); ?>
     <?php Pjax::begin(); ?>
     <div class="card">
         <div class="card-body card-dashboard">

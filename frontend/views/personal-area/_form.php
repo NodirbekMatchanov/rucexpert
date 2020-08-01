@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\Hotels */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="media">
 

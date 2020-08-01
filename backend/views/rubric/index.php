@@ -13,9 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rubric-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php $this->beginBlock('sidebar'); ?>
+    <h2><?= $this->title ?></h2>
+    <?php $this->endBlock(); ?>
+    <div class="black-list-index">
     <p>
         <?= Html::a('Создать рубрик', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{delete}{update}',
                             'buttons' => [
                                 'delete' => function ($url, $model) {
-                                    return Html::a('<i class="kt-nav__link-icon fa fa-trash-o"></i>', Url::to(['delete', 'id' => $model->id]), [
+                                    return Html::a('<i class=" fa fa-trash"></i>', Url::to(['delete', 'id' => $model->id]), [
                                         'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
                                         'class' => 'pull-right',
                                         'data-method' => 'post',

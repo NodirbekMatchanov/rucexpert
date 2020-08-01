@@ -1,97 +1,139 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: matjazz
- * Date: 06/01/16
- * Time: 09:47
- */
+
+use yii\helpers\Url;
+
+$img = '/images/avatar-default-icon.png';
+
 ?>
 
 
-<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-shadow navbar-brand-center" >
-    <div class="navbar-header d-xl-block d-none">
-        <ul class="nav navbar-nav flex-row">
-            <li class="nav-item"><a class="navbar-brand" href="#">
-                    <div class="brand-logo"></div>
-                </a></li>
-        </ul>
+
+
+<header class="header header-nav-menu header-nav-top-line">
+    <div class="logo-container">
+        <a href="../" class="logo">
+            <img src="/new_temp/admin/img/logo.png" width="131" height="35" alt="ruc.expert"/>
+        </a>
+        <button class="btn header-btn-collapse-nav d-lg-none" data-toggle="collapse" data-target=".header-nav">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- start: header nav menu -->
+        <div class="header-nav collapse">
+            <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
+                <nav>
+                    <ul class="nav nav-pills" id="mainNav">
+
+                            <?php $menuItems = [
+                                [
+                                    'label' => 'Администрирование',
+                                    'template' => '<a href="{url}" class="dropdown-toggle nav-link" data-toggle="dropdown"><i ></i><span class="nav-label ">{label}</span> <span
+                            class=" "></span></a>',
+                                    'url' => '#',
+                                    'items' => [
+                                        [
+                                            'template' => '<a href="{url}" class="dropdown-item">Все пользователи<i class=""></i> <span
+                            class=""></span></a>',
+                                            'url' => ['/admin/user']],
+                                        [
+                                            'template' => '<a href="{url}" class="dropdown-item">Назначение<i class=""></i> <span
+                            class=""></span></a>',
+                                            'url' => ['/admin/assignment']],
+//                            [
+//                                'template' => '<a href="{url}" class="dropdown-item">Роли<i class=""></i> <span
+//                            class=""></span></a>',
+//                                'url' => ['/admin/role']],
+//                            [
+//                                'template' => '<a href="{url}" class="dropdown-item">Разрешения<i class=""></i> <span
+//                            class=""></span></a>',
+//                                'url' => ['/admin/permission']],
+//                            [
+//                                'template' => '<a href="{url}" class="dropdown-item">Маршруты<i class=""></i> <span
+//                            class=""></span></a>',
+//                                'url' => ['/admin/route']],
+//                        ['label' => 'Правила', 'url' => ['/admin/rule']],
+                                    ]
+                                ],
+                                [
+                                    'label' => 'Новости',
+                                    'template' => '<a href="{url}" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i><span class="nav-label ">{label}</span> <span
+                            class=" "></span></a>',
+                                    'url' => '#',
+                                    'items' => [
+                                        [
+                                            'template' => '<a href="{url}" class="dropdown-item">Рубрики<i class=""></i> <span
+                            class=""></span></a>', 'url' => ['/rubric/index']],
+                                        [
+                                            'template' => '<a href="{url}" class="dropdown-item">Список новостей<i class=""></i> <span
+                            class=""></span></a>',
+                                            'url' => ['/news/index']],
+                                    ]
+                                ],
+                                [
+                                    'label' => 'Реестр',
+                                    'template' => '<a href="{url}" class="dropdown-item">Реестр<i class=""></i> <span
+                            class=""></span></a>',
+                                    'url' => ['/black-list/index'],
+                                ],
+
+
+                            ];
+                            if (\backend\components\User::getRoleName() != 'admin') {
+                                $menuItems = \mdm\admin\components\Helper::filter($menuItems);
+                            }
+                            ?>
+                            <?= backend\widgets\InspiniaMenu::widget([
+                                'options' => ['tag' => false],
+                                'items' => $menuItems
+                            ]);
+                            //              ?>
+                        </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- end: header nav menu -->
     </div>
-    <div class="navbar-wrapper">
-        <div class="navbar-container content">
-            <div class="navbar-collapse" id="navbar-mobile">
-                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a
-                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-                                        class="ficon feather icon-menu"></i></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li class="nav navbar-nav bookmark-icons"><a
-                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-                                        class=" "></i></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li class="nav navbar-nav bookmark-icons"><a
-                                    class="nav-link nav-menu-main" href="/admin/"><i
-                                        class=" "></i>Админ панель</a></li>
-                    </ul>
-                </div>
-                <ul class="nav navbar-nav float-right">
+    <!-- start: search & user box -->
+    <div class="header-right">
+        <span class="separator"></span>
+        <ul class="notifications">
+            <li>
+                <a href="#" id="specialButton" class="notification-icon">
+                    <i class="fas fa-eye"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/feedback" class=" notification-icon" title="">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/" class=" notification-icon">
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+        </ul>
+        <span class="separator"></span>
+        <div id="userbox" class="userbox">
+            <a href="#" data-toggle="dropdown">
 
+                    <figure class="profile-picture">
+                        <img src="<?= $img ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?= $img ?>"/>
+                    </figure>
 
-<!--                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"-->
-<!--                                                                           data-toggle="dropdown"><i-->
-<!--                                    class="ficon feather icon-bell"></i><span-->
-<!--                                    class="badge badge-pill badge-primary badge-up">1</span></a>-->
-<!--                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">-->
-<!--                            <li class="dropdown-menu-header">-->
-<!--                                <div class="dropdown-header m-0 p-2">-->
-<!--                                    <h3 class="white">1 New</h3><span-->
-<!--                                            class="notification-title">App Notifications</span>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            <li class="scrollable-container media-list"><a class="d-flex justify-content-between"-->
-<!--                                                                           href="javascript:void(0)">-->
-<!---->
-<!--                               <a class="d-flex justify-content-between" href="javascript:void(0)">-->
-<!--                                    <div class="media d-flex align-items-start">-->
-<!--                                        <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>-->
-<!--                                        </div>-->
-<!--                                        <div class="media-body">-->
-<!--                                            <h6 class="warning media-heading">Generate monthly report</h6><small-->
-<!--                                                    class="notification-text">Chocolate cake oat cake tiramisu-->
-<!--                                                marzipan</small>-->
-<!--                                        </div>-->
-<!--                                        <small>-->
-<!--                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month-->
-<!--                                            </time>-->
-<!--                                        </small>-->
-<!--                                    </div>-->
-<!--                                </a></li>-->
-<!--                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"-->
-<!--                                                                href="javascript:void(0)">Read all notifications</a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
-                                                                   href="#" data-toggle="dropdown">
-                            <div class="user-nav d-sm-flex d-none"><span
-                                        class="user-name text-bold-600"><?= Yii::$app->user->identity->username ?></span><span
-                                        class="user-status"><?= Yii::$app->user->identity->email ?></span></div>
-                            <span><img class="round" src="/admin/images/portrait/small/avatar-s-11.jpg"
-                                       alt="avatar" height="40" width="40"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
-                                                                          href="page-user-profile.html"><i
-                                        class="feather icon-user"></i> Настройка</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/admin/site/logout?id=<?= Yii::$app->user->identity->id ?>"><i
-                                        class="feather icon-power"></i>
-                                Выход</a>
-                        </div>
+                <span><?=Yii::$app->user->identity->username?> </span> <i class="fa custom-caret"></i>
+            </a>
+            <div class="dropdown-menu">
+                <ul class="list-unstyled">
+                    <li class="divider"></li>
+                    <li>
+                        <a role="menuitem" tabindex="-1"
+                           href="<?= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?>"><i
+                                    class="fas fa-power-off"></i> Выход</a>
                     </li>
+
                 </ul>
             </div>
         </div>
     </div>
-</nav>
+    <!-- end: search & user box -->
+</header>

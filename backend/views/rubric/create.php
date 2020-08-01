@@ -11,7 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rubric-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php $this->beginBlock('sidebar'); ?>
+    <h2><?= $this->title ?></h2>
+    <?php $this->endBlock(); ?>
+    <div class="black-list-index">
 
     <?= $this->render('_form', [
         'model' => $model,

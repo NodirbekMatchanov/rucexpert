@@ -22,11 +22,11 @@ $column = [
         'format' => 'raw',
         'value' => function ($model) {
             if ($model->status == 0) {
-                return '<div class="alert alert-primary btn-sm text-center">Новый</div>';
+                return '<div class=" alert-primary xs text-center">Новый</div>';
             } elseif($model->status == 2) {
-                return '<div class="alert alert-success btn-sm text-center">опубликовано</div>';
+                return '<div class=" alert-success btn-xs text-center">опубликовано</div>';
             } elseif($model->status == 3) {
-                return '<div class="alert alert-danger btn-sm text-center">Отменено</div>';
+                return '<div class=" alert-danger btn-xs text-center">Отменено</div>';
             }
         }
     ],
@@ -65,7 +65,7 @@ $columns = array_merge($columns, [[
         },
 
         'delete' => function ($url, $model) {
-            return Html::a('<i class="kt-nav__link-icon fa fa-trash-o"></i>', Url::to(['delete', 'id' => $model->id]), [
+            return Html::a('<i class="kt-nav__link-icon fa fa-trash"></i>', Url::to(['delete', 'id' => $model->id]), [
                 'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
                 'class' => 'kt-nav__link',
                 'data-method' => 'post',
@@ -74,10 +74,10 @@ $columns = array_merge($columns, [[
     ],
 ]])
 ?>
+<?php $this->beginBlock('sidebar'); ?>
+<h2><?= $this->title ?></h2>
+<?php $this->endBlock(); ?>
 <div class="black-list-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Добавить новую запись', ['create'], ['class' => 'btn btn-success']) ?>

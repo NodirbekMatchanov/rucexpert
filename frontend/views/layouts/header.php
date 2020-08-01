@@ -1,13 +1,15 @@
 <?php
 
 use \yii\helpers\Url;
+
 $balance = '';
 $img = '/images/avatar-default-icon.png';
-if(\backend\components\User::getRoleName() == 'director'){
+$role = \backend\components\User::getRoleName();
+if ($role == 'director') {
     $hotel = \common\models\User::findHotel(Yii::$app->user->identity->hotel_id);
-    $balance = $hotel->balance .' РУБ';
-    if(!empty($hotel->avatar)){
-        $img = '/uploads/files/'.$hotel->avatar;
+    $balance = $hotel->balance . ' РУБ';
+    if (!empty($hotel->avatar)) {
+        $img = '/uploads/files/' . $hotel->avatar;
     }
 }
 ?>
@@ -15,7 +17,7 @@ if(\backend\components\User::getRoleName() == 'director'){
 <header class="header header-nav-menu header-nav-top-line">
     <div class="logo-container">
         <a href="../" class="logo">
-            <img src="/new_temp/admin/img/logo.png" width="131" height="35" alt="ruc.expert" />
+            <img src="/new_temp/admin/img/logo.png" width="131" height="35" alt="ruc.expert"/>
         </a>
         <button class="btn header-btn-collapse-nav d-lg-none" data-toggle="collapse" data-target=".header-nav">
             <i class="fas fa-bars"></i>
@@ -25,16 +27,27 @@ if(\backend\components\User::getRoleName() == 'director'){
             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
                 <nav>
                     <ul class="nav nav-pills" id="mainNav">
-                        <li class="<?=(Yii::$app->controller->action->id == 'search') ? 'active' : ''?>">
-                            <a class="nav-link" href="<?= Url::to(['black-list/search']) ?>" >
-                                <i class="fa fa-search" aria-hidden="true"></i> Поиск
-                            </a>
-                        </li>
-                        <li class="<?=(Yii::$app->controller->id.'/'.Yii::$app->controller->action->id == 'black-list/index') ? 'active' : ''?>">
-                            <a class="nav-link" href="<?=Url::to(['black-list/index'])?>" style="color: red;" >
+                        <?php if ($role == 'director'): ?>
+                            <li class="<?= (Yii::$app->controller->action->id == 'search') ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?= Url::to(['black-list/search']) ?>">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Поиск
+                                </a>
+                            </li>
+                        <? endif; ?>
+
+                        <li class="<?= (Yii::$app->controller->id . '/' . Yii::$app->controller->action->id == 'black-list/index') ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= Url::to(['black-list/index']) ?>" style="color: red;">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Добавить в реестр
                             </a>
                         </li>
+                        <?php if ($role == 'director'): ?>
+                            <li class="<?= (Yii::$app->controller->id . '/' . Yii::$app->controller->action->id == 'personal-area/employe') ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?= Url::to(['personal-area/employe']) ?>"
+                                   style="color: #0a6aa1;">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Регистрация сотрудников
+                                </a>
+                            </li>
+                        <? endif; ?>
                     </ul>
                 </nav>
             </div>
@@ -46,17 +59,17 @@ if(\backend\components\User::getRoleName() == 'director'){
         <span class="separator"></span>
         <ul class="notifications">
             <li>
-                <a href="#" id="specialButton" class="notification-icon"  >
+                <a href="#" id="specialButton" class="notification-icon">
                     <i class="fas fa-eye"></i>
                 </a>
             </li>
             <li>
-                <a href="/feedback" class=" notification-icon" title="" >
+                <a href="/feedback" class=" notification-icon" title="">
                     <i class="fas fa-envelope"></i>
                 </a>
             </li>
             <li>
-                <a href="/" class=" notification-icon" >
+                <a href="/" class=" notification-icon">
                     <i class="fas fa-home"></i>
                 </a>
             </li>
@@ -65,16 +78,17 @@ if(\backend\components\User::getRoleName() == 'director'){
         <div id="userbox" class="userbox">
             <a href="#" data-toggle="dropdown">
                 <?php
-                if(!empty($admin_img)):
+                if (!empty($admin_img)):
                     ?>
                     <figure class="profile-picture">
-                        <img src="<?=$img?>" style="object-fit: cover" alt="Joseph Doe" class="rounded-circle" data-lock-picture="img/!logged-user.jpg" />
+                        <img src="<?= $img ?>" style="object-fit: cover" alt="Joseph Doe" class="rounded-circle"
+                             data-lock-picture="img/!logged-user.jpg"/>
                     </figure>
-                <?php else:?>
+                <?php else: ?>
                     <figure class="profile-picture">
-                        <img src="<?=$img?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?=$img?>" />
+                        <img src="<?= $img ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?= $img ?>"/>
                     </figure>
-                <?php endif;?>
+                <?php endif; ?>
 
                 <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                     <span class="name"><?= Yii::$app->user->identity->username ?></span>
@@ -86,23 +100,29 @@ if(\backend\components\User::getRoleName() == 'director'){
                 <ul class="list-unstyled">
                     <li class="divider"></li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="<?= Url::to(['personal-area/index']) ?>"><i class="fas fa-user"></i> Ваш профиль</a>
+                        <a role="menuitem" tabindex="-1" href="<?= Url::to(['personal-area/index']) ?>"><i
+                                    class="fas fa-user"></i> Ваш профиль</a>
                     </li>
-                <?php
-                    if (\backend\components\User::getRoleName(Yii::$app->user->identity->id) == 'admin'):?>
+                    <?php
+                    if ($role == 'admin'):?>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/black-list/index']) ?>"><i class="fas fa-cog"></i> Модерация нарушителей</a>
+                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/black-list/index']) ?>"><i
+                                        class="fas fa-cog"></i> Модерация нарушителей</a>
                         </li>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/news/index']) ?>"><i class="fas fa-cog"></i> Модерация отелей</a>
+                            <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/news/index']) ?>"><i
+                                        class="fas fa-cog"></i> Модерация отелей</a>
                         </li>
-<!--                        <li>-->
-<!--                            <a role="menuitem" tabindex="-1" href="--><?//= Url::to(['personal-area/index']) ?><!--"><i class="fas fa-cog"></i> Настройки сайта</a>-->
-<!--                        </li>-->
+                        <!--                        <li>-->
+                        <!--                            <a role="menuitem" tabindex="-1" href="--><?//= Url::to(['personal-area/index'])
+                        ?><!--"><i class="fas fa-cog"></i> Настройки сайта</a>-->
+                        <!--                        </li>-->
                     <?php
                     endif; ?>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="<?= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?>"><i class="fas fa-power-off"></i> Выход</a>
+                        <a role="menuitem" tabindex="-1"
+                           href="<?= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?>"><i
+                                    class="fas fa-power-off"></i> Выход</a>
                     </li>
 
                 </ul>
@@ -147,21 +167,21 @@ if(\backend\components\User::getRoleName() == 'director'){
 <!--                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"-->
 <!--                                                                   href="#" data-toggle="dropdown">-->
 <!--                            <div class="user-nav d-sm-flex d-none"><span-->
-<!--                                        class="user-name text-bold-600">--><?//= Yii::$app->user->identity->username ?><!--</span>-->
-<!--                                <span  class="user-info">--><?//= $balance ?><!-- </span></div>-->
-<!--                            <span><img class="round" src="--><?//=$img?><!--"-->
+<!--                                        class="user-name text-bold-600">--><? //= Yii::$app->user->identity->username ?><!--</span>-->
+<!--                                <span  class="user-info">--><? //= $balance ?><!-- </span></div>-->
+<!--                            <span><img class="round" src="--><? //=$img?><!--"-->
 <!--                                       alt="avatar" style="object-fit: cover" height="40" width="40"></span>-->
 <!--                        </a>-->
 <!--                        <div class="dropdown-menu dropdown-menu-right">-->
-<!--                            <a class="dropdown-item" href="--><?//= Url::to(['black-list/search']) ?><!--"><i-->
+<!--                            <a class="dropdown-item" href="--><? //= Url::to(['black-list/search']) ?><!--"><i-->
 <!--                                        class="feather icon-user"></i> Быстрый поиск</a>-->
-<!--                            <a class="dropdown-item" href="--><?//= Url::to(['site/contact']) ?><!--"><i-->
+<!--                            <a class="dropdown-item" href="--><? //= Url::to(['site/contact']) ?><!--"><i-->
 <!--                                        class="feather icon-user"></i> Написать нам</a>-->
-<!--                            <a class="dropdown-item" href="--><?//= Url::to(['personal-area/index']) ?><!--"><i-->
+<!--                            <a class="dropdown-item" href="--><? //= Url::to(['personal-area/index']) ?><!--"><i-->
 <!--                                        class="feather icon-user"></i> Ваш профиль</a>-->
 <!--                            <div class="dropdown-divider"></div>-->
 <!--                            <a class="dropdown-item"-->
-<!--                               href="--><?//= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?><!--"><i-->
+<!--                               href="--><? //= Url::to(['site/logout?id=' . Yii::$app->user->identity->id]) ?><!--"><i-->
 <!--                                        class="feather icon-power"></i>-->
 <!--                                Выход</a>-->
 <!--                        </div>-->

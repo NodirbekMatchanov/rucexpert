@@ -28,6 +28,20 @@ return [
         '@mdm/admin' => '@common/modules/rbac-gui',
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@frontend',
+                    'css' => [],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => '@frontend',
+                    'js'=>[
+                        '/new_temp/news/vendor/jquery/jquery.min.js'
+                    ]
+                ],
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin'

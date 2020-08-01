@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->endBlock(); ?>
 <div class="black-list-index">
 
+
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>

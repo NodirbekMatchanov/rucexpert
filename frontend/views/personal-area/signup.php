@@ -14,8 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
 
 <div class="card">
-
-    <div class="card-content">
+    <div class="card-body card-dashboard">
 
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>

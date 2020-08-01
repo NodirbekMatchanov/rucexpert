@@ -14,7 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card">
     <div class="card-body">
-        <h1><?= Html::encode($this->title) ?></h1>
+        <?php $this->beginBlock('sidebar'); ?>
+        <h2><?= $this->title ?></h2>
+        <?php $this->endBlock(); ?>
 
         <p>Данные пользователя :</p>
 
