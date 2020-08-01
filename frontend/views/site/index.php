@@ -99,10 +99,11 @@ $this->title = 'Главная страница';
                                         <?php $i = 0; foreach ($newsList as $k => $news): ?>
                                             <?php  foreach ($news as $item) : $i++?>
                                             <?if($i <= 4):?>
-                                               <div class="col-6">
-                                                   <a href="<?= Url::to(['news/view', 'id' => $item['id']]) ?>">
+                                               <div class="col-6" style="margin-bottom: 20px">
+                                                   <a class="d-block line-height-2 text-4 text-dark font-weight-regular mt-1 mb-0" style="font-weight: 300;
+    font-size: 14px!important;" href="<?= Url::to(['news/view', 'id' => $item['id']]) ?>">
                                                    <?= Html::img('/uploads/news/' . $item['img'], ['class' => 'img img-thumbnail','style' => 'width: 200px; height: 120px; object-fit:cover']) ?>
-                                                   <p><?= \yii\helpers\StringHelper::truncate($item['title'],40)  ?></p></a>
+                                                   <?= \yii\helpers\StringHelper::truncate($item['title'],40)  ?></a>
                                                </div>
                                             <?php endif;?>
                                             <?php endforeach; ?>
