@@ -27,27 +27,43 @@ $this->title = 'Главная страница';
                                  data-bgfit="cover"
                                  data-bgrepeat="no-repeat"
                                  class="rev-slidebg">
+                            <h3 class="tp-caption font-weight-extra-bold text-color-light"
+                                data-frames='[{"delay":1000,"speed":500,"frame":"0","from":"opacity:0;x:50%;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                                data-x="['left','left','left','center']"
+                                data-y="center" data-voffset="['-200','-200','-200','-200']"
+                                data-fontsize="['36','36','36','36']"
+                                data-lineheight="['70','70','70','70']"
+                                data-letterspacing="-1">Ruc Expert</h3>
+                            <h3 class="tp-caption font-weight-extra-bold text-color-light"
+                                data-frames='[{"delay":1000,"speed":500,"frame":"0","from":"opacity:0;x:50%;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                                data-x="['left','left','left','center']"
+                                data-y="center" data-voffset="['-150','-150','-150','-150']"
+                                data-fontsize="['30','30','30','30']"
+                                data-lineheight="['70','70','70','70']"
+                                data-letterspacing="-1">Международный объединенный</h3>
 
                             <h3 class="tp-caption font-weight-extra-bold text-color-light"
                                 data-frames='[{"delay":1000,"speed":500,"frame":"0","from":"opacity:0;x:50%;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
                                 data-x="['left','left','left','center']"
                                 data-y="center" data-voffset="['-100','-100','-100','-100']"
-                                data-fontsize="['36','36','36','36']"
+                                data-fontsize="['30','30','30','30']"
                                 data-lineheight="['70','70','70','70']"
-                                data-letterspacing="-1">Ruc Expert</h3>
+                                data-letterspacing="-1">реестр нарушителей</h3>
 
                             <div class="tp-caption font-weight-extra-bold text-color-light"
                                  data-frames='[{"delay":500,"speed":2500,"from":"y:50px;sX:1;sY:1;opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]'
                                  data-type="text"
-                                 data-typewriter='{"lines":"аренды жилых<br>и нежилых помещений,правил%20пользования%20<br>сервисом%20каршеринга<br>и аренды авто,правил%20проживания<br>в отелях и хостелах","enabled":"on","speed":"60","delays":"1%7C100","looped":"on","cursorType":"one","blinking":"on","word_delay":"off","sequenced":"on","hide_cursor":"off","start_delay":"1500","newline_delay":"1000","deletion_speed":"20","deletion_delay":"1000","blinking_speed":"500","linebreak_delay":"60","cursor_type":"two","background":"off"}'
+                                 data-typewriter='{"lines":"правил%20пользования%20<br>сервисом%20каршеринга<br>и аренды авто,правил%20проживания<br>в отелях и хостелах","enabled":"on","speed":"60","delays":"1%7C100","looped":"on","cursorType":"one","blinking":"on","word_delay":"off","sequenced":"on","hide_cursor":"off","start_delay":"1500","newline_delay":"1000","deletion_speed":"20","deletion_delay":"1000","blinking_speed":"500","linebreak_delay":"60","cursor_type":"two","background":"off"}'
                                  data-x="['left','left','left','center']"
                                  data-y="center" data-voffset="['-33','-33','-33','-33']"
                                  data-responsive_offset="on"
                                  data-width="['750','750','750','750']"
                                  data-fontsize="['36','36','36','36']"
                                  data-lineheight="['50','50','50','50']"
-                                 data-textAlign="['left','left','left','center']">Международный реестр <br>нарушителей
-                            </div>
+                                 data-textAlign="['left','left','left','center']">аренды жилых<br>и нежилых помещений</div>
+
+
+
 
 
                             <a class="tp-caption btn btn-primary font-weight-bold rounded"
@@ -120,7 +136,8 @@ $this->title = 'Главная страница';
 
                 </h1>
                 <h3 style="color: green;font-weight: bold;">
-                    <center>База реестра: <?= $count ?></center>
+                    <center>База реестра: <?= $count ?> ГРАЖДАН.
+                    </center>
                 </h3>
 
                 <p class="lead appear-animation animated fadeInUpShorter appear-animation-visible"
@@ -131,6 +148,7 @@ $this->title = 'Главная страница';
                     доступностью, нанося вред имуществу и репутации компании. <br>Решение проблемы – прямо перед вами:
                     <br><b>RUC EXPERT</b> – реестр безответственных постояльцев и арендаторов.
                 </p>
+                <h3 style="color: #0088CC !important;font-weight: bold;"><center>Партнеров сервиса: 248</center> </h3>
             </div>
         </div>
 
@@ -273,7 +291,7 @@ $this->title = 'Главная страница';
                     <div class="row align-items-center appear-animation" data-appear-animation="fadeInUpShorter"
                          data-appear-animation-delay="1000">
                         <div class="col-lg-12">
-                            <a href="#" data-toggle="modal" data-target="#signModal"
+                            <a href="#" data-toggle="modal" style="color: white" data-target="#signModal"
                                class="btn btn-modern mt-3 btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a>
                             <a href="#" data-toggle="modal" data-target="#feedBackModal"
                                class="btn btn-modern btn-primary mt-3">Получить консультацию</a>
