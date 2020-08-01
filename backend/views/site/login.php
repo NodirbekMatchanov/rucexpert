@@ -13,7 +13,7 @@ use yii\helpers\Html;
 /* @var $model \common\models\LoginForm */
 backend\assets\InspiniaAsset::register($this);
 
-$this->title = 'Sign In';
+$this->title = 'Админка';
 
 ?>
 
