@@ -16,8 +16,11 @@ body {
     text-align: inherit;
 }
 .fast-sign-email{
-    max-width: 604px;
+    max-width: 400px;
     margin: 10px;
+}
+.fast-sign-phone{
+    max-width: 550px;
 }
 .wrap {
     min-height: 100%;

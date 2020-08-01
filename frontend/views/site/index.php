@@ -112,7 +112,7 @@ $this->title = 'Главная страница';
                 <h1 class="word-rotator slide font-weight-bold text-8 mb-3 appear-animation animated fadeInUpShorter appear-animation-visible"
                     data-appear-animation="fadeInUpShorter" style="animation-delay: 100ms;">
                     <span>Международный реестр нарушителей правил пользования услуг </span>
-                    <span class="word-rotator-words bg-dark">
+                    <span class="word-rotator-words bg-danger">
 									<b class="is-hidden">ОТЕЛЕЙ</b>
 									<b class="is-visible">КАРШЕРИНГА</b>
 									<b class="is-visible">АРЕНДЫ</b>
