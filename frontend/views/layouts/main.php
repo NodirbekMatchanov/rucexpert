@@ -82,10 +82,9 @@ NewAppAsset::register($this);
             <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
                 <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Личный кабинет</h5>
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="#" data-toggle="modal"
-                                               data-target="#signModal" class="link-hover-style-1 ml-1"> Авторизация</a>
+                    <li class="text-4 mb-2"><a href="#"  data-toggle="modal" data-target="#signModal" class="link-hover-style-1 ml-1"> Авторизация</a>
                     </li>
-                    <li class="text-4 mb-2"><a href="#" data-toggle="modal"
+                    <li class="text-4 mb-2"><a href="/site/login" data-toggle="modal"
                                                data-target="#largesizemodal" class="link-hover-style-1 ml-1">
                             Регистрация</a></li>
                     <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный кабинет</a></li>
