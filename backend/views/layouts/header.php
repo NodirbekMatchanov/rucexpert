@@ -68,6 +68,7 @@ $img = '/images/avatar-default-icon.png';
                                             'url' => ['/news/index']],
                                     ]
                                 ],
+
                                 [
                                     'label' => 'Реестр',
                                     'template' => '<a href="{url}" class="dropdown-item">Реестр<i class=""></i> <span
@@ -75,7 +76,18 @@ $img = '/images/avatar-default-icon.png';
                                     'url' => ['/black-list/index'],
                                 ],
 
+                                [
+                                    'label' => 'Настройки сайта',
+                                    'template' => '<a href="{url}" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i><span class="nav-label ">{label}</span> <span
+                            class=" "></span></a>',
+                                    'url' => '#',
+                                    'items' => [
+                                        [
+                                            'template' => '<a href="{url}" class="dropdown-item">Страницы<i class=""></i> <span
+                            class=""></span></a>', 'url' => ['/pages/index']],
 
+                                    ]
+                                ],
                             ];
                             if (\backend\components\User::getRoleName() != 'admin') {
                                 $menuItems = \mdm\admin\components\Helper::filter($menuItems);

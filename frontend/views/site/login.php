@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
 ?>
 <?php Pjax::begin(); ?>
-<div class="panel-login container">
+<div class="panel-login container" <?= (Yii::$app->controller->action->id != 'index') ? 'style="margin-top: 100px"' :'' ?>>
 
     <p style="font-size: 16px">Добро пожаловать на сайт <b>Ruc.expert</b>
     </p>

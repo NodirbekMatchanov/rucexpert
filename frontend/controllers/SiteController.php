@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use backend\components\Sender;
 use backend\models\News;
+use backend\models\Pages;
 use common\models\BlackList;
 use common\models\Sms;
 use common\models\User;
@@ -107,7 +108,6 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (Yii::$app->request->isAjax) {
 
             if (!Yii::$app->user->isGuest) {
                 return $this->redirect(['personal-area/index']);
@@ -117,13 +117,20 @@ class SiteController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
                 return $this->redirect(['personal-area/index']);
             } else {
-                return $this->renderAjax('login', [
-                    'model' => $model,
-                ]);
+                if (Yii::$app->request->isAjax) {
+
+                    return $this->renderAjax('login', [
+                        'model' => $model,
+                    ]);
+                } else {
+                    return $this->render('login', [
+                        'model' => $model,
+                    ]);
+                }
             }
-        } else {
-            return $this->redirect(['index']);
-        }
+//        } else {
+//            return $this->redirect(['index']);
+//        }
     }
 
     /**
@@ -243,6 +250,14 @@ class SiteController extends Controller
             }
         }
 
+    }
+
+    public function actionPages($url)
+    {
+        $page = Pages::find()->where(['url' => $url])->one();
+            return $this->render('page',[
+                'page' => $page
+            ]);
     }
 
     /**

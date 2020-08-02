@@ -41,7 +41,7 @@ class PersonalAreaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'employe', 'send-code'],
+                'only' => ['logout','index', 'signup', 'employe', 'send-code'],
                 'rules' => [
                     [
                         'actions' => ['index', 'search', 'logout'],

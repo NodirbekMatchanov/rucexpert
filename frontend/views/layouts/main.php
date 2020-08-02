@@ -88,29 +88,29 @@ NewAppAsset::register($this);
                     <li class="text-4 mb-2"><a href="#" data-toggle="modal"
                                                data-target="#largesizemodal" class="link-hover-style-1 ml-1">
                             Регистрация</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Личный кабинет</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Поиск нарушителя</a></li>
+                    <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный кабинет</a></li>
+                    <li class="text-4 mb-2"><a href="/black-list/search" class="link-hover-style-1 ml-1"> Поиск нарушителя</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
                 <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">О нас</h5>
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> О проекте</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Правила пользования
+                    <li class="text-4 mb-2"><a href="/about" class="link-hover-style-1 ml-1"> О проекте</a></li>
+                    <li class="text-4 mb-2"><a href="/license" class="link-hover-style-1 ml-1"> Правила пользования
                             сервисом</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Обработка персональных
+                    <li class="text-4 mb-2"><a href="/personal-data" class="link-hover-style-1 ml-1"> Обработка персональных
                             данных</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Политика конфиденциальности</a>
+                    <li class="text-4 mb-2"><a href="/politic" class="link-hover-style-1 ml-1"> Политика конфиденциальности</a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
                 <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Информация</h5>
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> F.A.Q</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Контакты</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Оплата и доставка</a></li>
-                    <li class="text-4 mb-2"><a href="#" class="link-hover-style-1 ml-1"> Поддержка клиентов</a></li>
+                    <li class="text-4 mb-2"><a href="/faq" class="link-hover-style-1 ml-1"> F.A.Q</a></li>
+                    <li class="text-4 mb-2"><a href="/contact" class="link-hover-style-1 ml-1"> Контакты</a></li>
+                    <li class="text-4 mb-2"><a href="/service" class="link-hover-style-1 ml-1"> Оплата и доставка</a></li>
+                    <li class="text-4 mb-2"><a href="/support" class="link-hover-style-1 ml-1"> Поддержка клиентов</a></li>
                 </ul>
             </div>
         </div>

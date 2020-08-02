@@ -95,10 +95,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'news' => 'news/index',
                 'news/view' => 'news/view',
                 'search' => 'news/search',
                 'news/<url>' => 'news/rubric',
+                'news/<action>' => '<controller><action>',
                 'about' => 'site/about',
+                '<url>' => 'site/pages',
             ],
         ],
         'robokassa' => [

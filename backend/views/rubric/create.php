@@ -9,6 +9,7 @@ $this->title = 'Создать рубрик';
 $this->params['breadcrumbs'][] = ['label' => 'Rubrics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="rubric-create">
 
 
