@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -35,7 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'content:ntext',
             'url:url',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return '<a href="' . Url::to(['update', 'id' => $model->id]) . '" class="kt-nav__link">
+								<i class="fa fa-edit"></i>
+							</a>';
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a('<i class=" fa fa-trash"></i>', Url::to(['delete', 'id' => $model->id]), [
+                            'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить запись?'),
+                            'class' => 'kt-nav__link',
+                            'data-method' => 'post',
+                        ]);
+                    },
+                ],
+                ],
         ],
     ]); ?>
 </div>
