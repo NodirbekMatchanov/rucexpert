@@ -14,8 +14,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'content')->widget(\mihaildev\ckeditor\CKEditor::className(), [
+        'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', []),
+    ]);
+    ?>
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
