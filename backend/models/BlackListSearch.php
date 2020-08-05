@@ -16,6 +16,7 @@ class BlackListSearch extends BlackList
 {
     public $searching;
     public $type_db;
+
     public function __construct($config = [])
     {
         $rubric = new Rubric();
@@ -24,6 +25,7 @@ class BlackListSearch extends BlackList
 
         parent::__construct($config);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -31,7 +33,7 @@ class BlackListSearch extends BlackList
     {
         return [
             [['id', 'moder', 'type_org', 'user_id', 'status'], 'integer'],
-            [['first_name', 'last_name', 'middle_name', 'comment', 'date_born', 'place_born', 'moder_comment', 'ser_num_car', 'phone', 'email'], 'safe'],
+            [['first_name', 'searching', 'last_name', 'middle_name', 'comment', 'date_born', 'place_born', 'moder_comment', 'ser_num_car', 'phone', 'email'], 'safe'],
         ];
     }
 
@@ -109,49 +111,34 @@ class BlackListSearch extends BlackList
             $rubric = $rubric::findOne($this->type_org);
             $price = (float)$rubric->price;
         }
-        if (($isAdmin && $this->searching) || $this->searching && (($this->hotel->balance >= $price || $this->hotel->count_bonus_find) )) {
-            if (!$isAdmin) {
-                if ($this->hotel->count_bonus_find) {
-                    $this->hotel->count_bonus_find = $this->hotel->count_bonus_find - 1;
-                } else {
-                    $this->hotel->balance = $this->hotel->balance - $price;
-                }
-            }
-            if ($isAdmin || $this->hotel->save()) {
+        if ($isAdmin && $this->searching) {
 
-                if (!$this->validate()) {
-                    // uncomment the following line if you do not want to return any records when validation fails
-                    // $query->where('0=1');
-                    return $dataProvider;
-                }
-
-                // grid filtering conditions
-                $query->andFilterWhere([
-                    'id' => $this->id,
-                    'date_born' => $this->date_born,
-                    'moder' => $this->moder,
-                    'type_org' => $this->type_org,
-                    'user_id' => $this->user_id,
-                ]);
-
-                $query->andFilterWhere(['like', 'first_name', $this->first_name])
-                    ->andFilterWhere(['like', 'last_name', $this->last_name])
-                    ->andFilterWhere(['like', 'middle_name', $this->middle_name])
-                    ->andFilterWhere(['like', 'comment', $this->comment])
-                    ->andFilterWhere(['like', 'place_born', $this->place_born])
-                    ->andFilterWhere(['like', 'moder_comment', $this->moder_comment])
-                    ->andFilterWhere(['like', 'ser_num_car', $this->ser_num_car]);
-
+            if (!$this->validate()) {
+                // uncomment the following line if you do not want to return any records when validation fails
+                // $query->where('0=1');
                 return $dataProvider;
             }
 
-        } else {
-            $query->where(['id' => 0]);
-            if ($this->searching) {
-                \Yii::$app->session->setFlash('error', 'Не достаточно средство! Пополняйте пожалуйста счет');
-            }
+            // grid filtering conditions
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'date_born' => $this->date_born,
+                'moder' => $this->moder,
+                'type_org' => $this->type_org,
+                'user_id' => $this->user_id,
+            ]);
+
+            $query->andFilterWhere(['like', 'first_name', $this->first_name])
+                ->andFilterWhere(['like', 'last_name', $this->last_name])
+                ->andFilterWhere(['like', 'middle_name', $this->middle_name])
+                ->andFilterWhere(['like', 'comment', $this->comment])
+                ->andFilterWhere(['like', 'place_born', $this->place_born])
+                ->andFilterWhere(['like', 'moder_comment', $this->moder_comment])
+                ->andFilterWhere(['like', 'ser_num_car', $this->ser_num_car]);
+
             return $dataProvider;
         }
+
 
     }
 }
