@@ -27,19 +27,20 @@ if ($role == 'director') {
             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
                 <nav>
                     <ul class="nav nav-pills" id="mainNav">
-                        <?php if ($role == 'director'): ?>
+                        <?php if ($role == 'director' && $role == 'admin'): ?>
                             <li class="<?= (Yii::$app->controller->action->id == 'search') ? 'active' : '' ?>">
                                 <a class="nav-link" href="<?= Url::to(['black-list/search']) ?>">
                                     <i class="fa fa-search" aria-hidden="true"></i> Поиск
                                 </a>
                             </li>
                         <? endif; ?>
-
+                        <?php if ($role != 'admin'): ?>
                         <li class="<?= (Yii::$app->controller->id . '/' . Yii::$app->controller->action->id == 'black-list/index') ? 'active' : '' ?>">
                             <a class="nav-link" href="<?= Url::to(['black-list/index']) ?>" style="color: red;">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Добавить в реестр
                             </a>
                         </li>
+                        <? endif; ?>
                         <?php if ($role == 'director'): ?>
                             <li class="<?= (Yii::$app->controller->id . '/' . Yii::$app->controller->action->id == 'personal-area/employe') ? 'active' : '' ?>">
                                 <a class="nav-link" href="<?= Url::to(['personal-area/employe']) ?>"

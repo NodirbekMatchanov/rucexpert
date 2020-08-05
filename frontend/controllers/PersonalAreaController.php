@@ -46,7 +46,7 @@ class PersonalAreaController extends Controller
                     [
                         'actions' => ['index', 'search', 'logout'],
                         'allow' => true,
-                        'roles' => ['manager'],
+                        'roles' => ['manager','admin'],
                     ],
                     [
                         'actions' => ['logout', 'signup', 'employe'],
