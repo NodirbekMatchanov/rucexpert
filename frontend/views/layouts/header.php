@@ -27,7 +27,7 @@ if ($role == 'director') {
             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
                 <nav>
                     <ul class="nav nav-pills" id="mainNav">
-                        <?php if ($role == 'director' && $role == 'admin'): ?>
+                        <?php if ($role == 'director' || $role == 'admin'): ?>
                             <li class="<?= (Yii::$app->controller->action->id == 'search') ? 'active' : '' ?>">
                                 <a class="nav-link" href="<?= Url::to(['black-list/search']) ?>">
                                     <i class="fa fa-search" aria-hidden="true"></i> Поиск
