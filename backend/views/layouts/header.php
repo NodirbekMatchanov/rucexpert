@@ -88,6 +88,12 @@ $img = '/images/avatar-default-icon.png';
 
                                     ]
                                 ],
+                                [
+                                    'label' => 'Поиск нарушителей',
+                                    'template' => '<a href="{url}" class=" nav-link"><i class="fa fa-newspaper-o"></i><span class="nav-label ">{label}</span> <span
+                            class=" "></span></a>',
+                                    'url' => '/admin/black-list/search'
+                                ],
                             ];
                             if (\backend\components\User::getRoleName() != 'admin') {
                                 $menuItems = \mdm\admin\components\Helper::filter($menuItems);

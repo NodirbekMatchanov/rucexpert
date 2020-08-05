@@ -32,7 +32,7 @@ class BlackListController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout', 'search' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -72,6 +72,20 @@ class BlackListController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Lists all BlackList models.
+     * @return mixed
+     */
+    public function actionSearch()
+    {
+        $searchModel = new BlackListSearch();
+        $dataProvider = $searchModel->searchByFilter(Yii::$app->request->post());
+        return $this->render('search', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
