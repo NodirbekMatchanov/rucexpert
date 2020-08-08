@@ -30,6 +30,13 @@ $column = [
             }
         }
     ],
+    [
+        'label' => 'Рубрика',
+        'format' => 'raw',
+        'value' => function ($model) {
+           return \backend\models\Rubric::getRubricName($model->type_org);
+        }
+    ],
 
 ];
 if(\backend\components\User::getRoleName() == 'admin'){
