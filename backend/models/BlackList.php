@@ -42,6 +42,7 @@ class BlackList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['first_name'],'required'],
             [['comment', 'moder_comment'], 'string'],
             [['date_born'], 'safe'],
             [['moder', 'type_org', 'user_id', 'status'], 'integer'],

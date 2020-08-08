@@ -81,6 +81,7 @@ $columns = array_merge($columns, [[
 
     <p>
         <?= Html::a('Добавить новую запись', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Импорт csv', ['import-csv'], ['class' => 'btn btn-primary']) ?>
     </p>
     <div class="card">
         <div class="card-body card-dashboard">

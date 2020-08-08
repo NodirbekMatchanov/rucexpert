@@ -27,6 +27,7 @@ class Gallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['url'],'required'],
             [['parent_id'], 'integer'],
             [['url'], 'string', 'max' => 255],
         ];

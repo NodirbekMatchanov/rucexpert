@@ -3,15 +3,18 @@
 namespace backend\controllers;
 
 use backend\models\Gallery;
+use backend\models\ImportForm;
 use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 use Yii;
 use backend\models\BlackList;
 use backend\models\BlackListSearch;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\web\UploadedFile;
+use backend\components\Importer;
 /**
  * BlackListController implements the CRUD actions for BlackList model.
  */
@@ -32,7 +35,7 @@ class BlackListController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'search' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout', 'search','import-csv' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -190,4 +193,30 @@ class BlackListController extends Controller
             }
         }
     }
+
+    /**
+     * Импорт товаров из csv файла
+     */
+    public function actionImportCsv()
+    {
+        $importForm = new ImportForm();
+        //путь к файлу
+        if (Yii::$app->request->post() && $importForm->load(Yii::$app->request->post())) {
+            $uploadFile = UploadedFile::getInstance($importForm, 'file');
+            try {
+                $importer = Importer::importCsv($uploadFile);
+            } catch (\Exception $e){
+                Yii::info($e);
+                throw new HttpException(500 ,'Ошибка обработка данных');
+            }
+            if($importer){
+                Yii::$app->session->setFlash('success', 'Загруженное количество данных: '. $importer);
+            }
+        }
+        return $this->render('import',[
+            'importForm' => $importForm
+        ]);
+    }
+
+
 }
