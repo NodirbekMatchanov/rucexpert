@@ -81,6 +81,12 @@ class News extends \yii\db\ActiveRecord
         } else {
             $this->date = date("Y-m-d", strtotime($this->date));
         }
+        if (User::getRoleName() == 'admin') {
+            $this->status = 2;
+        } else {
+            $this->status = self::MODER;
+        }
+
         $this->videoFile = UploadedFile::getInstance($this, 'videoFile');
         if ($this->video != '' || !empty($this->videoFile)) {
             $this->is_video = 1;
@@ -101,11 +107,7 @@ class News extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if (User::getRoleName() == 'admin') {
-            $this->status = 2;
-        } else {
-            $this->status = self::MODER;
-        }
+
         $this->videoFile = UploadedFile::getInstance($this, 'videoFile');
         if (!empty($this->videoFile)) {
             $video = new Video();
