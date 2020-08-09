@@ -124,7 +124,7 @@ class News extends \yii\db\ActiveRecord
     public static function getNewsGroupByRubric()
     {
 //      статус 2 разрешенный наовости
-        $homeNews = self::find()->where(['status' => 2])->orderBy('id desc')->asArray()->all();
+        $homeNews = self::find()->where(['status' => 2])->andWhere('date <= "'. date("Y-m-d").'"')->orderBy('id desc')->asArray()->all();
         return self::getHomePageNews($homeNews);
     }
 

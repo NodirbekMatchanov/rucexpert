@@ -93,7 +93,7 @@ class NewsSearch extends News
         $newsList = [];
         foreach ($rubrics as $rubric) {
             $newsList [] = [
-                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere('date <= "'. date("Y-m-d").'"')->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
                 'title' => $rubric->title
             ];
         }
@@ -107,7 +107,7 @@ class NewsSearch extends News
         $newsList = [];
         foreach ($rubrics as $rubric) {
             $newsList [] = [
-                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
+                'news' => self::find()->where(['rubric_id' => $rubric->id])->andWhere('date <= "'. date("Y-m-d").'"')->andWhere(['status' => 2])->orderBy(['id' => 'desc'])->asArray()->all(),
                 'title' => $rubric->title
             ];
         }
@@ -116,7 +116,7 @@ class NewsSearch extends News
 
     public static function getMainNews()
     {
-        return self::find()->orderBy(['id' => 'desc'])->andWhere(['status' => 2])->limit(1)->one();
+        return self::find()->orderBy(['id' => 'desc'])->andWhere('date <= "'. date("Y-m-d").'"')->andWhere(['status' => 2])->limit(1)->one();
     }
 
     // Todo нужно перенести в отдельный helper класс

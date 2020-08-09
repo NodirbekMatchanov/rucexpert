@@ -166,7 +166,7 @@ $(document).ready(function () {
         }).fail(function (err) {
             toastr.warning('Что то пошло не так')
         })
-    })
+    });
 
     $(document).on('click', '.news-cancel', function () {
         $.ajax({
@@ -181,5 +181,7 @@ $(document).ready(function () {
         }).fail(function (err) {
             toastr.warning('Что то пошло не так')
         })
-    })
+    });
+
+
 });

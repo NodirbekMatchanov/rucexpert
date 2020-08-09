@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model backend\models\News */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,8 +22,18 @@ use kartik\select2\Select2;
                 ]) ?>
             </div>
             <div class="col-md-6 col-lg-6">
-                <?= $form->field($model, 'date')->textInput(['class' => 'kt_datepicker_ form-control']) ?>
-
+                <?= '<label>Дата публикация</label>'.
+                DatePicker::widget([
+                    'model' => $model,
+                    'attribute' => 'date',
+                    'language' => 'ru',
+                    'options' => ['placeholder' => '22.01.2020','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy'
+                    ]
+                ]);
+                ?>
             </div>
         </div>
 
@@ -40,10 +50,37 @@ use kartik\select2\Select2;
 
         <?= $form->field($model, 'video')->textarea(['row' => 10]) ?>
 
-        <?= $form->field($model, 'videoFile')->fileInput() ?>
 
-
-        <?= $form->field($model, 'image')->fileInput() ?>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <?=
+                $form->field($model, 'videoFile')->widget(\kartik\file\FileInput::className(), [
+                    'language' => 'ru',
+                     'pluginOptions' => [
+        'showPreview' => false,
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false
+    ],
+                    'options' => ['multiple' => false],
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <?=
+                $form->field($model, 'image')->widget(\kartik\file\FileInput::className(), [
+                    'language' => 'ru',
+                    'pluginOptions' => [
+                        'showPreview' => false,
+                        'showCaption' => true,
+                        'showRemove' => true,
+                        'showUpload' => false
+                    ],
+                    'options' => ['multiple' => false],
+                ]) ?>
+            </div>
+        </div>
 
         <?php if (Yii::$app->controller->action->id === 'update' && $model->img != ''): ?>
             <div class="row">

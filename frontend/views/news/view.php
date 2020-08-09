@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                    <?php if(!empty($otherNews)):?>
                        <?php foreach ($otherNews as $item):?>
+                           <?php if(!empty($item['news'])):?>
                            <div class="mb-4 pb-2">
                                <article
                                        class="thumb-info thumb-info-side-image thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
@@ -115,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                    <?=date('d.m.Y',strtotime($item['news'][0]['date']))?>
                                                </div>
                                                <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
-                                                   <a href="/news?id=<?= $item['news'][0]['id'] ?>"
+                                                   <a href="/news/view?id=<?= $item['news'][0]['id'] ?>"
                                                       class="text-decoration-none text-color-dark"><?= $item['news'][0]['title'] ?></a>
                                                </h4>
                                            </div>
@@ -123,6 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                    </div>
                                </article>
                            </div>
+                           <?php endif; ?>
                        <?php endforeach;?>
                    <?php endif;?>
 

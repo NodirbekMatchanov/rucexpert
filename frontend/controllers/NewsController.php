@@ -85,7 +85,7 @@ class NewsController extends Controller
             return $this->redirect('/news');
         }
         $otherNews = NewsSearch::getOtherNews($rubricId);
-        $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2]);
+        $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2])->andWhere('date <= "'. date("Y-m-d").'"');
         $pageData = clone $news;
         $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 6, 'defaultPageSize' => 6]);
         $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();

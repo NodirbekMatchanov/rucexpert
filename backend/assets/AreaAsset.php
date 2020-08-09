@@ -35,7 +35,6 @@ class AreaAsset extends AssetBundle
         'new_temp/admin/vendor/jquery-browser-mobile/jquery.browser.mobile.js',
         'new_temp/admin/vendor/popper/umd/popper.min.js',
         'new_temp/admin/vendor/bootstrap/js/bootstrap.js',
-        'new_temp/admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js',
         'new_temp/admin/vendor/common/common.js',
         'new_temp/admin/vendor/nanoscroller/nanoscroller.js',
         'new_temp/admin/vendor/magnific-popup/jquery.magnific-popup.js',
