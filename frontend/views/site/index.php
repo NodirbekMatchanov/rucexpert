@@ -160,7 +160,7 @@ $this->title = 'Главная страница';
                  data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="600"
                  style="animation-delay: 600ms;">
                 <p class="text-7 gradient-text-color font-weight-bold line-height-5 negative-ls-2">RUC.EXPERT - Онлайн
-                    сервис, который всегда доступен 24 / 7 / 365 на любом усройстве.</p>
+                    сервис, который всегда доступен 24/7/365 на любом усройстве.</p>
             </div>
             <div class="col-lg-8">
                 <div class="row featured-boxes featured-boxes-style-4">

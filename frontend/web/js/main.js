@@ -107,27 +107,27 @@ $(document).ready(function () {
     }
 
     // кликаем на кнопку вход чтобы открывался модалка для входа
-    $(document).on('click','.authorization',function () {
+    $(document).on('click', '.authorization', function () {
         $('#headerAccount .login').trigger('click');
     });
 
-    $(document).on('click','#specialButton',function () {
-        $('.header.header-nav-menu').css("margin-top","50px")
+    $(document).on('click', '#specialButton', function () {
+        $('.header.header-nav-menu').css("margin-top", "50px")
     });
     setTimeout(function () {
-        if($('.special-quit button').length){
-            $('.header.header-nav-menu').css("margin-top","50px")
+        if ($('.special-quit button').length) {
+            $('.header.header-nav-menu').css("margin-top", "50px")
         }
-    },2000);
-    $(document).on('click','.special-quit button',function () {
-        $('.header.header-nav-menu').css("margin-top","0px")
+    }, 2000);
+    $(document).on('click', '.special-quit button', function () {
+        $('.header.header-nav-menu').css("margin-top", "0px")
     });
 
     $(document).on('click', '.admin-success', function () {
         $.ajax({
             url: 'admin-success?id=' + $(this).attr('data-id')
         }).done(function (data) {
-            if(data){
+            if (data) {
                 toastr.success('Опубликовано');
                 window.location.reload();
             } else {
@@ -142,7 +142,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'admin-cancel?id=' + $(this).attr('data-id')
         }).done(function (data) {
-            if(data){
+            if (data) {
                 toastr.success('Отменено');
                 window.location.reload();
             } else {
@@ -151,13 +151,13 @@ $(document).ready(function () {
         }).fail(function (err) {
             toastr.warning('Что то пошло не так')
         })
-    })
+    });
 
     $(document).on('click', '.news-success', function () {
         $.ajax({
             url: 'news-success?id=' + $(this).attr('data-id')
         }).done(function (data) {
-            if(data){
+            if (data) {
                 toastr.success('Опубликовано');
                 window.location.reload();
             } else {
@@ -172,7 +172,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'news-cancel?id=' + $(this).attr('data-id')
         }).done(function (data) {
-            if(data){
+            if (data) {
                 toastr.success('Отменено');
                 window.location.reload();
             } else {
@@ -182,6 +182,31 @@ $(document).ready(function () {
             toastr.warning('Что то пошло не так')
         })
     });
+    var selectedItems = [];
+
+    $(document).on('click, change', '.gridSelect', function () {
+
+        if($(this)[0].checked){
+            $('#delete_selected_items_btn').removeClass('hidden');
+        } else {
+            $('#delete_selected_items_btn').addClass('hidden');
+        }
+    });
+
+    $('#delete_selected_items_btn').click(function () {
+        selectedItems = selectedItems.concat($('.grid-view').yiiGridView('getSelectedRows'));
+        console.log(selectedItems);
+        $.ajax({
+            url: 'delete-all',
+            'method' : 'POST',
+            'data': {selectedItems}
+        }).done(function (data) {
+            toastr.success('Успешно выполнен!');
+            window.location.reload();
+        }).fail(function (err) {
+            toastr.error(err);
+        })
+    })
 
 
 });

@@ -12,11 +12,33 @@ $this->title = 'Список';
 $this->params['breadcrumbs'][] = $this->title;
 
 $column = [
+    [
+        'class' => 'yii\grid\CheckboxColumn',
+        'name' => 'id',
+        'checkboxOptions' => [
+                'class' => 'gridSelect'
+        ]
+
+    ],
     'id',
     'first_name',
     'last_name',
     'middle_name',
-    'email',
+    [
+        'label' => 'Автор',
+        'format' => 'raw',
+        'value' => function ($model) {
+            if(\backend\components\User::getRoleName($model->user_id) == 'admin'){
+                return 'Admin';
+            } else {
+                $user = \common\models\User::findOne($model->user_id);
+                if(!empty($user)){
+                   return $user->username;
+                }
+            }
+            return 'Admin';
+        }
+    ],
     [
         'label' => 'Статус',
         'format' => 'raw',
@@ -89,6 +111,12 @@ $columns = array_merge($columns, [[
     <p>
         <?= Html::a('Добавить новую запись', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Импорт csv', ['import-csv'], ['class' => 'btn btn-primary']) ?>
+        <?=Html::a('<i class="kt-nav__link-icon fa fa-trash"> Удалить все</i>', Url::to(['delete-all', 'id' => 'all']), [
+            'data-confirm' => Yii::t('yii', 'Вы точно хотите удалить все ?'),
+            'class' => 'kt-nav__link btn btn-danger pull-right',
+            'data-method' => 'post',
+        ])?>
+        <?= Html::button('Удалить выбранные',['id' => 'delete_selected_items_btn','class' => ' btn btn-danger hidden'])?>
     </p>
     <div class="card">
         <div class="card-body card-dashboard">
@@ -98,7 +126,7 @@ $columns = array_merge($columns, [[
 
                     'columns' => $columns,
                     'tableOptions' => ['class' => 'table table-striped dataex-html5-selectors dataTable', 'id' => 'DataTables_Table_4'],
-                    'options' => ['class' => ' dataTables_wrapper dt-bootstrap4', 'id' => 'DataTables_Table_4_wrapper'],
+                    'options' => ['class' => ' dataTables_wrapper grid-view dt-bootstrap4', 'id' => 'DataTables_Table_4_wrapper'],
 
                 ]); ?>
             </div>

@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 use Yii;
 use backend\models\BlackList;
 use backend\models\BlackListSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
@@ -35,7 +36,7 @@ class BlackListController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'search','import-csv' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout','delete-all','search','import-csv' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -162,6 +163,9 @@ class BlackListController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * @return bool
+     */
     public function actionAdminSuccess()
     {
         if (Yii::$app->request->isAjax) {
@@ -178,6 +182,9 @@ class BlackListController extends Controller
         }
     }
 
+    /**
+     * @return bool
+     */
     public function actionAdminCancel()
     {
         if (Yii::$app->request->isAjax) {
@@ -216,6 +223,24 @@ class BlackListController extends Controller
         return $this->render('import',[
             'importForm' => $importForm
         ]);
+    }
+
+    /**
+     * удаления по выборку
+     */
+    public function actionDeleteAll(){
+       if(Yii::$app->request->isAjax && Yii::$app->request->post()){
+           $ids = Yii::$app->request->post('selectedItems');
+           foreach ($ids as $id){
+               $this->findModel($id)->delete();
+           }
+
+       }
+       if(Yii::$app->request->get('id') == 'all'){
+           BlackList::deleteAll();
+           return $this->redirect('index');
+       }
+       return true;
     }
 
 
