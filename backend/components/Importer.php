@@ -25,7 +25,7 @@ class Importer
             if (($handle = fopen($uploadFile->tempName, 'r')) !== false) {
                 $i = 1;
                 $savedData = 0;
-                while (($row = fgetcsv($handle, 1000, ',')) !== false) {
+                while (($row = fgetcsv($handle, 100000, ';')) !== false) {
                     if ($i > 1) {
                         $model = new BlackList();
                         if(isset($row[1]) && !empty($row[1])){
@@ -37,11 +37,13 @@ class Importer
                         $model->phone = $row[2] ?? '';
                         $model->date_born = $row[3] ?? '';
                         $model->comment = $row[4] ?? '';
+                        $model->moder = 1;
                         $model->place_born = $row[6] ?? '';
                         $model->email = $row[7] ?? '';
                         $model->ser_num_car = $row[11] ?? '';
                         $model->type_org = $row[12] ?? '';
-                        $model->user_id = $row[13] ?? Yii::$app->getUser()->identity->id;
+                        $model->user_id = Yii::$app->getUser()->identity->id;
+
                         if ($model->validate()) {
                             $model->save();
                             $gallery = new Gallery();
@@ -52,6 +54,7 @@ class Importer
                             }
                             $savedData ++;
                         } else {
+                            $notValid [] = $row[0];
                             //... код в случае ошибки сохранения
                         }
                     }
