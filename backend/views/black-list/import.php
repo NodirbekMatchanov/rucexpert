@@ -2,11 +2,14 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+
 $this->title = 'Импорт';
 /* @var $importForm backend\models\ImportForm */
 
 ?>
-
+<?php $this->beginBlock('sidebar'); ?>
+<h2><?= $this->title ?></h2>
+<?php $this->endBlock(); ?>
 <div class="card">
     <div class="card-body card-dashboard">
 
@@ -15,10 +18,21 @@ $this->title = 'Импорт';
 
             <?php $form = ActiveForm::begin(); ?>
 
-            <h5> Выберите файл <a download="" href="/backend/web/example/rowdys.csv">Скачать
-                    пример
-                    Csv
-                    файла</a></h5>
+
+            <div class="row">
+                <div class="col-6">
+                    <?= $form->field($importForm, 'count')->textInput(['maxlength' => true])->label('Количества публикации') ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->field($importForm, 'time')->widget(\kartik\time\TimePicker::className(),[   'pluginOptions' => [
+                        'showMeridian' => false,
+                        'minuteStep' => 1,
+                        'secondStep' => 5,
+                    ]])->label('Время публикации'); ?>
+                </div>
+            </div>
+
+            <h5> Выберите файл <a download="" href="/backend/web/example/rowdys.csv">Скачать пример Csv файла</a></h5>
             <div class="row">
                 <?=
                 $form->field($importForm, 'file')->widget(\kartik\file\FileInput::classname(), [
@@ -30,7 +44,6 @@ $this->title = 'Импорт';
                         'showUpload' => false]
                 ])->label('Csv файл')
                 ?>
-
             </div>
             <div class="row">
                 <div class="form-group">

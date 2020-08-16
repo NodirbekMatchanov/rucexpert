@@ -25,6 +25,7 @@ use Yii;
  * @property string $passport_num
  * @property string $passport_ser
  * @property string $numb_car
+ * @property string $date_public
  */
 class BlackList extends \yii\db\ActiveRecord
 {
@@ -44,7 +45,7 @@ class BlackList extends \yii\db\ActiveRecord
         return [
 //            [['first_name'],'required'],
             [['comment', 'moder_comment'], 'string'],
-            [['date_born'], 'safe'],
+            [['date_born','date_public'], 'safe'],
             [['moder', 'type_org', 'user_id', 'status'], 'integer'],
             [['first_name', 'last_name', 'middle_name', 'place_born', 'ser_num_car', 'phone', 'email'], 'string', 'max' => 255],
             [['numb_car','passport_ser','passport_num'], 'string', 'max' => 50],

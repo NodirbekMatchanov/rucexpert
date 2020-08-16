@@ -116,7 +116,8 @@ $columns = array_merge($columns, [[
             'class' => 'kt-nav__link btn btn-danger pull-right',
             'data-method' => 'post',
         ])?>
-        <?= Html::button('Удалить выбранные',['id' => 'delete_selected_items_btn','class' => ' btn btn-danger hidden'])?>
+        <?= Html::button('Удалить выбранные',['id' => 'delete_selected_items_btn','class' => ' btn btn-warning hidden'])?>
+        <?= Html::button('Разрешить выбранные',['id' => 'accept_selected_items_btn','class' => ' btn btn-success hidden'])?>
     </p>
     <div class="card">
         <div class="card-body card-dashboard">

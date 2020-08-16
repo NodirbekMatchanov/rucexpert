@@ -2,13 +2,17 @@
 
 namespace backend\controllers;
 
+use backend\components\Importer;
+use backend\models\ImportForm;
 use Yii;
 use backend\models\News;
 use backend\models\NewsSearch;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -29,7 +33,7 @@ class NewsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'news-cancel', 'delete-image', 'view', 'news-success', 'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout', 'news-cancel', 'import-csv', 'delete-image', 'view', 'news-success', 'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -227,5 +231,29 @@ class NewsController extends Controller
         }
 
         return $body;
+    }
+
+    /**
+     * Импорт новостей из csv файла
+     */
+    public function actionImportCsv()
+    {
+        $importForm = new ImportForm();
+        //путь к файлу
+        if (Yii::$app->request->post() && $importForm->load(Yii::$app->request->post())) {
+            $uploadFile = UploadedFile::getInstance($importForm, 'file');
+            try {
+                $importer = Importer::importCsvNews($uploadFile);
+            } catch (\Exception $e) {
+                Yii::info($e);
+                throw new HttpException(500, 'Ошибка обработка данных');
+            }
+            if ($importer) {
+                Yii::$app->session->setFlash('success', 'Загруженное количество данных: ' . $importer);
+            }
+        }
+        return $this->render('import', [
+            'importForm' => $importForm
+        ]);
     }
 }

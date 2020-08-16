@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use backend\components\Importer;
+
 /**
  * BlackListController implements the CRUD actions for BlackList model.
  */
@@ -36,7 +37,7 @@ class BlackListController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout','delete-all','search','import-csv' ,'admin-cancel', 'view', 'admin-success',  'update', 'delete', 'create', 'index', 'create-user'],
+                        'actions' => ['logout', 'delete-all', 'search', 'accept-all', 'import-csv', 'admin-cancel', 'view', 'admin-success', 'update', 'delete', 'create', 'index', 'create-user'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -202,7 +203,7 @@ class BlackListController extends Controller
     }
 
     /**
-     * Импорт товаров из csv файла
+     * Импорт нарушителей из csv файла
      */
     public function actionImportCsv()
     {
@@ -211,16 +212,16 @@ class BlackListController extends Controller
         if (Yii::$app->request->post() && $importForm->load(Yii::$app->request->post())) {
             $uploadFile = UploadedFile::getInstance($importForm, 'file');
             try {
-                $importer = Importer::importCsv($uploadFile);
-            } catch (\Exception $e){
+                $importer = Importer::importCsv($uploadFile, $importForm->count, $importForm->time);
+            } catch (\Exception $e) {
                 Yii::info($e);
-                throw new HttpException(500 ,'Ошибка обработка данных');
+                throw new HttpException(500, 'Ошибка обработка данных');
             }
-            if($importer){
-                Yii::$app->session->setFlash('success', 'Загруженное количество данных: '. $importer);
+            if ($importer) {
+                Yii::$app->session->setFlash('success', 'Загруженное количество данных: ' . $importer);
             }
         }
-        return $this->render('import',[
+        return $this->render('import', [
             'importForm' => $importForm
         ]);
     }
@@ -228,19 +229,37 @@ class BlackListController extends Controller
     /**
      * удаления по выборку
      */
-    public function actionDeleteAll(){
-       if(Yii::$app->request->isAjax && Yii::$app->request->post()){
-           $ids = Yii::$app->request->post('selectedItems');
-           foreach ($ids as $id){
-               $this->findModel($id)->delete();
-           }
+    public function actionDeleteAll()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->post()) {
+            $ids = Yii::$app->request->post('selectedItems');
+            foreach ($ids as $id) {
+                $this->findModel($id)->delete();
+            }
 
-       }
-       if(Yii::$app->request->get('id') == 'all'){
-           BlackList::deleteAll();
-           return $this->redirect('index');
-       }
-       return true;
+        }
+        if (Yii::$app->request->get('id') == 'all') {
+            BlackList::deleteAll();
+            return $this->redirect('index');
+        }
+        return true;
+    }
+
+    /**
+     * удаления по выборку
+     */
+    public function actionAcceptAll()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->post()) {
+            $ids = Yii::$app->request->post('selectedItems');
+            $model = new BlackList();
+            foreach ($ids as $id) {
+                $model = $model::findOne($id);
+                $model->status = 2;
+                $model->save();
+            }
+        }
+        return true;
     }
 
 

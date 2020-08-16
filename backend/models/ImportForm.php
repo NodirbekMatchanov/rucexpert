@@ -3,19 +3,22 @@
 
 namespace backend\models;
 
-use Yii; 
+use Yii;
 use yii\base\Model;
 
 class ImportForm extends Model
 {
     public $file;
     public $fileYml;
+    public $count;
+    public $time;
 
     public function rules()
     {
         return [
-            ['file', 'file', 'skipOnEmpty' => true, 'extensions' => 'csv,xls,xlsx'],
-            ['fileYml', 'file', 'skipOnEmpty' => true, 'extensions' => 'yml'],
+            ['time','safe'],
+            ['count','integer'],
+            ['file', 'file', 'skipOnEmpty' => true, 'extensions' => 'csv'],
         ];
     }
 }

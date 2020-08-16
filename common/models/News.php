@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  * @property string $content
+ * @property string $short_content
  * @property string $date
  * @property string $creator
  * @property int $rubric_id
@@ -33,7 +34,7 @@ class News extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['content'], 'string'],
+            [['content','short_content'], 'string'],
             [['date'], 'safe'],
             [['rubric_id','status'], 'integer'],
             [['title', 'creator', 'img'], 'string', 'max' => 255],

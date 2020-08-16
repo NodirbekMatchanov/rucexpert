@@ -12,12 +12,34 @@ $this->title = 'Новости';
 $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
-    'id',
-    'title',
-    'date',
     [
+        'attribute' => 'id',
+        'format' => 'raw',
+        'contentOptions' => ['style' => 'width:10px;'],
+    ],
+    [
+        'attribute' => 'title',
+        'format' => 'raw',
+        'contentOptions' => ['style' => 'max-width:350px;'],
+        'value' => function ($model) {
+            return $model->title;
+        }
+
+    ],
+    [
+        'attribute' => 'date',
+        'format' => 'raw',
+        'contentOptions' => ['style' => 'max-width:50px;'],
+        'value' => function ($model) {
+            return date("d.m.Y",strtotime($model->date));
+        }
+
+    ],
+    [
+        'attribute' => 'status',
         'label' => 'Статус',
         'format' => 'raw',
+        'contentOptions' => ['style' => 'max-width:50px;'],
         'value' => function ($model) {
             if ($model->status == 0) {
                 return '<div class=" alert-primary btn-sm text-center">Новый</div>';
@@ -77,6 +99,8 @@ $columns = array_merge($columns, [[
 
     <p>
         <?= Html::a('Добавить новую запись', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Импорт csv', ['import-csv'], ['class' => 'btn btn-primary']) ?>
+
     </p>
     <div class="card">
         <div class="card-body card-dashboard">

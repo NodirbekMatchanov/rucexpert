@@ -188,8 +188,10 @@ $(document).ready(function () {
 
         if($(this)[0].checked){
             $('#delete_selected_items_btn').removeClass('hidden');
+            $('#accept_selected_items_btn').removeClass('hidden');
         } else {
             $('#delete_selected_items_btn').addClass('hidden');
+            $('#accept_selected_items_btn').addClass('hidden');
         }
     });
 
@@ -198,6 +200,21 @@ $(document).ready(function () {
         console.log(selectedItems);
         $.ajax({
             url: 'delete-all',
+            'method' : 'POST',
+            'data': {selectedItems}
+        }).done(function (data) {
+            toastr.success('Успешно выполнен!');
+            window.location.reload();
+        }).fail(function (err) {
+            toastr.error(err);
+        })
+    })
+
+    $('#accept_selected_items_btn').click(function () {
+        selectedItems = selectedItems.concat($('.grid-view').yiiGridView('getSelectedRows'));
+        console.log(selectedItems);
+        $.ajax({
+            url: 'accept-all',
             'method' : 'POST',
             'data': {selectedItems}
         }).done(function (data) {

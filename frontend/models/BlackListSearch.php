@@ -37,7 +37,7 @@ class BlackListSearch extends BlackList
     {
         return [
             [['id', 'moder', 'type_org', 'user_id'], 'integer'],
-            [['searching', 'first_name', 'last_name', 'middle_name', 'comment', 'date_born', 'place_born', 'moder_comment', 'ser_num_car'], 'safe'],
+            [['searching', 'first_name', 'last_name', 'middle_name', 'date_public', 'comment', 'date_born', 'place_born', 'moder_comment', 'ser_num_car'], 'safe'],
         ];
     }
 
@@ -74,7 +74,7 @@ class BlackListSearch extends BlackList
             $rubric = $rubric::findOne($this->type_org);
             $price = (float)$rubric->price;
         }
-        if (($isAdmin && $this->searching) || $this->searching && (($this->hotel->balance >= $price || $this->hotel->count_bonus_find) )) {
+        if (($isAdmin && $this->searching) || $this->searching && (($this->hotel->balance >= $price || $this->hotel->count_bonus_find))) {
             if (!$isAdmin) {
                 if ($this->hotel->count_bonus_find) {
                     $this->hotel->count_bonus_find = $this->hotel->count_bonus_find - 1;
@@ -89,7 +89,7 @@ class BlackListSearch extends BlackList
                     // $query->where('0=1');
                     return $dataProvider;
                 }
-
+                $query->andWhere('date_public <= "'. date("Y-m-d H:i:s").'"');
                 // grid filtering conditions
                 $query->andFilterWhere([
                     'id' => $this->id,
