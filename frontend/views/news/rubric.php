@@ -62,7 +62,7 @@ $this->title = 'Новости '. Helper::getRubricWords()[$url];
                                                 <a href="/news/view?id=<?= $item->id ?> "><?= $item->title ?> </a>
                                             </h2>
                                             <p class="mb-0">
-                                                <?= \yii\helpers\StringHelper::truncate($item->short_content, 250) ?>
+                                                <?= \yii\helpers\StringHelper::truncate(Html::encode($item->short_content), 250) ?>
                                             </p>
                                         </div>
                                     </div>
@@ -82,33 +82,10 @@ $this->title = 'Новости '. Helper::getRubricWords()[$url];
 
                             <div class="row">
                                 <div class="col-md-12 pull-left ">
-                                    <?php
-                                    echo \justinvoelker\separatedpager\LinkPager::widget([
+                                    <?= \yii\widgets\LinkPager::widget([
                                         'pagination' => $pages,
-                                        'activePageCssClass' => 'active-page',
-                                        'prevPageLabel' => false,
-                                        'nextPageLabel' => false,
-                                        'maxButtonCount' => 5,
-                                        'options' => [
-                                            'class' => 'pagin-list',
-                                        ]
-                                    ]);
-
+                                    ])
                                     ?>
-                                    <p>
-                                        <?php
-                                        $totalCount = $pages->totalCount;
-                                        $begin = $pages->getPage() + 1;
-                                        $count = $pages->pageCount;
-                                        $end = $totalCount - 4;
-                                        if ($begin > $end) {
-                                            $begin = $end;
-                                        }
-                                        $page = $pages->getPage() + 1;
-                                        $pageCount = $pages->pageCount;
-
-
-                                        ?>
                                     </p>
                                 </div>
                             </div>
