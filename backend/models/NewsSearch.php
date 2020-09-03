@@ -45,8 +45,9 @@ class NewsSearch extends News
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query->orderBy('date desc'),
         ]);
+
         $query->select(['id,creator,DATE_FORMAT(date, "%Y-%m-%d") as date,title,status']);
         $this->load($params);
 

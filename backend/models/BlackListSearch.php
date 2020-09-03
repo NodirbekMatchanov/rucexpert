@@ -70,7 +70,6 @@ class BlackListSearch extends BlackList
             // $query->where('0=1');
             return $dataProvider;
         }
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
