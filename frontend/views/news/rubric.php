@@ -62,7 +62,7 @@ $this->title = 'Новости '. Helper::getRubricWords()[$url];
                                                 <a href="/news/view?id=<?= $item->id ?> "><?= $item->title ?> </a>
                                             </h2>
                                             <p class="mb-0">
-                                                <?= \yii\helpers\StringHelper::truncate(Html::encode($item->short_content), 250) ?>
+                                                <?= strip_tags(\yii\helpers\StringHelper::truncate($item->short_content, 250)) ?>
                                             </p>
                                         </div>
                                     </div>
