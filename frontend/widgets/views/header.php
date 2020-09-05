@@ -217,10 +217,10 @@ use yii\helpers\Html;
                     </div>
                     <div class="header-column justify-content-end mobile-hidden">
                         <div class="header-row h-100">
-                            <a href="#"
-                               target="_blank" class="py-3 d-block">
-                                <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/blog/mariott.gif"/>
-                            </a>
+<!--                            <a href="#"-->
+<!--                               target="_blank" class="py-3 d-block">-->
+<!--                                <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/blog/mariott.gif"/>-->
+<!--                            </a>-->
                         </div>
                     </div>
                     <div class="header-column justify-content-end">
