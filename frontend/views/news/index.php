@@ -178,10 +178,10 @@ if (Yii::$app->request->get('rubric_id')) {
 
 
                 <div class="text-center py-3 mb-4">
-                    <a href="#"
-                       target="_blank" class="d-block">
-                        <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/toyota.gif"/>
-                    </a>
+<!--                    <a href="#"-->
+<!--                       target="_blank" class="d-block">-->
+<!--                        <img alt="Porto" class="img-fluid pl-3" src="/new_temp/news/img/toyota.gif"/>-->
+<!--                    </a>-->
                 </div>
 
 
@@ -194,8 +194,7 @@ if (Yii::$app->request->get('rubric_id')) {
 
 
                     <div class="mb-4 pb-2">
-
-                        <img src="/new_temp/news/img/blog/hilton.gif">
+<!--                        <img src="/new_temp/news/img/blog/hilton.gif">-->
                     </div>
                 </div>
 

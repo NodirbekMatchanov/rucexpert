@@ -143,8 +143,7 @@ $this->title = 'Новости '. Helper::getRubricWords()[$url];
 
 
                     <div class="mb-4 pb-2">
-
-                        <img src="/new_temp/news/img/blog/hilton.gif">
+<!--                        <img src="/new_temp/news/img/blog/hilton.gif">-->
                     </div>
 
                 </div>
