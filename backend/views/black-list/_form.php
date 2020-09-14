@@ -41,17 +41,6 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'date_born')->textInput() ?>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'place_born')->textInput(['maxlength' => true]) ?>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
                 </div>
@@ -62,7 +51,7 @@ use yii\widgets\ActiveForm;
                     $form->field($model, 'file[]')->widget(\kartik\file\FileInput::className(), [
                         'language' => 'ru',
                         'options' => ['multiple' => true],
-                    ]) ?>
+                    ])->label('Файлы') ?>
                 </div>
             </div>
 
