@@ -62,15 +62,15 @@ NewAppAsset::register($this);
             </p>
         </div>
     <?php endif; ?>
-<!--  Если главная страница то контейнер не нужно  -->
+    <!--  Если главная страница то контейнер не нужно  -->
     <?php if (
-            Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'
-            || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id == 'view'
-            || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id != 'index'
+        Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'
+        || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id == 'view'
+        || Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id != 'index'
     ) : ?>
-            <?= $content ?>
+        <?= $content ?>
     <?php else: ?>
-        <div class="container" >
+        <div class="container">
             <?= $content ?>
         </div>
     <?php endif; ?>
@@ -84,10 +84,13 @@ NewAppAsset::register($this);
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
                     <li class="text-4 mb-2"><a href="/site/login" class="link-hover-style-1 ml-1"> Авторизация</a>
                     </li>
-                    <li class="text-4 mb-2"><a href="#"  data-toggle="modal" data-target="#signModal"  class="link-hover-style-1 ml-1">
+                    <li class="text-4 mb-2"><a href="#" data-toggle="modal" data-target="#signModal"
+                                               class="link-hover-style-1 ml-1">
                             Регистрация</a></li>
-                    <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный кабинет</a></li>
-                    <li class="text-4 mb-2"><a href="/black-list/search" class="link-hover-style-1 ml-1"> Поиск нарушителя</a></li>
+                    <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный
+                            кабинет</a></li>
+                    <li class="text-4 mb-2"><a href="/black-list/search" class="link-hover-style-1 ml-1"> Поиск
+                            нарушителя</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
@@ -96,9 +99,11 @@ NewAppAsset::register($this);
                     <li class="text-4 mb-2"><a href="/about" class="link-hover-style-1 ml-1"> О проекте</a></li>
                     <li class="text-4 mb-2"><a href="/license" class="link-hover-style-1 ml-1"> Правила пользования
                             сервисом</a></li>
-                    <li class="text-4 mb-2"><a href="/personal-data" class="link-hover-style-1 ml-1"> Обработка персональных
+                    <li class="text-4 mb-2"><a href="/personal-data" class="link-hover-style-1 ml-1"> Обработка
+                            персональных
                             данных</a></li>
-                    <li class="text-4 mb-2"><a href="/politic" class="link-hover-style-1 ml-1"> Политика конфиденциальности</a>
+                    <li class="text-4 mb-2"><a href="/politic" class="link-hover-style-1 ml-1"> Политика
+                            конфиденциальности</a>
                     </li>
                 </ul>
             </div>
@@ -107,8 +112,10 @@ NewAppAsset::register($this);
                 <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
                     <li class="text-4 mb-2"><a href="/faq" class="link-hover-style-1 ml-1"> F.A.Q</a></li>
                     <li class="text-4 mb-2"><a href="/contact" class="link-hover-style-1 ml-1"> Контакты</a></li>
-                    <li class="text-4 mb-2"><a href="/service" class="link-hover-style-1 ml-1"> Оплата и доставка</a></li>
-                    <li class="text-4 mb-2"><a href="/support" class="link-hover-style-1 ml-1"> Поддержка клиентов</a></li>
+                    <li class="text-4 mb-2"><a href="/service" class="link-hover-style-1 ml-1"> Оплата и доставка</a>
+                    </li>
+                    <li class="text-4 mb-2"><a href="/support" class="link-hover-style-1 ml-1"> Поддержка клиентов</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -141,7 +148,8 @@ NewAppAsset::register($this);
                 <a href="#" onclick="doGTranslate('ru|en');return false;" title="English" class="nturl btn btn-default"
                    style="font-size: 15px;background-position:-0px -0px;"><img src="/new_temp/news/img/lang/english.png"
                                                                                height="24" width="30" alt="English"
-                                                                               style=" object-fit: fill;  padding: 2px;     margin-right: 4px;"><p>English</p></a>
+                                                                               style=" object-fit: fill;  padding: 2px;     margin-right: 4px;">
+                    <p>English</p></a>
                 <a href="#"
                    onclick="doGTranslate('ru|fr');return false;"
                    title="French"
@@ -149,37 +157,43 @@ NewAppAsset::register($this);
                    style="font-size: 15px; background-position:-200px -100px;"><img
                             src="/new_temp/news/img/lang/french.png"
                             height="24" width="30" alt="French"
-                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;"><p>French</p></a>
+                            style=" object-fit: fill; padding: 2px;   margin-right: 4px;">
+                    <p>French</p></a>
                 <a href="#"
                    onclick="doGTranslate('ru|de');return false;"
                    title="German"
                    class=" nturl btn btn-default"
                    style="background-position:-300px -100px;"><img
                             style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
-                            src="/new_temp/news/img/lang/german.png" height="24" width="30" alt="German"/><p>German</p></a><a
+                            src="/new_temp/news/img/lang/german.png" height="24" width="30" alt="German"/>
+                    <p>German</p></a><a
                         href="#"
                         onclick="doGTranslate('ru|it');return false;"
                         title="Italian"
                         class="nturl btn btn-default"
                         style="font-size: 15px; background-position:-600px -100px;"><img
                             style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
-                            src="/new_temp/news/img/lang/russian.png" height="24" width="24" alt="Italian"/><p>Italian</p></a>
+                            src="/new_temp/news/img/lang/russian.png" height="24" width="24" alt="Italian"/>
+                    <p>Italian</p></a>
                 <a href="#" onclick="doGTranslate('uz|uz');return false;" title="Uzbek" class=" nturl btn btn-default"
                    style="background-position:-300px -200px;"><img
                             style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
-                            src="/new_temp/news/img/lang/uz.png" height="24" width="30" alt="Uzbek"/><p>Uzbek</p></a><a
+                            src="/new_temp/news/img/lang/uz.png" height="24" width="30" alt="Uzbek"/>
+                    <p>Uzbek</p></a><a
                         href="#" onclick="doGTranslate('ru|ru');return false;" title="Russian"
                         class=" nturl btn btn-default"
                         style="font-size: 15px; background-position:-500px -200px;"><img
                             style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
                             src="/new_temp/news/img/lang/russian.png"
-                            height="24" width="30" alt="Russian"/><p>Russian</p></a><a
+                            height="24" width="30" alt="Russian"/>
+                    <p>Russian</p></a><a
                         href="#" onclick="doGTranslate('ru|es');return false;" title="Spanish"
                         class="btn btn-default nturl"
                         style="font-size: 15px; background-position:-600px -200px;"><img
                             style=" object-fit: fill; padding: 2px;   margin-right: 4px;"
                             src="/new_temp/news/img/lang/spanish.png"
-                            height="24" width="30" alt="Spanish"/><p>Spanish</p></a>
+                            height="24" width="30" alt="Spanish"/>
+                    <p>Spanish</p></a>
 
                 <style type="text/css">
                     <!--
@@ -262,6 +276,24 @@ NewAppAsset::register($this);
         </div>
     </div>
 </div>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript"> (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym");
+    ym(56893129, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        trackHash: true
+    }); </script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/56893129" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript> <!-- /Yandex.Metrika counter -->
 <!--<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>-->
 </body>
 </html>
