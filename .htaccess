@@ -6,6 +6,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
     RewriteBase /
+    #enable HTTPS only
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
     RewriteCond %{HTTP_HOST} ^(www\.)?backend\.rucexpert\.ru$ [NC]
     RewriteCond %{REQUEST_URI} !^/backend
     RewriteRule ^(.*)$ backend/$1 [L]
