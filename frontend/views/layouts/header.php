@@ -114,10 +114,7 @@ if ($role == 'director') {
                             <a role="menuitem" tabindex="-1" href="<?= Url::to(['/admin/news/index']) ?>"><i
                                         class="fas fa-cog"></i> Модерация отелей</a>
                         </li>
-                        <!--                        <li>-->
-                        <!--                            <a role="menuitem" tabindex="-1" href="--><?//= Url::to(['personal-area/index'])
-                        ?><!--"><i class="fas fa-cog"></i> Настройки сайта</a>-->
-                        <!--                        </li>-->
+
                     <?php
                     endif; ?>
                     <li>

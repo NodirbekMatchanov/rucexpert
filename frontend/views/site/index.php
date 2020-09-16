@@ -16,7 +16,7 @@ $this->title = 'Главная страница';
         <div class="forcefullwidth_wrapper_tp_banner" id="revolutionSlider_forcefullwidth"
              style="position:relative;width:100%;height:auto;margin-top:0px;margin-bottom:0px">
             <div class="slider-container rev_slider_wrapper"
-                 style="height: 670px; margin-top: 0px; margin-bottom: 0px; position: absolute; overflow: visible; width: 1349px; left: 0px;">
+                 style="height: 670px; margin-top: 0px; margin-bottom: 0px; position: absolute; overflow: visible; width: 1349px; left: 0px; ">
                 <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider
                      data-plugin-options="{'addOnTypewriter': { 'enable': true }, 'sliderLayout': 'fullscreen', 'delay': 9000, 'gridwidth': [1410,1110,930,690], 'gridheight': 700, 'disableProgressBar': 'on', 'responsiveLevels': [4096,1422,1182,974], 'navigation' : {'arrows': { 'enable': true, 'style': 'arrows-style-1 arrows-primary' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 70, 'h_offset': 0}}}">
                     <ul>
@@ -66,29 +66,34 @@ $this->title = 'Главная страница';
 
 
 
-                            <a class="tp-caption btn btn-primary font-weight-bold rounded"
-                               href="#" data-toggle="modal" data-target="#largesizemodal"
-                               data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-                               data-x="['left','left','left','center']"
-                               data-y="center" data-voffset="['103','103','103','140']"
-                               data-paddingtop="['16','16','16','24']"
-                               data-paddingbottom="['16','16','16','24']"
-                               data-paddingleft="['40','40','40','45']"
-                               data-paddingright="['40','40','40','45']"
-                               data-fontsize="['14','14','14','18']"
-                               data-lineheight="['20','20','20','22']"> <i
-                                        class="fas fa-lock-right ml-1">РЕГИСТРАЦИЯ</i></a>
+
 
                         </li>
                     </ul>
+
                 </div>
+
             </div>
-            <div class="tp-fullwidth-forcer" style="width: 100%; height: 670px;"></div>
+            <div class="tp-fullwidth-forcer" style="width: 100%; height: 670px; "></div>
         </div>
 
-        <div class="slider-contact-form">
+        <div class="slider-contact-form" style="z-index: 999">
             <div class="container">
                 <div class="row justify-content-end">
+                    <div class="col-lg-6" >
+                        <a style="margin-top: 350px; margin-left: 100px" class="tp-caption btn btn-primary font-weight-bold rounded"
+                           href="#" data-toggle="modal" data-target="#signModal"
+                           data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                           data-x="['left','left','left','center']"
+                           data-y="center" data-voffset="['103','103','103','140']"
+                           data-paddingtop="['16','16','16','24']"
+                           data-paddingbottom="['16','16','16','24']"
+                           data-paddingleft="['40','40','40','45']"
+                           data-paddingright="['40','40','40','45']"
+                           data-fontsize="['14','14','14','18']"
+                           data-lineheight="['20','20','20','22']"> <i
+                                    class="fas fa-lock-right ml-1">РЕГИСТРАЦИЯ</i></a>
+                    </div>
                     <div class="col-lg-6" >
                         <div class="featured-box featured-box-primary text-left mt-5">
                             <div class="slider-contact-form-wrapper box-content  bg-primary rounded p-5 appear-animation animated fadeInLeftShorter appear-animation-visible"
