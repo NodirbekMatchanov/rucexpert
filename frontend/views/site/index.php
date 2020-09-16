@@ -81,7 +81,7 @@ $this->title = 'Главная страница';
             <div class="container">
                 <div class="row justify-content-end">
                     <div class="col-lg-6" >
-                        <a style="margin-top: 350px; margin-left: 100px" class="tp-caption btn btn-primary font-weight-bold rounded"
+                        <a style="margin-top: 350px; margin-left: 40px" class="tp-caption btn btn-primary font-weight-bold rounded"
                            href="#" data-toggle="modal" data-target="#signModal"
                            data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
                            data-x="['left','left','left','center']"
