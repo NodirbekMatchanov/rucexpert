@@ -91,6 +91,7 @@ class SiteController extends Controller
         $signModel = new SignupForm();
         $contactModel = new ContactForm();
         $newsList = News::getNewsGroupByRubric();
+        $homePage = Pages::find()->where(['url' => 'home'])->one();
         $count = BlackList::find()->count();
         return $this->render('index', [
             "newsList" => $newsList,
@@ -98,6 +99,7 @@ class SiteController extends Controller
             "model" => $loginModel,
             "signModel" => $signModel,
             "contact" => $contactModel,
+            "homePage" => $homePage
         ]);
     }
 

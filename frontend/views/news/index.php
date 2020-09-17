@@ -8,7 +8,7 @@ use \yii\helpers\Url;
 /* @var $searchModel frontend\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Новости';
+$this->title =  $newsPage->title ?? 'Новости';
 $this->params['breadcrumbs'][] = ['url' => '/news', 'label' => $this->title];
 if (Yii::$app->request->get('rubric_id')) {
     foreach ($rubric as $item) {
@@ -18,6 +18,9 @@ if (Yii::$app->request->get('rubric_id')) {
     }
 }
 ?>
+<?php $this->beginBlock('meta'); ?>
+<meta name="keywords" content="<?= $newsPage->tags ?? '' ?>">
+<?php $this->endBlock(); ?>
 <div role="main" class="main pt-3 mt-3" style="margin-top: 60px!important;">
     <div class="container">
         <div class="row pb-1">

@@ -5,11 +5,13 @@
 use yii\helpers\Url;
 use \yii\helpers\Html;
 
-$this->title = 'Главная страница';
+$this->title = $homePage->title ?? 'Главная страница';
 
 ?>
-
-<div role="main" class="main" >
+<?php $this->beginBlock('meta'); ?>
+<meta name="keywords" content="<?= $homePage->tags ?? '' ?>">
+<?php $this->endBlock(); ?>
+<div role="main" class="main">
 
     <div class="slider-with-overlay">
 
@@ -60,12 +62,8 @@ $this->title = 'Главная страница';
                                  data-width="['750','750','750','750']"
                                  data-fontsize="['36','36','36','36']"
                                  data-lineheight="['50','50','50','50']"
-                                 data-textAlign="['left','left','left','center']">аренды жилых<br>и нежилых помещений</div>
-
-
-
-
-
+                                 data-textAlign="['left','left','left','center']">аренды жилых<br>и нежилых помещений
+                            </div>
 
 
                         </li>
@@ -80,8 +78,9 @@ $this->title = 'Главная страница';
         <div class="slider-contact-form" style="z-index: 999">
             <div class="container">
                 <div class="row justify-content-end">
-                    <div class="col-lg-6" >
-                        <a style="margin-top: 350px; margin-left: 40px" class="tp-caption btn btn-primary font-weight-bold rounded"
+                    <div class="col-lg-6">
+                        <a style="margin-top: 350px; margin-left: 40px"
+                           class="tp-caption btn btn-primary font-weight-bold rounded"
                            href="#" data-toggle="modal" data-target="#signModal"
                            data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
                            data-x="['left','left','left','center']"
@@ -94,23 +93,25 @@ $this->title = 'Главная страница';
                            data-lineheight="['20','20','20','22']"> <i
                                     class="fas fa-lock-right ml-1">РЕГИСТРАЦИЯ</i></a>
                     </div>
-                    <div class="col-lg-6" >
+                    <div class="col-lg-6">
                         <div class="featured-box featured-box-primary text-left mt-5">
                             <div class="slider-contact-form-wrapper box-content  bg-primary rounded p-5 appear-animation animated fadeInLeftShorter appear-animation-visible"
                                  data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="2000"
                                  style="animation-delay: 2000ms; margin: 1rem!important;">
-                                <div class="row" >
+                                <div class="row">
                                     <?php if (!empty($newsList)): ?>
-                                        <?php $i = 0; foreach ($newsList as $k => $news): ?>
-                                            <?php  foreach ($news as $item) : $i++?>
-                                            <?if($i <= 4):?>
-                                               <div class="col-6" style="margin-bottom: 20px">
-                                                   <a class="d-block line-height-2 text-4 text-dark font-weight-regular mt-1 mb-0" style="font-weight: 300;
+                                        <?php $i = 0;
+                                        foreach ($newsList as $k => $news): ?>
+                                            <?php foreach ($news as $item) : $i++ ?>
+                                                <? if ($i <= 4): ?>
+                                                    <div class="col-6" style="margin-bottom: 20px">
+                                                        <a class="d-block line-height-2 text-4 text-dark font-weight-regular mt-1 mb-0"
+                                                           style="font-weight: 300;
     font-size: 14px!important;" href="<?= Url::to(['news/view', 'id' => $item['id']]) ?>">
-                                                   <?= Html::img('/uploads/news/' . $item['img'], ['class' => 'img img-thumbnail','style' => 'width: 200px; height: 120px; object-fit:cover']) ?>
-                                                   <?= \yii\helpers\StringHelper::truncate($item['title'],40)  ?></a>
-                                               </div>
-                                            <?php endif;?>
+                                                            <?= Html::img('/uploads/news/' . $item['img'], ['class' => 'img img-thumbnail', 'style' => 'width: 200px; height: 120px; object-fit:cover']) ?>
+                                                            <?= \yii\helpers\StringHelper::truncate($item['title'], 40) ?></a>
+                                                    </div>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
@@ -154,7 +155,9 @@ $this->title = 'Главная страница';
                     доступностью, нанося вред имуществу и репутации компании. <br>Решение проблемы – прямо перед вами:
                     <br><b>RUC EXPERT</b> – реестр безответственных постояльцев и арендаторов.
                 </p>
-                <h3 style="color: #0088CC !important;font-weight: bold;"><center>Партнеров сервиса: 248</center> </h3>
+                <h3 style="color: #0088CC !important;font-weight: bold;">
+                    <center>Партнеров сервиса: 248</center>
+                </h3>
             </div>
         </div>
 
@@ -392,8 +395,6 @@ $this->title = 'Главная страница';
 
 
 </div>
-
-
 
 
 <?php

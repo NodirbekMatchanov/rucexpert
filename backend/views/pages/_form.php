@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', []),
             ]);
             ?>
+            <?= $form->field($model, 'tags')->textarea() ?>
             <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
             <div class="form-group">

@@ -29,7 +29,7 @@ class Pages extends \yii\db\ActiveRecord
     {
         return [
             [['content'], 'string'],
-            [['title', 'url'], 'string', 'max' => 255],
+            [['title','tags', 'url'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,9 +40,10 @@ class Pages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Название',
-            'content' => 'Content',
+            'title' => 'Заголовка',
+            'content' => 'Описание страницы',
             'url' => 'Url',
+            'tags' => 'Ключевые слова',
         ];
     }
 }

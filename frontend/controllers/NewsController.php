@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use backend\models\Pages;
 use backend\models\Rubric;
 use common\models\Video;
 use Yii;
@@ -41,12 +42,14 @@ class NewsController extends Controller
     {
         $newsItems = NewsSearch::getNewsByRubric();
         $mainNews = NewsSearch::getMainNews();
+        $newsPage = Pages::find()->where(['url' => 'news'])->one();
 //        $pageData = clone $news;
 //        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 4, 'defaultPageSize' => 4]);
 //        $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
         return $this->render('index', [
             'newsItems' => $newsItems,
             'mainNews' => $mainNews,
+            'newsPage' => $newsPage,
 //            'pages' => $page,
 //            'rubric' => $rubric,
         ]);
@@ -84,6 +87,7 @@ class NewsController extends Controller
         } else {
             return $this->redirect('/news');
         }
+        $newsPage = Pages::find()->where(['url' => $url])->one();
         $otherNews = NewsSearch::getOtherNews($rubricId);
         $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2])->andWhere('date <= "'. date("Y-m-d").'"');
         $pageData = clone $news;
@@ -95,6 +99,7 @@ class NewsController extends Controller
             'rubricId' => $rubricId,
             'url' => $url,
             'pages' => $page,
+            'newsPage' => $newsPage,
         ]);
     }
 

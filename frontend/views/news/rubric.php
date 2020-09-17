@@ -5,10 +5,12 @@ use yii\grid\GridView;
 use \yii\helpers\Url;
 use frontend\components\Helper;
 
-$this->title = 'Новости '. Helper::getRubricWords()[$url];
+$this->title = $newsPage->title ??  'Новости '. Helper::getRubricWords()[$url];
 
 ?>
-
+<?php $this->beginBlock('meta'); ?>
+<meta name="keywords" content="<?= $newsPage->tags ?? '' ?>">
+<?php $this->endBlock(); ?>
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
     <div class="container">
         <div class="row">
