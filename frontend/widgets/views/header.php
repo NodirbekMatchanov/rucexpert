@@ -329,20 +329,13 @@ use yii\helpers\Html;
                                                             </a>
 
                                                         </li>
-                                                        <li class="dropdown dropdown-full-color dropdown-light">
-                                                            <a class="dropdown-item dropdown-toggle "
-                                                               href="<?= Url::to(['/news/car-rent']) ?>">
-                                                                Арендовать авто
-                                                            </a>
 
+
+                                                        <li class="dropdown dropdown-full-color dropdown-light">
+                                                            <a class="dropdown-item dropdown-toggle" href="#">
+                                                                Добавить новость
+                                                            </a>
                                                         </li>
-<!--                                                        -->
-<!--                                                        <li class="dropdown dropdown-full-color dropdown-light">-->
-<!--                                                            <a class="dropdown-item dropdown-toggle" href="#">-->
-<!--                                                                Добавить новость-->
-<!--                                                            </a>-->
-<!---->
-<!--                                                        </li>-->
 
                                                     </ul>
                                                 </nav>
