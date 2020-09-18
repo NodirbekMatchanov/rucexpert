@@ -158,3 +158,22 @@ $this->title = $newsPage->title ??  'Новости '. Helper::getRubricWords()[
 
 </div>
 
+<?php
+\yii\bootstrap\Modal::begin([
+    'header' => '<h4 class="modal-title">Подтвердите код</h4>',
+    'toggleButton' => ['label' => 'click me', 'id' => 'openModal', 'class' => 'hidden'],
+]);
+\yii\bootstrap\Modal::end();
+?>
+<!-- Sign up -->
+
+<?php
+\yii\bootstrap\Modal::begin([
+    'header' => '<h4 class="modal-title">Регистрация</h4>',
+    'size' => 'modal-lg',
+    'options' => ['class' => 'modal fade', 'id' => 'signModal', 'aria-labelledby' => "signModalLabel"],
+]);
+echo $this->render('signup', ['model' => $signModel]);
+
+\yii\bootstrap\Modal::end();
+?>

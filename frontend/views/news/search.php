@@ -44,7 +44,7 @@ $this->title = 'Поиск'
                                 <div class="col-md-4">
                                     <article class="post post-medium border-0 pb-0 mb-5">
                                         <div class="post-image">
-                                            <a href="/news?id=<?= $item->id ?>">
+                                            <a href="/news/view?id=<?= $item->id ?>">
                                                 <img src="<?= $item->img ?>"
                                                      class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0"
                                                      style="width: 550px; height: 250px; object-fit: cover"
@@ -55,7 +55,7 @@ $this->title = 'Поиск'
                                         <div class="post-content">
 
                                             <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a
-                                                    href="/news?id=<?= $item->id ?>"><?= $item->title ?></a>
+                                                    href="/news/view?id=<?= $item->id ?>"><?= $item->title ?></a>
                                             </h2>
                                             <p><?= \yii\helpers\StringHelper::truncate($item->short_content, 180) ?></p>
 

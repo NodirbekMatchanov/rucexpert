@@ -6,6 +6,7 @@ use backend\models\Pages;
 use backend\models\Rubric;
 use common\models\Video;
 use frontend\models\NewsFeedBack;
+use frontend\models\SignupForm;
 use Yii;
 use common\models\News;
 use frontend\models\NewsSearch;
@@ -44,15 +45,12 @@ class NewsController extends Controller
         $newsItems = NewsSearch::getNewsByRubric();
         $mainNews = NewsSearch::getMainNews();
         $newsPage = Pages::find()->where(['url' => 'news'])->one();
-//        $pageData = clone $news;
-//        $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 4, 'defaultPageSize' => 4]);
-//        $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();
+        $signModel = new SignupForm();
         return $this->render('index', [
             'newsItems' => $newsItems,
             'mainNews' => $mainNews,
+            "signModel" => $signModel,
             'newsPage' => $newsPage,
-//            'pages' => $page,
-//            'rubric' => $rubric,
         ]);
     }
 
@@ -65,12 +63,14 @@ class NewsController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $signModel = new SignupForm();
         $otherNews = NewsSearch::getOtherNews($model->rubric_id);
         $video = Video::find()->where(['parent_id' => $id])->one();
         return $this->render('view', [
             'model' => $model,
             'otherNews' => $otherNews,
             'video' => $video,
+            "signModel" => $signModel,
         ]);
     }
 
@@ -82,6 +82,7 @@ class NewsController extends Controller
     public function actionFeedBack()
     {
         $model = new NewsFeedBack();
+        $signModel = new SignupForm();
         if (Yii::$app->request->post() && $model->load(Yii::$app->request->post())) {
             try {
                 $result = $model->sendFeedBack();
@@ -96,6 +97,7 @@ class NewsController extends Controller
         }
         return $this->render('feedback', [
             'model' => $model,
+            "signModel" => $signModel,
         ]);
     }
 
@@ -107,6 +109,7 @@ class NewsController extends Controller
     public function actionRubric($url)
     {
         $model = new News();
+        $signModel = new SignupForm();
         $rubric = News::getRubric();
         if (isset($rubric[$url])) {
             $rubricId = $rubric[$url];
@@ -126,6 +129,7 @@ class NewsController extends Controller
             'url' => $url,
             'pages' => $page,
             'newsPage' => $newsPage,
+            "signModel" => $signModel,
         ]);
     }
 

@@ -79,8 +79,8 @@ $this->title = $homePage->title ?? 'Главная страница';
             <div class="container">
                 <div class="row justify-content-end">
                     <div class="col-lg-6">
-                        <a style="margin-top: 350px; margin-left: 40px"
-                           class="tp-caption btn btn-primary font-weight-bold rounded"
+                        <a style=""
+                           class="tp-caption btn btn-primary font-weight-bold rounded slider-sign-btn"
                            href="#" data-toggle="modal" data-target="#signModal"
                            data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
                            data-x="['left','left','left','center']"
@@ -115,10 +115,7 @@ $this->title = $homePage->title ?? 'Главная страница';
                                             <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -140,7 +137,6 @@ $this->title = $homePage->title ?? 'Главная страница';
 									<b class="is-visible">КАРШЕРИНГА</b>
 									<b class="is-visible">АРЕНДЫ</b>
 								</span>
-
                 </h1>
                 <h3 style="color: green;font-weight: bold;">
                     <center>База реестра: <?= $count ?> ГРАЖДАН.
@@ -207,7 +203,6 @@ $this->title = $homePage->title ?? 'Главная страница';
                     <div class="call-to-action-content">
                         <h3 style="color: white;">У нас всегда актуальная база нарушителей. <br><strong
                                     class="font-weight-extra-bold"> Пополняется ежедневно</strong></h3>
-
                     </div>
                 </div>
                 <div class="col-sm-3 col-lg-3">
@@ -250,7 +245,6 @@ $this->title = $homePage->title ?? 'Главная страница';
                         <div class="box-content px-lg-1 px-xl-5">
                             <i class="icon-featured icons icon-lock text-color-primary text-11"></i>
                             <h4 class="font-weight-bold text-5 mb-3">Безопасность клиентов</h4>
-
                         </div>
                     </div>
                 </div>
@@ -260,7 +254,6 @@ $this->title = $homePage->title ?? 'Главная страница';
                         <div class="box-content px-lg-1 px-xl-5">
                             <i class="icon-featured icons icon-wallet text-color-primary text-11"></i>
                             <h4 class="font-weight-bold text-5 mb-3">Деньги</h4>
-
                         </div>
                     </div>
                 </div>
@@ -270,7 +263,6 @@ $this->title = $homePage->title ?? 'Главная страница';
                         <div class="box-content px-lg-1 px-xl-5">
                             <i class="icon-featured icons icon-user-following text-color-primary text-11"></i>
                             <h4 class="font-weight-bold text-5 mb-3">Ваш покой</h4>
-
                         </div>
                     </div>
                 </div>
@@ -315,7 +307,6 @@ $this->title = $homePage->title ?? 'Главная страница';
             </div>
         </div>
     </section>
-
 
     <section class="section section-height-3 section-parallax bg-color-light border-0 m-0" data-plugin-parallax
              data-plugin-options="{'speed': 1.5, 'parallaxHeight': '100%', 'offset': 70}"
