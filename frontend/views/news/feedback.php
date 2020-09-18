@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
+$this->title = 'Добавить новость'
 ?>
 
 
@@ -21,7 +21,15 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'text')->widget(\mihaildev\ckeditor\CKEditor::className(), [
                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', []),
             ]) ?>
-            <?= $form->field($model, 'attachFile')->fileInput() ?>
+            <?= $form->field($model, 'attachFile')->widget(\kartik\file\FileInput::className(), [
+                'language' => 'ru',
+                'pluginOptions' => [
+                    'showPreview' => false,
+                    'showCaption' => false,
+                    'showRemove' => false,
+                    'showUpload' => false
+                ],
+            ]) ?>
             <div class="col-md-3">
                 <?= $form->field($model, 'reCaptcha')->widget(
                     \himiklab\yii2\recaptcha\ReCaptcha2::className()

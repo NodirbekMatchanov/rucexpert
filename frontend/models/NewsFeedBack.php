@@ -34,9 +34,9 @@ class NewsFeedBack extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['phone', 'string', 'max' => 255],
+            [['attachFile'], 'file', 'extensions' => 'jpg, bmp, gif, avi,mp4'],
             [['attachFile'], 'file', 'maxSize' => '100000'],
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator2::className(),
-
             ]
         ];
     }
