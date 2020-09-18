@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use backend\models\Pages;
 use backend\models\Rubric;
 use common\models\Video;
+use frontend\models\NewsFeedBack;
 use Yii;
 use common\models\News;
 use frontend\models\NewsSearch;
@@ -73,6 +74,31 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * FeedBack form
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionFeedBack()
+    {
+        $model = new NewsFeedBack();
+        if (Yii::$app->request->post() && $model->load(Yii::$app->request->post())) {
+            try {
+                $result = $model->sendFeedBack();
+            } catch (\Exception $exception){
+                Yii::info($exception);
+                Yii::$app->session->setFlash('error', 'Ошибка при отправке');
+                return $this->render('feedback', [
+                    'model' => $model,
+                ]);
+            }
+            Yii::$app->session->setFlash('success', 'Успешно отправлено');
+        }
+        return $this->render('feedback', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * @param $url
@@ -89,7 +115,7 @@ class NewsController extends Controller
         }
         $newsPage = Pages::find()->where(['url' => $url])->one();
         $otherNews = NewsSearch::getOtherNews($rubricId);
-        $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2])->andWhere('date <= "'. date("Y-m-d").'"');
+        $news = $model::find()->where(['rubric_id' => $rubricId, 'status' => 2])->andWhere('date <= "' . date("Y-m-d") . '"');
         $pageData = clone $news;
         $page = new Pagination(['totalCount' => $pageData->count(), 'pageSize' => 6, 'defaultPageSize' => 6]);
         $newsItems = $pageData->orderBy('id desc')->offset($page->offset)->limit($page->limit)->all();

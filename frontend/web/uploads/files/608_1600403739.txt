@@ -1,0 +1,66 @@
+var catalog_id;
+new Promise(function (resolve, reject) {
+    $.ajax({
+        url: "/api/v2/catalogs",
+        method: "POST",
+        data: {"add": [{"name": "Документы"}]}
+    }).done(function (data) {
+        catalog_id = data._embedded.items[0].id;
+        resolve(catalog_id);
+    }).fail(function (err) {
+        reject(err);
+    })
+
+}).then(function (catalog_id) {
+
+    return new Promise((resolve, reject) => { // (*)
+        $.ajax({
+            url: "/api/v4/catalogs/" + catalog_id + "/custom_fields"
+        }).done(function (response) {
+            var data = {"action": "apply_changes", "cf": {"delete": []}};
+            console.log(response._embedded.custom_fields);
+            let fields = [];
+            _.map(response._embedded.custom_fields, function (v) {
+                data.cf.delete.push({"id": v.id, "catalog_id": catalog_id, "element_type": catalog_id});
+            });
+            resolve(data);
+        });
+ });
+    }).then(function (data) { // (**)
+
+      return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "/ajax/settings/custom_fields/",
+                method: "POST",
+                data: data
+            }).done(function(data){
+                resolve(data);
+            }).fail(function(err){
+                reject(err);
+            })
+        });
+
+    }).then(function (result) {
+
+        $.ajax({
+            url: "/api/v4/catalogs/"+catalog_id+"/custom_fields",
+            method: "POST",
+            dataType: "JSON",
+            data: JSON.stringify([
+                {"name": "Скачать PDF", "type": "url"},
+                {"name": "Кем создан", "type": "text"},
+                {"name": "Папка с документом", "type": "url"},
+                {"name": "Дата создания", "type": "date_time"},
+                {"name": "Номер документа", "type": "numeric"},
+                {"name": "Сделка", "type": "url"},
+                {"name": "Статус (где создан)", "type": "text"},
+                {"name": "Шаблон", "type": "text"}
+            ])
+        }).done(function (data) {
+            console.log(data);
+        }).fail(function(err){
+            console.log(data);
+        })
+
+
+    });

@@ -31,6 +31,11 @@ return [
                 ],
             ],
         ],
+        'reCaptcha' => [
+            'class' => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
+            'siteKeyV3' => '6LfFrc0ZAAAAACPaUOuR3n842yTAHs_FnE5SP4lP',
+            'secretV3' => '6LfFrc0ZAAAAAJGFcLGRKWGI2nv5b68j0nK4N1xD',
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ""
@@ -41,11 +46,11 @@ return [
              'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.mail.ru',
-                'username' => 'group.scala@mail.ru',
-                'password' => 'nodirbek199601051',
-                'port' => '587',
-                'encryption' => 'tls',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'demin@ruc.expert',
+                'password' => 'Lion6006826407',
+                'port' => '465',
+                'encryption' => 'ssl',
             ],
         ],
         'user' => [
@@ -97,6 +102,7 @@ return [
             'rules' => [
                 'news' => 'news/index',
                 'news/view' => 'news/view',
+                'news/feed-back' => 'news/feed-back',
                 'search' => 'news/search',
                 'news/<url>' => 'news/rubric',
                 'news/<action>' => '<controller><action>',

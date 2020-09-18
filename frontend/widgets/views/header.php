@@ -332,7 +332,7 @@ use yii\helpers\Html;
 
 
                                                         <li class="dropdown dropdown-full-color dropdown-light">
-                                                            <a class="dropdown-item dropdown-toggle" href="#">
+                                                            <a class="dropdown-item dropdown-toggle" href="/news/feed-back">
                                                                 Добавить новость
                                                             </a>
                                                         </li>
