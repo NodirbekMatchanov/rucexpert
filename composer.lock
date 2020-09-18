@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea6436dc361cc83802ccb601f199b2e5",
+    "content-hash": "bf20b33bf936017ddb3f60d9efb59294",
     "packages": [
         {
             "name": "2amigos/yii2-arrayquery-component",
@@ -1464,6 +1464,57 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "vintage/yii2-invisible-recaptcha",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Inspired-by-Boredom/yii2-invisible-recaptcha.git",
+                "reference": "27106328f37ad409f16f389fae78b3e43a5afee8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Inspired-by-Boredom/yii2-invisible-recaptcha/zipball/27106328f37ad409f16f389fae78b3e43a5afee8",
+                "reference": "27106328f37ad409f16f389fae78b3e43a5afee8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "^2.0.0",
+                "yiisoft/yii2-httpclient": "~2.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~2.2",
+                "codeception/specify": "*",
+                "codeception/verify": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vintage\\recaptcha\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Kuprienko",
+                    "email": "vldmr.kuprienko@gmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Facade of Invisible reCAPTCHA by Google for Yii2 Framework",
+            "keywords": [
+                "captcha",
+                "google",
+                "invisible",
+                "re-captcha",
+                "widget",
+                "yii2"
+            ],
+            "time": "2019-10-25T12:49:57+00:00"
         },
         {
             "name": "yii-cms/yii2-robokassa",

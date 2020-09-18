@@ -22,17 +22,17 @@ use yii\bootstrap\ActiveForm;
                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', []),
             ]) ?>
             <?= $form->field($model, 'attachFile')->fileInput() ?>
-            <?= $form->field($model, 'reCaptcha',['enableClientValidation' => false])->widget(
-                \himiklab\yii2\recaptcha\ReCaptcha3::className(),
-                [
-                ]
-            ) ?>
-            <div class="form-group">
+            <div class="col-md-3">
+                <?= $form->field($model, 'reCaptcha')->widget(
+                    \himiklab\yii2\recaptcha\ReCaptcha2::className()
+                ) ?>
+                <div class="form-group">
+            </div>
                 <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
         </div>
 
         <?php ActiveForm::end(); ?>
     </div>
-</div>
+
 

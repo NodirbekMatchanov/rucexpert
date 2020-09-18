@@ -33,8 +33,8 @@ return [
         ],
         'reCaptcha' => [
             'class' => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
-            'siteKeyV3' => '6LfFrc0ZAAAAACPaUOuR3n842yTAHs_FnE5SP4lP',
-            'secretV3' => '6LfFrc0ZAAAAAJGFcLGRKWGI2nv5b68j0nK4N1xD',
+            'siteKeyV2' => '6Le2tc0ZAAAAADoKNufm23yH9DcPXXmRQzjB1Cc-',
+            'secretV2' => '6Le2tc0ZAAAAAIBF33K9tJfebhxginthtWT0X-oW',
         ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
