@@ -26,7 +26,7 @@ use yii\bootstrap\ActiveForm;
                 \himiklab\yii2\recaptcha\ReCaptcha3::className(),
                 [
                     'siteKey' => '6LfFrc0ZAAAAACPaUOuR3n842yTAHs_FnE5SP4lP', // unnecessary is reCaptcha component was set up
-                    'action' => 'homepage',
+                    'action' => 'feed-back',
                 ]
             ) ?>
             <div class="form-group">

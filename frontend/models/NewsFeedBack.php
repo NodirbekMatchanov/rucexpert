@@ -38,7 +38,7 @@ class NewsFeedBack extends Model
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::className(),
         'secret' => '6LfFrc0ZAAAAAJGFcLGRKWGI2nv5b68j0nK4N1xD', // unnecessary if reСaptcha is already configured
         'threshold' => 0.5,
-        'action' => 'homepage',
+        'action' => 'feed-back',
       ]
         ];
     }
