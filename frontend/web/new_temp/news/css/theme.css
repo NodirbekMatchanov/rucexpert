@@ -43,6 +43,9 @@ li {
 	body {
 		font-size: 13px;
 	}
+	.header-logo{
+		width: 205px!important;
+	}
 }
 /* Header */
 #header {
@@ -6462,7 +6465,9 @@ html.dark .text-muted {
 	#footer .footer-nav {
 		width: 100%;
 	}
-
+	.mobil-login{
+		display: flex!important;
+	}
 	#header .header-nav-features {
 		position: relative;
 		padding-left: 0px;
