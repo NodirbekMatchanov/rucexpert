@@ -96,6 +96,7 @@ use yii\widgets\ActiveForm;
                     ])->textInput(['maxlength' => true,'placeholder' => 'Страна, Область (штат), Город'])->label('Место рождения') ?>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'passport_ser')->textInput() ?>

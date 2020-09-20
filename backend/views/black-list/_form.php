@@ -40,6 +40,21 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'passport_ser')->textInput() ?>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'passport_num')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'ser_num_car')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'numb_car')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
