@@ -24,8 +24,8 @@ class PaymentController extends Controller
             $merchant = Yii::$app->get('robokassa');
             return $merchant->payment($model->summ, $model->id, 'Пополнение счета', null, \Yii::$app->user->identity->email);
         } else {
-            var_dump($model->errors);
-            die();
+//            var_dump($model->errors);
+//            die();
             return $this->redirect('/personal-area/index');
         }
     }

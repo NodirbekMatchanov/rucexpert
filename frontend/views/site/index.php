@@ -345,7 +345,7 @@ $this->title = $homePage->title ?? 'Главная страница';
             <h3 class="text-center" style="color: white">Быстрая регистрация</h3>
             <div class="row" style="display: flex; align-items: center; justify-content: center">
                 <?= Html::textInput('email', '', ['class' => 'form-control fast-sign-email', 'placeholder' => 'email']) ?>
-                <div class="input-group" style="width: 36%">
+                <div class="input-group fast-sign-group" >
                     <?= Html::textInput('phone', '', ['class' => 'form-control fast-sign-phone', 'placeholder' => 'телефон']) ?>
                     <div class="input-group-append">
                         <button style=" width: 150px;

@@ -113,24 +113,19 @@ use yii\helpers\Html;
                                             </div>
                                         </div>
                                     <?php else: ?>
-                                        <a href="#" class="header-nav-features-toggle">
-                                            <i class="far fa-user"></i> <?= Yii::$app->user->identity->username ?>
+                                        <a href="#" style="color: #0ab5f2!important;" class="header-nav-features-toggle">
+                                            <i class="far fa-user"></i>
                                         </a>
                                         <div class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
                                              id="headerTopUserDropdown">
                                             <div class="row">
                                                 <div class="col-8">
-                                                    <p class="mb-0 pb-0 text-2 line-height-1 pt-1">Привет!,</p>
+                                                    <p  class="mb-0 pb-0 text-2 line-height-1 pt-1">Привет!,</p>
                                                     <p>
                                                         <strong class="text-color-dark text-4"><?= Yii::$app->user->identity->username ?></strong>
                                                     </p>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="d-flex justify-content-end">
-                                                        <img class="rounded-circle" width="40" height="40" alt=""
-                                                             src="img/avatars/avatar.jpg">
-                                                    </div>
-                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col">
@@ -161,9 +156,9 @@ use yii\helpers\Html;
                         <div class="header-row">
                             <div class="header-nav header-nav-links header-nav-dropdowns-dark header-nav-light-text order-2 order-lg-1"
                                  style="display: flex; justify-content: space-between">
-                                <div class="mobile-nav hidden header-nav-main mobile header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                <div class="mobile-nav  header-nav-main mobile header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
                                     <nav class="collapse">
-                                        <ul class="nav nav-pills mobile-ul " id="mainNav">
+                                        <ul class="nav nav-pills  " id="mainNav">
                                             <li class="dropdown dropdown-full-color dropdown-light">
                                                 <a class="dropdown-item dropdown-toggle "
                                                    href="<?= Url::to(['/']) ?>">
@@ -237,10 +232,7 @@ use yii\helpers\Html;
                                                     </ul>
                                                 </nav>
                                             </div>
-                                            <button class="btn header-btn-collapse-nav" data-toggle="collapse"
-                                                    data-target=".header-nav-main nav">
-                                                <i class="fas fa-bars"></i>
-                                            </button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -271,12 +263,7 @@ use yii\helpers\Html;
                                                             <strong class="text-color-dark text-4"><?= Yii::$app->user->identity->username ?></strong>
                                                         </p>
                                                     </div>
-                                                    <div class="col-4">
-                                                        <div class="d-flex justify-content-end">
-                                                            <img class="rounded-circle" width="40" height="40" alt=""
-                                                                 src="img/avatars/avatar.jpg">
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">

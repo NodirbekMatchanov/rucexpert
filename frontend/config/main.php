@@ -118,7 +118,7 @@ return [
             'sMerchantPass1' => 'CBznhH2VCC6gCQ7ZWz16',
 //            'sMerchantPass2' => 'Z12dbGUBT1hcsm7wU7WX',
             'sMerchantPass2' => 'eB3wD1mR4QkfP0vk0cCi',
-            'isTest' => true,
+            'isTest' => false,
         ]
     ],
     'params' => $params,

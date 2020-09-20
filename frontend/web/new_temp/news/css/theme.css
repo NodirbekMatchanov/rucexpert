@@ -7812,9 +7812,16 @@ html.gap-outside #header:not(.side-header) .header-container:after {
 	content: none;
 }
 
+.fast-sign-group {
+	width: 36%!important;
+}
 @media (max-width: 991px) {
 	html.gap-outside #header:not(.side-header) .header-nav-main:before {
 		width: calc(100vw - 50px);
+	}
+
+	.fast-sign-group {
+		width: 86%!important;
 	}
 }
 
@@ -7837,4 +7844,3 @@ html.gap-outside .pin-wrapper .sticky-wrapper.sticky-effect-active .sticky-body 
 	padding-left: 25px;
 	padding-right: 25px;
 }
-
