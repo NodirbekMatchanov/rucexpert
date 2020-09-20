@@ -33,7 +33,8 @@ class NewAppAsset extends AssetBundle
         'new_temp/fonts/font-awesome/css/font-awesome.min.css',
         'new_temp/css/toastr.css',
         'new_temp/news/css/skins/skin-corporate-14.css',
-        'new_temp/news/css/custom.css'
+        'new_temp/news/css/custom.css',
+        'css/intlTelInput.css'
     ];
     public $js = [
 //        'new_temp/news/vendor/jquery/jquery.min.js',
@@ -62,6 +63,8 @@ class NewAppAsset extends AssetBundle
         'new_temp/news/vendor/rs-plugin/revolution-addons/typewriter/js/revolution.addon.typewriter.min.js',
         'new_temp/news/js/custom.js',
         'new_temp/news/js/theme.init.js',
+        'js/intlTelInput.min.js',
+        'js/intlTelInput-jquery.min.js',
 
     ];
     public $depends = [

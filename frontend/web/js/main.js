@@ -4,6 +4,8 @@ $(document).ready(function () {
     function init() {
         bindAction();
         // $('#phone').mask('+0000000000000');
+
+
     }
 
     function bindAction() {

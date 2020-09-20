@@ -8,6 +8,7 @@ use backend\models\Pages;
 use common\models\BlackList;
 use common\models\Sms;
 use common\models\User;
+use frontend\components\Helper;
 use frontend\models\FastSignupForm;
 use Yii;
 use yii\authclient\AuthAction;
@@ -319,7 +320,7 @@ class SiteController extends Controller
             $code = rand(1000, 9999);
             $sms = new Sms();
             $sms->code = $code;
-            $sms->phone = "+" . trim($phone);
+            $sms->phone = Helper::formatPhone(trim($phone));
             $sms->create_at = date("Y-m-d h:i:s");
             if ($sms->save()) {
                 $messages = new Sender(Yii::$app->params['sms_login'], Yii::$app->params['sms_passwd']);
