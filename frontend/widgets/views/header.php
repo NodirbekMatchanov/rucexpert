@@ -308,7 +308,7 @@ use yii\helpers\Html;
                                                               style="top: 1px;"></i> Поиск</span>
                                     </li>
                                     <li class="nav-item nav-item-borders py-2">
-                                        <a href="#" data-toggle="modal" data-target="#signModal"><i
+                                        <a href="/site/login" ><i
                                                     class="far fa-user text-4 text-color-primary"
                                                     style="top: 0;"></i>Авторизация</a>
                                     </li>
