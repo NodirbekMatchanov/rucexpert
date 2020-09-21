@@ -320,7 +320,7 @@ class SiteController extends Controller
             $code = rand(1000, 9999);
             $sms = new Sms();
             $sms->code = $code;
-            $sms->phone = Helper::formatPhone(trim($phone));
+            $sms->phone = Helper::formatPhone($phone);
             $sms->create_at = date("Y-m-d h:i:s");
             if ($sms->save()) {
                 $messages = new Sender(Yii::$app->params['sms_login'], Yii::$app->params['sms_passwd']);
@@ -328,7 +328,7 @@ class SiteController extends Controller
                 $messages->setUrl(Yii::$app->params['sms_host']);
                 $mes = $messages->createNewMessage(Yii::$app->params['sms_sender'], $code, 'sms');
 
-                $abonent = $mes->createAbonent($phone);
+                $abonent = $mes->createAbonent($sms->phone);
                 $abonent->setNumberSms(1);
                 $mes->addAbonent($abonent);
                 //$abonent->setTimeSend("2015-12-15 15:12");
