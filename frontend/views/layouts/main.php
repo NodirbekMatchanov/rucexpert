@@ -30,8 +30,7 @@ NewAppAsset::register($this);
 
     <?php $this->head() ?>
 </head>
-<body class="loading-overlay-showing" data-plugin-page-transition data-loading-overlay
-      data-plugin-options="{'hideDelay': 500}">
+<body >
 <?php $this->beginBody() ?>
 <div class="body">
 
