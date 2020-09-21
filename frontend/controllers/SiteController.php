@@ -111,7 +111,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-
+        $signModel = new SignupForm();
             if (!Yii::$app->user->isGuest) {
                 return $this->redirect(['personal-area/index']);
             }
@@ -124,10 +124,12 @@ class SiteController extends Controller
 
                     return $this->renderAjax('login', [
                         'model' => $model,
+                        "signModel" => $signModel,
                     ]);
                 } else {
                     return $this->render('login', [
                         'model' => $model,
+                        "signModel" => $signModel,
                     ]);
                 }
             }
