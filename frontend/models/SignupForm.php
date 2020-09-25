@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use common\models\Hotels;
 use common\models\Sms;
+use frontend\components\Helper;
 use yii\base\Model;
 use common\models\User;
 use yii\helpers\Html;
@@ -93,7 +94,7 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-
+        $this->phone = Helper::formatPhone($this->phone);
         $user = new User();
         $hotels = new Hotels();
         $user->username = $this->email;

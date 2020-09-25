@@ -238,7 +238,7 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isAjax && Yii::$app->request->get()) {
             $model->email = Yii::$app->request->get('email');
-            $model->phone = '+' . Yii::$app->request->get('phone');
+            $model->phone = Helper::formatPhone(Yii::$app->request->get('phone'));
             $model->code = '';
             $this->actionSendCode();
             return $this->renderAjax('fast_signup', [
