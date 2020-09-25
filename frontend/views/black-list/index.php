@@ -34,6 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'middle_name',
                         'email',
                         [
+                            'label' => 'Автор',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                               return \common\models\User::findOne($model->user_id)->username;
+                            }
+                        ],
+                        [
                             'label' => 'Статус',
                             'format' => 'raw',
                             'value' => function ($model) {

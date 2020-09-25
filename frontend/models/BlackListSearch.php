@@ -137,7 +137,18 @@ class BlackListSearch extends BlackList
             'query' => $query,
         ]);
 
-        $query->where(['user_id' => \Yii::$app->user->identity->id]);
+        if(User::getRoleName(\Yii::$app->user->identity->id) == 'director') {
+            $users = \common\models\User::find()->where(['parent_id' => \Yii::$app->user->identity->id])-> all();
+            $userList = [];
+            array_push($userList,\Yii::$app->user->identity->id);
+            foreach ($users as $user){
+                array_push($userList,$user->id);
+            }
+            $userIds = implode(',',$userList);
+            $query->where('user_id IN('.$userIds.')');
+        } else {
+            $query->where(['user_id' => \Yii::$app->user->identity->id]);
+        }
         $this->load($params);
 
         if (!$this->validate()) {
