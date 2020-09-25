@@ -113,7 +113,7 @@ return [
         'robokassa' => [
             'class' => '\robokassa\Merchant',
             'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
-//            'sMerchantLogin' => 'RUCEXPERT_RU',
+            'sMerchantLogin' => 'RUCEXPERT_RU',
             'sMerchantPass1' => 'noNu3N38bTytM1adC7lt',
 //            'sMerchantPass1' => 'CBznhH2VCC6gCQ7ZWz16',
             'sMerchantPass2' => 'Z12dbGUBT1hcsm7wU7WX',
