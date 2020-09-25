@@ -207,7 +207,7 @@ class NewsController extends Controller
         return \Yii::$app
             ->mailer
             ->compose()
-            ->setFrom(['group.scala@mail.ru' => 'Robot'])
+            ->setFrom(['demin@ruc.expert' => 'Robot'])
             ->setTo(Yii::$app->params['notification'])
             ->setSubject('Rucexpert')
             ->setHtmlBody($body)
