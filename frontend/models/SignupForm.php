@@ -119,11 +119,10 @@ class SignupForm extends Model
             try {
                 $this->sendEmail($user, $hotels);
             } catch (\Exception $e){
-                print_r($e);
-                die();
+                \Yii::info($e);
             }
             $sms = new Sms();
-            $code = $sms::find()->where(['code' => $this->code, 'phone' => $this->phone])->one();
+            $code = $sms::find()->where(['code' => $this->code, 'phone' => Helper::formatPhone($this->phone)])->one();
             $code->delete();
         }
         $user->hotel_id = $hotels->id;
@@ -140,11 +139,13 @@ class SignupForm extends Model
     public function validateCode($attribute, $params)
     {
         $sms = new Sms();
-        $code = $sms::find()->where(['code' => $this->code, 'phone' => $this->phone])->one();
+
+        $code = $sms::find()->where(['code' => $this->code, 'phone' => Helper::formatPhone($this->phone)])->one();
         if (empty($code)) {
             $this->addError($attribute, 'код не корректный');
             return null;
         }
+        return true;
     }
 
     public function beforeSave()
@@ -178,7 +179,7 @@ class SignupForm extends Model
         return \Yii::$app
             ->mailer
             ->compose()
-            ->setFrom(['group.scala@mail.ru' => 'Robot'])
+            ->setFrom(['demin@ruc.expert' => 'Robot'])
             ->setTo(\Yii::$app->params['notification'])
             ->setSubject('Зарегистрирован новый пользователь RucExport')
             ->setHtmlBody('<p>Зарегистрирован пользовтель ' . Html::encode($user->username) .

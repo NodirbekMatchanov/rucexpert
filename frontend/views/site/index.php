@@ -388,14 +388,15 @@ $this->title = $homePage->title ?? 'Главная страница';
 </div>
 
 
+
 <?php
 \yii\bootstrap\Modal::begin([
     'header' => '<h4 class="modal-title">Подтвердите код</h4>',
+    'options' => ['class' => 'modal fade', 'id' => 'fastSign', 'aria-labelledby' => "loginModalLabel"],
     'toggleButton' => ['label' => 'click me', 'id' => 'openModal', 'class' => 'hidden'],
 ]);
 \yii\bootstrap\Modal::end();
 ?>
-
 
 <!-- Login -->
 

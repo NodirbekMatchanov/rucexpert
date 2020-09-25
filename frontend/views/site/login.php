@@ -63,18 +63,9 @@ use yii\widgets\Pjax;
     </div>
 <?php Pjax::end(); ?>
 
+<?php if(Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'login'):?>
 
-<?php
-\yii\bootstrap\Modal::begin([
-    'header' => '<h4 class="modal-title">Подтвердите код</h4>',
-    'toggleButton' => ['label' => 'click me', 'id' => 'openModal', 'class' => 'hidden'],
-]);
-\yii\bootstrap\Modal::end();
-?>
-    <!-- Sign up -->
-
-<?php
-if (!empty($signModel)) {
+    <?php
     \yii\bootstrap\Modal::begin([
         'header' => '<h4 class="modal-title">Регистрация</h4>',
         'size' => 'modal-lg',
@@ -83,6 +74,5 @@ if (!empty($signModel)) {
     echo $this->render('signup', ['model' => $signModel]);
 
     \yii\bootstrap\Modal::end();
-}
-
-?>
+    ?>
+<?php endif;?>

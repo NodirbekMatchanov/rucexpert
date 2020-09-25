@@ -336,7 +336,6 @@ class SiteController extends Controller
                 //$abonent->setTimeSend("2015-12-15 15:12");
                 //$abonent->setValidityPeriod("2015-12-16 16:00");
                 $mes->addAbonent($abonent);
-
                 $messages->addMessage($mes);
                 if (!$messages->send()) {
                     Yii::info($messages->getError());

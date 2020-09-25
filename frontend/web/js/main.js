@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     $(".avatar-upload").on('click', function () {
     });
-    //
+
     $(document).on('click', '.fast-sign-reg', function () {
         let email = $('input[name="email"]').val();
         let phone = $('input[name="phone"]').val();
