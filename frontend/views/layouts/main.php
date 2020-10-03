@@ -290,6 +290,16 @@ NewAppAsset::register($this);
     <div><img src="https://mc.yandex.ru/watch/56893129" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript> <!-- /Yandex.Metrika counter -->
 <!--<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179546896-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-179546896-1');
+</script>
+
 </body>
 </html>
 <?php $this->endPage() ?>
