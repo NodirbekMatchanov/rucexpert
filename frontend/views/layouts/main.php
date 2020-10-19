@@ -9,7 +9,14 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\NewAppAsset;
 use common\widgets\Alert;
 
-NewAppAsset::register($this);
+if (Yii::$app->controller->id == 'site' &&
+       (Yii::$app->controller->action->id == 'login' ||  Yii::$app->controller->action->id == 'signup' ||  Yii::$app->controller->action->id == 'request-password-reset' ||   Yii::$app->controller->action->id == 'reset-password'))
+{
+    \frontend\assets\LoginAppAsset::register($this);
+} else {
+    NewAppAsset::register($this);
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -30,11 +37,16 @@ NewAppAsset::register($this);
 
     <?php $this->head() ?>
 </head>
-<body >
+<body>
 <?php $this->beginBody() ?>
-<div class="body">
+    <?php if (Yii::$app->controller->id == 'site' &&
+    (Yii::$app->controller->action->id == 'login' ||  Yii::$app->controller->action->id == 'signup' ||  Yii::$app->controller->action->id == 'request-password-reset' ||   Yii::$app->controller->action->id == 'reset-password')
+    ): ?>
+        <?= $content ?>
+    <?php else: ?>
+        <div class="body">
 
-    <?php
+        <?php
     $menuItems = [
         ['label' => 'Главная страница', 'url' => ['/site/index']],
         $menuItems[] = ['label' => 'Поиск', 'url' => ['black-list/search']]
@@ -71,64 +83,66 @@ NewAppAsset::register($this);
     <?php endif; ?>
 </div>
 
-<footer id="footer" class="mt-0">
-    <div class="container container-lg my-4">
-        <div class="row py-4">
-            <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
-                <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Личный кабинет</h5>
-                <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="/site/login" class="link-hover-style-1 ml-1"> Авторизация</a>
-                    </li>
-                    <li class="text-4 mb-2"><a href="#" data-toggle="modal" data-target="#signModal"
-                                               class="link-hover-style-1 ml-1">
-                            Регистрация</a></li>
-                    <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный
-                            кабинет</a></li>
-                    <li class="text-4 mb-2"><a href="/black-list/search" class="link-hover-style-1 ml-1"> Поиск
-                            нарушителя</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
-                <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">О нас</h5>
-                <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="/about" class="link-hover-style-1 ml-1"> О проекте</a></li>
-<!--                    <li class="text-4 mb-2"><a href="/license" class="link-hover-style-1 ml-1"> Правила пользования-->
-<!--                            сервисом</a></li>-->
-<!--                    <li class="text-4 mb-2"><a href="/personal-data" class="link-hover-style-1 ml-1"> Обработка-->
-<!--                            персональных-->
-<!--                            данных</a></li>-->
-                    <li class="text-4 mb-2"><a href="/politic" class="link-hover-style-1 ml-1"> Политика
-                            конфиденциальности</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
-                <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Информация</h5>
-                <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
-                    <li class="text-4 mb-2"><a href="/faq" class="link-hover-style-1 ml-1"> F.A.Q</a></li>
-                    <li class="text-4 mb-2"><a href="/contact" class="link-hover-style-1 ml-1"> Контакты</a></li>
-                    <li class="text-4 mb-2"><a href="/service" class="link-hover-style-1 ml-1"> Оплата и доставка</a>
-                    </li>
-                    <li class="text-4 mb-2"><a href="/support" class="link-hover-style-1 ml-1"> Поддержка клиентов</a>
-                    </li>
-                </ul>
+    <footer id="footer" class="mt-0">
+        <div class="container container-lg my-4">
+            <div class="row py-4">
+                <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
+                    <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Личный кабинет</h5>
+                    <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
+                        <li class="text-4 mb-2"><a href="/site/login" class="link-hover-style-1 ml-1"> Авторизация</a>
+                        </li>
+                        <li class="text-4 mb-2"><a href="#" data-toggle="modal" data-target="#signModal"
+                                                   class="link-hover-style-1 ml-1">
+                                Регистрация</a></li>
+                        <li class="text-4 mb-2"><a href="/personal-area/index" class="link-hover-style-1 ml-1"> Личный
+                                кабинет</a></li>
+                        <li class="text-4 mb-2"><a href="/black-list/search" class="link-hover-style-1 ml-1"> Поиск
+                                нарушителя</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
+                    <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">О нас</h5>
+                    <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
+                        <li class="text-4 mb-2"><a href="/about" class="link-hover-style-1 ml-1"> О проекте</a></li>
+                        <!--                    <li class="text-4 mb-2"><a href="/license" class="link-hover-style-1 ml-1"> Правила пользования-->
+                        <!--                            сервисом</a></li>-->
+                        <!--                    <li class="text-4 mb-2"><a href="/personal-data" class="link-hover-style-1 ml-1"> Обработка-->
+                        <!--                            персональных-->
+                        <!--                            данных</a></li>-->
+                        <li class="text-4 mb-2"><a href="/politic" class="link-hover-style-1 ml-1"> Политика
+                                конфиденциальности</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4 mb-md-0 text-center text-lg-left pt-4">
+                    <h5 class="text-5 text-transform-none font-weight-semibold text-color-dark mb-4">Информация</h5>
+                    <ul class="list list-icons list-icons-sm d-inline-flex flex-column">
+                        <li class="text-4 mb-2"><a href="/faq" class="link-hover-style-1 ml-1"> F.A.Q</a></li>
+                        <li class="text-4 mb-2"><a href="/contact" class="link-hover-style-1 ml-1"> Контакты</a></li>
+                        <li class="text-4 mb-2"><a href="/service" class="link-hover-style-1 ml-1"> Оплата и
+                                доставка</a>
+                        </li>
+                        <li class="text-4 mb-2"><a href="/support" class="link-hover-style-1 ml-1"> Поддержка
+                                клиентов</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container container-lg">
-        <div class="footer-copyright footer-copyright-style-2">
-            <div class="py-2">
-                <div class="row py-4">
-                    <div class="col d-flex align-items-center justify-content-center mb-4 mb-lg-0">
-                        <p>Copyright 2019 © RUC.EXPERT - Реестр недобросовестных пользователей услугами
-                            отелей/хостелами, проката автомашин/каршеринга, арендой помещений.</p>
+        <div class="container container-lg">
+            <div class="footer-copyright footer-copyright-style-2">
+                <div class="py-2">
+                    <div class="row py-4">
+                        <div class="col d-flex align-items-center justify-content-center mb-4 mb-lg-0">
+                            <p>Copyright 2019 © RUC.EXPERT - Реестр недобросовестных пользователей услугами
+                                отелей/хостелами, проката автомашин/каршеринга, арендой помещений.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
-
+    </footer>
+<?php endif; ?>
 <?php $this->endBody() ?>
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel"
      aria-hidden="true">
@@ -294,7 +308,11 @@ NewAppAsset::register($this);
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179546896-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-179546896-1');

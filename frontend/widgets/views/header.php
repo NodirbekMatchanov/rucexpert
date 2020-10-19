@@ -102,16 +102,10 @@ use yii\helpers\Html;
                                      id="headerAccount">
                                     <?php if (Yii::$app->user->isGuest): ?>
 
-                                        <a href="#" class="header-nav-features-toggle login"
+                                        <a href="<?=Url::to(['/site/login'])?>" class="header-nav-features-toggle login"
                                            style="color: #0ab5f2!important;">
                                             <i class="far fa-user"></i> Вход
                                         </a>
-                                        <div class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"  style=" margin-right: -183px !important;"
-                                             id="headerTopUserDropdown">
-                                            <div class="signin-form">
-                                                <?php echo $this->render('@app/views/site/login', ['model' => $model]); ?>
-                                            </div>
-                                        </div>
                                     <?php else: ?>
                                         <a href="#" style="color: #0ab5f2!important;" class="header-nav-features-toggle">
                                             <i class="far fa-user"></i>
@@ -237,19 +231,14 @@ use yii\helpers\Html;
                                     </div>
                                 </div>
                                 <div class="header-nav-features header-nav-features-no-border header-nav-features-lg-show-border order-1 order-lg-2 pull-right">
-                                    <div class="header-nav-feature header-nav-features-user d-inline-flex mx-2 pr-2 signin"
-                                         id="headerAccount">
+                                    <div class="header-nav-feature header-nav-features-user d-inline-flex mx-2 pr-2 "
+                                         id="">
                                         <?php if (Yii::$app->user->isGuest): ?>
 
-                                            <a href="#" class="header-nav-features-toggle login">
+                                            <a href="<?=Url::to(['/site/login'])?>" style="color: white!important; text-decoration: none">
                                                 <i class="far fa-user"></i> Вход
                                             </a>
-                                            <div class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
-                                                 id="headerTopUserDropdown">
-                                                <div class="signin-form">
-                                                    <?php echo $this->render('@app/views/site/login', ['model' => $model]); ?>
-                                                </div>
-                                            </div>
+
                                         <?php else: ?>
                                             <a href="#" class="header-nav-features-toggle">
                                                 <i class="far fa-user"></i> <?= Yii::$app->user->identity->username ?>

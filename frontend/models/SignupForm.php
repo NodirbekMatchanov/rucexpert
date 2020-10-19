@@ -40,7 +40,7 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            [['company', 'policy', 'code', 'phone', 'password_repeat'], 'required'],
+            [['company', 'policy', 'code', 'phone'], 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -55,7 +55,7 @@ class SignupForm extends Model
             [['file'], 'file', 'maxSize' => '100000'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'message' => "Пароли не совпадают"],
+//            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'message' => "Пароли не совпадают"],
             ['code', 'validateCode'],
             [['policy'], 'required', 'requiredValue' => 1, 'message' => 'Подтвердите согласие с политикой конфидициальности'],
 

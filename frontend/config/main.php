@@ -12,6 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'ru',
+    'name' => 'rucexpert.ru',
     'homeUrl' => '/',
     'aliases' => [
         '@mdm/admin' => '@common/modules/rbac-gui',

@@ -81,7 +81,7 @@ $this->title = $homePage->title ?? 'Главная страница';
                     <div class="col-lg-6">
                         <a style=""
                            class="tp-caption btn btn-primary font-weight-bold rounded slider-sign-btn"
-                           href="#" data-toggle="modal" data-target="#signModal"
+                           href="<?=Url::to(['/site/signup'])?>"
                            data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
                            data-x="['left','left','left','center']"
                            data-y="center" data-voffset="['103','103','103','140']"
@@ -207,7 +207,7 @@ $this->title = $homePage->title ?? 'Главная страница';
                 </div>
                 <div class="col-sm-3 col-lg-3">
                     <div class="call-to-action-btn">
-                        <a href="#" data-toggle="modal" data-target="#signModal"
+                        <a href="<?=Url::to(['/site/signup'])?>"
                            class="btn btn-modern text-2 btn-light">ЗАРЕГИСТРИРОВАТЬСЯ</a><span
                                 class="arrow hlb d-none d-md-block appear-animation animated rotateInUpLeft appear-animation-visible"
                                 data-appear-animation="rotateInUpLeft"
@@ -292,7 +292,7 @@ $this->title = $homePage->title ?? 'Главная страница';
                     <div class="row align-items-center appear-animation" data-appear-animation="fadeInUpShorter"
                          data-appear-animation-delay="1000">
                         <div class="col-lg-12">
-                            <a href="#" data-toggle="modal" style="color: white" data-target="#signModal"
+                            <a href="<?=Url::to(['/site/signup'])?>"  style="color: white"
                                class="btn btn-modern mt-3 btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a>
                             <a href="#" data-toggle="modal" data-target="#feedBackModal"
                                class="btn btn-modern btn-primary mt-3">Получить консультацию</a>
@@ -373,7 +373,7 @@ $this->title = $homePage->title ?? 'Главная страница';
                 </div>
                 <div class="col-sm-3 col-lg-3">
                     <div class="call-to-action-btn">
-                        <a href="#" data-toggle="modal" data-target="#signModal"
+                        <a href="<?=Url::to(['/site/signup'])?>"
                            class="btn btn-modern text-2 btn-light">ЗАРЕГИСТРИРОВАТЬСЯ</a><span
                                 class="arrow hlb d-none d-md-block appear-animation animated rotateInUpLeft appear-animation-visible"
                                 data-appear-animation="rotateInUpLeft"
@@ -398,32 +398,6 @@ $this->title = $homePage->title ?? 'Главная страница';
 \yii\bootstrap\Modal::end();
 ?>
 
-<!-- Login -->
-
-<?php
-\yii\bootstrap\Modal::begin([
-    'header' => '<h4 class="modal-title">Авторизация</h4>',
-    'options' => ['class' => 'modal fade', 'id' => 'loginModal', 'aria-labelledby' => "loginModalLabel"],
-]);
-echo $this->render('login', ['model' => $model]);
-
-\yii\bootstrap\Modal::end();
-?>
-
-<!--Login END-->
-
-<!-- Sign up -->
-
-<?php
-\yii\bootstrap\Modal::begin([
-    'header' => '<h4 class="modal-title">Регистрация</h4>',
-    'size' => 'modal-lg',
-    'options' => ['class' => 'modal fade', 'id' => 'signModal', 'aria-labelledby' => "signModalLabel"],
-]);
-echo $this->render('signup', ['model' => $signModel]);
-
-\yii\bootstrap\Modal::end();
-?>
 
 <!--Contact start-->
 <?php

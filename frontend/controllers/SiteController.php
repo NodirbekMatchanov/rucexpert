@@ -112,27 +112,27 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $signModel = new SignupForm();
-            if (!Yii::$app->user->isGuest) {
-                return $this->redirect(['personal-area/index']);
-            }
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(['personal-area/index']);
+        }
 
-            $model = new LoginForm();
-            if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                return $this->redirect(['personal-area/index']);
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['personal-area/index']);
+        } else {
+            if (Yii::$app->request->isAjax) {
+
+                return $this->renderAjax('login', [
+                    'model' => $model,
+                    "signModel" => $signModel,
+                ]);
             } else {
-                if (Yii::$app->request->isAjax) {
-
-                    return $this->renderAjax('login', [
-                        'model' => $model,
-                        "signModel" => $signModel,
-                    ]);
-                } else {
-                    return $this->render('login', [
-                        'model' => $model,
-                        "signModel" => $signModel,
-                    ]);
-                }
+                return $this->render('login', [
+                    'model' => $model,
+                    "signModel" => $signModel,
+                ]);
             }
+        }
 //        } else {
 //            return $this->redirect(['index']);
 //        }
@@ -199,32 +199,19 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        if (Yii::$app->request->isAjax) {
 
-            $model = new SignupForm();
-            if ($model->load(Yii::$app->request->post())) {
-                if ($user = $model->signup()) {
-                    if (Yii::$app->getUser()->login($user)) {
-                        return $this->redirect(['personal-area/index', 'new-user' => true]);
-                    }
-                } else {
-                    echo $this->renderAjax('signup', [
-                        'model' => $model,
-                    ]);
-                    exit();
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->redirect(['personal-area/index', 'new-user' => true]);
                 }
-            } else {
-                return $this->renderAjax('signup', [
-                    'model' => $model,
-                ]);
             }
-
-            return $this->renderAjax('signup', [
-                'model' => $model,
-            ]);
-        } else {
-            return $this->redirect('index');
         }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+
     }
 
     /**
@@ -260,9 +247,9 @@ class SiteController extends Controller
     public function actionPages($url)
     {
         $page = Pages::find()->where(['url' => $url])->one();
-            return $this->render('page',[
-                'page' => $page
-            ]);
+        return $this->render('page', [
+            'page' => $page
+        ]);
     }
 
     /**
@@ -275,11 +262,11 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', 'Проверьте свою электронную почту для получения дальнейших инструкций.');
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->session->setFlash('error', 'К сожалению, мы не можем сбросить пароль для указанного адреса электронной почты.');
             }
         }
 
@@ -304,7 +291,7 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+            Yii::$app->session->setFlash('success', 'Новый пароль сохранен.');
 
             return $this->goHome();
         }

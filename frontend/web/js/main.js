@@ -11,7 +11,7 @@ $(document).ready(function () {
     function bindAction() {
         $(document).on('click', '#send-sms', function () {
             $.ajax({
-                url: '/site/send-code?phone=' + $('#phone').val(),
+                url: '/site/send-code?phone=' + $('input[name="SignupForm[phone]"]').val(),
             }).done(function (data) {
                 if (data) {
                     alert('sms отправлено!');
@@ -38,6 +38,26 @@ $(document).ready(function () {
                 }
             });
         });
+        $(document).on('mousedown','#sub',function (e) {
+            let valid = true;
+            let policy  = $('input[name="SignupForm[policy]"]');
+            let policy_user  = $('input[name="SignupForm[policy_user]"]');
+            if(!$(policy)[0].checked){
+                policy.closest('.field-signupform-policy').find('.help-block').html('<span style="color: red">Подтвердите согласие с политикой конфидициальности</span>');
+                valid = false;
+            } else {
+                policy.closest('.field-signupform-policy').find('.help-block').html('');
+            }
+            if(!$(policy_user)[0].checked){
+                policy_user.closest('.field-signupform-policy_user').find('.help-block').html('<span style="color: red">Подтвердите согласие с правила пользования сервисом</span>');
+                valid = false;
+            } else {
+                policy_user.closest('.field-signupform-policy_user').find('.help-block').html('');
+            }
+            if(!valid){
+                e.preventDefault();
+            }
+        })
     }
 
 
@@ -210,7 +230,7 @@ $(document).ready(function () {
         }).fail(function (err) {
             toastr.error(err);
         })
-    })
+    });
 
     $('#accept_selected_items_btn').click(function () {
         selectedItems = selectedItems.concat($('.grid-view').yiiGridView('getSelectedRows'));
@@ -225,7 +245,17 @@ $(document).ready(function () {
         }).fail(function (err) {
             toastr.error(err);
         })
-    })
+    });
 
+    $(document).on('mousedown','.next',function () {
+       let reg_hotel = $('input[name="SignupForm[reg_hotel_type]"]');
+       let reg_car_type = $('input[name="SignupForm[reg_car_type]"]');
+       let reg_rent_type = $('input[name="SignupForm[reg_rent_type]"]');
+       let valid = false;
+       if(reg_hotel[0].checked || reg_hotel[0].checked || reg_hotel[0].checked){
+           valid = true;
+       }
+
+    })
 
 });
